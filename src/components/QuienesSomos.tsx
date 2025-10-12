@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MessageCircle, ArrowRight, Sparkles, Phone } from "lucide-react";
 import Link from "next/link";
-import { PerformanceOptimizer, useOptimizedAnimation } from "@/components/performance-optimizer";
 
 // Componente de logo de WhatsApp
 const WhatsAppIcon = ({ className = "" }: { className?: string }) => (
@@ -264,7 +263,6 @@ export function QuienesSomos() {
   const historyRef = useRef(null);
   const ctaRef = useRef(null);
 
-  const { shouldAnimate, animationProps } = useOptimizedAnimation();
   
   const heroInView = useInView(heroRef, { once: true, amount: 0.3 });
   const essenceInView = useInView(essenceRef, { once: true, amount: 0.3 });
@@ -302,9 +300,7 @@ export function QuienesSomos() {
   ];
 
   return (
-    <>
-      <PerformanceOptimizer />
-      <div className="min-h-screen bg-background text-foreground pt-20">
+    <div className="min-h-screen bg-background text-foreground pt-20">
       {/* Hero Section */}
       <section
         ref={heroRef}
@@ -315,14 +311,12 @@ export function QuienesSomos() {
         <motion.div
           initial="hidden"
           animate={heroInView ? "visible" : "hidden"}
-          variants={shouldAnimate ? animationVariants.heroContainer : undefined}
-          {...(!shouldAnimate && animationProps)}
+          variants={animationVariants.heroContainer}
           className="relative z-10 text-center px-4 max-w-6xl mx-auto"
         >
           {/* Logo Cinematográfico */}
           <motion.div
-            variants={shouldAnimate ? animationVariants.heroLogo : undefined}
-            {...(!shouldAnimate && animationProps)}
+            variants={animationVariants.heroLogo}
             className="flex justify-center mb-16"
           >
             <motion.svg
@@ -381,8 +375,7 @@ export function QuienesSomos() {
           
           {/* Título Cinematográfico */}
           <motion.div
-            variants={shouldAnimate ? animationVariants.heroTitle : undefined}
-            {...(!shouldAnimate && animationProps)}
+            variants={animationVariants.heroTitle}
             className="relative inline-block mb-8"
           >
             <motion.h1
@@ -427,8 +420,7 @@ export function QuienesSomos() {
           
           {/* Subtítulo Cinematográfico */}
           <motion.h2
-            variants={shouldAnimate ? animationVariants.heroSubtitle : undefined}
-            {...(!shouldAnimate && animationProps)}
+            variants={animationVariants.heroSubtitle}
             className="text-3xl md:text-4xl lg:text-5xl font-light mb-10 text-muted-foreground relative"
           >
             <motion.span
@@ -470,8 +462,7 @@ export function QuienesSomos() {
           
           {/* Descripción Cinematográfica */}
           <motion.div
-            variants={shouldAnimate ? animationVariants.heroDescription : undefined}
-            {...(!shouldAnimate && animationProps)}
+            variants={animationVariants.heroDescription}
             className="max-w-5xl mx-auto"
           >
             <motion.p
@@ -508,13 +499,11 @@ export function QuienesSomos() {
         <motion.div
           initial="hidden"
           animate={essenceInView ? "visible" : "hidden"}
-          variants={shouldAnimate ? animationVariants.sectionBlock : undefined}
-          {...(!shouldAnimate && animationProps)}
+          variants={animationVariants.sectionBlock}
           className="relative z-10 max-w-4xl mx-auto text-center"
         >
           <motion.h3
-            variants={shouldAnimate ? animationVariants.textReveal : undefined}
-            {...(!shouldAnimate && animationProps)}
+            variants={animationVariants.textReveal}
             className="text-3xl md:text-4xl font-bold mb-8 relative inline-block"
           >
             <span className="relative z-10">Nuestra Esencia</span>
@@ -557,8 +546,7 @@ export function QuienesSomos() {
         <motion.div
           initial="hidden"
           animate={missionInView ? "visible" : "hidden"}
-          variants={shouldAnimate ? animationVariants.sectionBlock : undefined}
-          {...(!shouldAnimate && animationProps)}
+          variants={animationVariants.sectionBlock}
           className="max-w-6xl mx-auto"
         >
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -599,10 +587,9 @@ export function QuienesSomos() {
             </motion.div>
             
             <motion.div
-              variants={shouldAnimate ? animationVariants.textReveal : undefined}
-              {...(!shouldAnimate && animationProps)}
+              variants={animationVariants.textReveal}
               className="space-y-6"
-              whileHover={shouldAnimate ? { scale: 1.02 } : undefined}
+              whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
               <motion.h3 
@@ -952,7 +939,7 @@ export function QuienesSomos() {
               </Button>
             </motion.div>
             
-            <motion.div variants={shouldAnimate ? animationVariants.scaleIn : undefined} {...(!shouldAnimate && animationProps)}>
+            <motion.div variants={animationVariants.scaleIn}>
               <Button
                 size="lg"
                 variant="outline"
@@ -1000,6 +987,5 @@ export function QuienesSomos() {
         </motion.div>
       </section>
     </div>
-    </>
   );
 }
