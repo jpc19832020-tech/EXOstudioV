@@ -26,9 +26,9 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  // Base path para GitHub Pages (ajusta según tu repositorio)
-  basePath: process.env.NODE_ENV === 'production' ? '/EXOstudioV' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/EXOstudioV' : '',
+  // Base path para GitHub Pages (sin prefijo para subdominio)
+  basePath: '',
+  assetPrefix: '',
   // Desactivar optimización experimental de CSS que causa problemas
   experimental: {
     optimizeCss: false,

@@ -52,12 +52,12 @@ const products: Product[] = [
   {
     id: 1,
     name: "SmartCard",
-    description: "Tarjeta de visita digital con tecnología NFC. Comparte tu información de contacto instantáneamente con un solo toque.",
+    description: "Tarjeta de presentación inteligente. Comparte tu información de contacto instantáneamente con un solo toque.",
     badge: "Nuevo",
     badgeVariant: "default",
     image: "/smartcard-image.png",
     features: [
-      "Tecnología NFC integrada",
+      "Disponible en cualquier momento",
       "Diseño personalizable",
       "Análisis de interacciones",
       "Compatibilidad universal",
