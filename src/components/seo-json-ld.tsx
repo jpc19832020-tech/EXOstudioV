@@ -14,7 +14,7 @@ export function SEOJsonLD() {
     },
     "sameAs": [
       "https://www.instagram.com/exo_digitalstudio/",
-      "https://www.tiktok.com/@exodigitalstudio",
+      "https://www.tiktok.com/@exodigital_studio?_t=ZS-90UlvsZVMMm&_r=1",
       "https://www.facebook.com/profile.php?id=61581476738289"
     ],
     "address": {

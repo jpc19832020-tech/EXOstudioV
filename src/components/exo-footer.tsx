@@ -28,7 +28,7 @@ const socialLinks = [
   },
   {
     name: "TikTok",
-    href: "https://www.tiktok.com/@exodigitalstudio",
+    href: "https://www.tiktok.com/@exodigital_studio?_t=ZS-90UlvsZVMMm&_r=1",
     icon: <TikTokIcon className="w-5 h-5" />,
   },
   {

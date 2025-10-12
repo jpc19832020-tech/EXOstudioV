@@ -82,7 +82,7 @@ src/
 - **WhatsApp**: https://wa.me/51925475680
 - **Email**: hola@exo.digital
 - **Instagram**: https://www.instagram.com/exo_digitalstudio/
-- **TikTok**: https://www.tiktok.com/@exodigitalstudio
+- **TikTok**: https://www.tiktok.com/@exodigital_studio?_t=ZS-90UlvsZVMMm&_r=1
 - **Facebook**: https://www.facebook.com/profile.php?id=61581476738289
 
 ## 🎯 SEO y Metadatos

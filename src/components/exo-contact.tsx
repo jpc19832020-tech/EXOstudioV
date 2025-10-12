@@ -111,9 +111,9 @@ export function ExoContact() {
 
   const handleSocialClick = (platform: string) => {
     const socialLinks = {
-      instagram: "https://instagram.com/exo.digital",
-      facebook: "https://facebook.com/exo.digital", 
-      tiktok: "https://tiktok.com/@exo.digital"
+      instagram: "https://www.instagram.com/exo_digitalstudio/",
+      facebook: "https://www.facebook.com/people/Exo-DigitalStudio/pfbid0SJtHiwGCc4Dg2SnSLSa9BBybJfzEApEFTedGkkhzUTmzT87xZMBVtdvHZoJzH5wLl/", 
+      tiktok: "https://www.tiktok.com/@exodigital_studio?_t=ZS-90UlvsZVMMm&_r=1"
     };
     
     const link = socialLinks[platform as keyof typeof socialLinks];
