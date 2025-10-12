@@ -128,7 +128,10 @@ export function ExoHeader() {
                   onClick={(e) => {
                     // Forzar navegación completa para evitar problemas con basePath
                     e.preventDefault();
-                    window.location.href = '/quienes-somos';
+                    // Determinar si estamos en producción o desarrollo
+                    const isProduction = process.env.NODE_ENV === 'production';
+                    const basePath = isProduction ? '/EXOstudioV' : '';
+                    window.location.href = `${basePath}/quienes-somos`;
                   }}
                 >
                   ¿Quiénes Somos?
