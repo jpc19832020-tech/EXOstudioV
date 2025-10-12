@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXO digital studio | Página no encontrada</title>
+    <meta name="description" content="La página que buscas no existe. Regresa a EXO digital studio.">
+    
+    <link rel="preload" href="./assets/fonts/inter-v12-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./css/styles.css" as="style">
+    
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+    
+    <script>
+        // SPA redirect - redirect to index.html and let the client handle routing
+        (function() {
+            var path = window.location.pathname;
+            var search = window.location.search;
+            var hash = window.location.hash;
+            
+            // Preserve the path, search, and hash
+            var newUrl = '/' + search + hash;
+            
+            // Replace the current URL with the index.html
+            window.history.replaceState({}, '', newUrl);
+            
+            // Reload the page to load the index.html
+            window.location.reload();
+        })();
+    </script>
+</head>
+<body>
+    <div class="loading-screen">
+        <div class="loading-logo">
+            <svg class="logo-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                <path d="M60 10 L90 30 L90 70 L60 90 L30 70 L30 30 Z" fill="none" stroke="#6EE7F9" stroke-width="2" stroke-dasharray="240" stroke-dashoffset="240"/>
+            </svg>
+        </div>
+    </div>
+    
+    <noscript>
+        <div style="font-family: system-ui, sans-serif; text-align: center; padding: 2rem; color: #333;">
+            <h1>Redirigiendo...</h1>
+            <p>Si no eres redirigido automáticamente, <a href="/">haz clic aquí</a>.</p>
+        </div>
+    </noscript>
+</body>
+</html>
