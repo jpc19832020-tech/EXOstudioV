@@ -23,126 +23,155 @@ const WhatsAppIcon = ({ className = "" }: { className?: string }) => (
 // Constantes
 const WHATSAPP_NUMBER = "51925475680";
 
-// Variantes de animación optimizadas para mejor rendimiento
+// Variantes de animación cinematográficas
 const animationVariants = {
   heroContainer: {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0, scale: 0.95 },
     visible: {
       opacity: 1,
+      scale: 1,
       transition: {
-        duration: 0.8,
+        duration: 1.2,
         ease: [0.23, 1, 0.32, 1],
       },
     },
   },
   heroLogo: {
-    hidden: { opacity: 0, scale: 0.8 },
+    hidden: { opacity: 0, scale: 0.3, rotate: -180, y: 100 },
     visible: {
       opacity: 1,
       scale: 1,
+      rotate: 0,
+      y: 0,
       transition: {
-        duration: 0.8,
-        delay: 0.2,
+        duration: 1.5,
+        delay: 0.3,
         ease: [0.23, 1, 0.32, 1],
       },
     },
   },
   heroTitle: {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 100, scale: 0.8, skewY: 5 },
     visible: {
       opacity: 1,
       y: 0,
+      scale: 1,
+      skewY: 0,
       transition: {
-        duration: 0.6,
-        delay: 0.4,
-        ease: [0.23, 1, 0.32, 1],
-      },
-    },
-  },
-  heroSubtitle: {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
+        duration: 1,
         delay: 0.6,
         ease: [0.23, 1, 0.32, 1],
       },
     },
   },
-  heroDescription: {
-    hidden: { opacity: 0, y: 20 },
+  heroSubtitle: {
+    hidden: { opacity: 0, y: 80, x: -100, rotateZ: -3 },
     visible: {
       opacity: 1,
       y: 0,
+      x: 0,
+      rotateZ: 0,
       transition: {
-        duration: 0.6,
-        delay: 0.8,
+        duration: 0.9,
+        delay: 0.9,
+        ease: [0.23, 1, 0.32, 1],
+      },
+    },
+  },
+  heroDescription: {
+    hidden: { opacity: 0, y: 60, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.8,
+        delay: 1.2,
         ease: [0.23, 1, 0.32, 1],
       },
     },
   },
   sectionBlock: {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 120, scale: 0.95 },
     visible: {
       opacity: 1,
       y: 0,
+      scale: 1,
       transition: {
-        duration: 0.6,
+        duration: 1,
         ease: [0.23, 1, 0.32, 1],
       },
     },
   },
   textReveal: {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, x: -80, rotateY: -25, scale: 0.8 },
     visible: {
       opacity: 1,
-      y: 0,
+      x: 0,
+      rotateY: 0,
+      scale: 1,
       transition: {
-        duration: 0.6,
+        duration: 0.8,
+        ease: [0.23, 1, 0.32, 1],
+      },
+    },
+  },
+  typewriterText: {
+    hidden: { width: 0 },
+    visible: {
+      width: "100%",
+      transition: {
+        duration: 2,
         ease: [0.23, 1, 0.32, 1],
       },
     },
   },
   glowText: {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, scale: 0.5, rotate: -10 },
     visible: {
       opacity: 1,
-      y: 0,
+      scale: 1,
+      rotate: 0,
       transition: {
-        duration: 0.6,
-        delay: 0.2,
+        duration: 0.7,
         ease: [0.23, 1, 0.32, 1],
       },
     },
   },
   cardFloat: {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 100, scale: 0.8, rotateX: 45, rotateZ: 5 },
     visible: {
       opacity: 1,
       y: 0,
+      scale: 1,
+      rotateX: 0,
+      rotateZ: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.8,
         ease: [0.23, 1, 0.32, 1],
       },
     },
     hover: {
-      y: -10,
+      y: -15,
+      scale: 1.08,
+      rotateX: 5,
+      rotateZ: 2,
       transition: {
-        duration: 0.3,
+        duration: 0.4,
         ease: [0.23, 1, 0.32, 1],
       },
     },
   },
   finalCta: {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 80, scale: 0.9, rotateX: 15 },
     visible: {
       opacity: 1,
       y: 0,
+      scale: 1,
+      rotateX: 0,
       transition: {
-        duration: 0.6,
-        delay: 0.2,
+        duration: 1,
+        delay: 0.4,
         ease: [0.23, 1, 0.32, 1],
       },
     },
@@ -151,25 +180,16 @@ const animationVariants = {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.15,
+        staggerDirection: 1,
       },
     },
   },
   fadeInUp: {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 60, scale: 0.95 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.23, 1, 0.32, 1],
-      },
-    },
-  },
-  scaleIn: {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: {
-      opacity: 1,
       scale: 1,
       transition: {
         duration: 0.6,
@@ -177,83 +197,141 @@ const animationVariants = {
       },
     },
   },
+  slideInFromLeft: {
+    hidden: { opacity: 0, x: -150, rotateY: -30 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      rotateY: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.23, 1, 0.32, 1],
+      },
+    },
+  },
+  slideInFromRight: {
+    hidden: { opacity: 0, x: 150, rotateY: 30 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      rotateY: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.23, 1, 0.32, 1],
+      },
+    },
+  },
+  scaleIn: {
+    hidden: { opacity: 0, scale: 0, rotate: 180 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      rotate: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.23, 1, 0.32, 1],
+      },
+    },
+  },
 } as const;
 
-// Componente de líneas de luz optimizado
-const LightLines = () => {
-  // Usar useMemo para evitar recrear las líneas en cada render
-  const lines = useMemo(() => {
-    return Array.from({ length: 3 }, (_, i) => ({
-      id: i,
-      top: 20 + i * 30,
-      duration: 8 + i * 2,
-      delay: i * 1,
-    }));
-  }, []);
+// Componente de líneas de luz cinematográfico
+const LightLines = () => (
+  <div className="absolute inset-0 overflow-hidden">
+    {[...Array(5)].map((_, i) => (
+      <motion.div
+        key={i}
+        className="absolute h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+        style={{
+          top: `${15 + i * 18}%`,
+          background: `linear-gradient(90deg, transparent, rgba(var(--primary), ${0.3 + i * 0.1}), transparent)`
+        }}
+        initial={{ x: "-200%", opacity: 0 }}
+        animate={{ x: "200%", opacity: [0, 1, 1, 0] }}
+        transition={{
+          duration: 6 + i * 0.8,
+          repeat: Infinity,
+          delay: i * 0.8,
+          ease: "easeInOut",
+          times: [0, 0.1, 0.9, 1],
+        }}
+      />
+    ))}
+    {/* Líneas verticales */}
+    {[...Array(3)].map((_, i) => (
+      <motion.div
+        key={`v-${i}`}
+        className="absolute w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent"
+        style={{
+          left: `${25 + i * 25}%`,
+          height: "100%",
+        }}
+        initial={{ y: "-100%", opacity: 0 }}
+        animate={{ y: "100%", opacity: [0, 0.8, 0.8, 0] }}
+        transition={{
+          duration: 8 + i * 1,
+          repeat: Infinity,
+          delay: i * 1.5,
+          ease: "easeInOut",
+          times: [0, 0.1, 0.9, 1],
+        }}
+      />
+    ))}
+  </div>
+);
 
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      {lines.map((line) => (
-        <motion.div
-          key={line.id}
-          className="absolute h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"
-          style={{ top: `${line.top}%` }}
-          initial={{ x: "-200%", opacity: 0 }}
-          animate={{ x: "200%", opacity: [0, 0.5, 0.5, 0] }}
-          transition={{
-            duration: line.duration,
-            repeat: Infinity,
-            delay: line.delay,
-            ease: "easeInOut",
-            times: [0, 0.1, 0.9, 1],
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
-// Componente de partículas optimizado
-const Particles = () => {
-  // Reducir el número de partículas y usar useMemo
-  const particles = useMemo(() => {
-    return Array.from({ length: 6 }, (_, i) => ({
-      id: i,
-      size: 2 + Math.random() * 2,
-      left: Math.random() * 100,
-      top: Math.random() * 100,
-      duration: 6 + Math.random() * 4,
-      delay: Math.random() * 2,
-    }));
-  }, []);
-
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="absolute rounded-full bg-primary/30"
-          style={{
-            width: `${particle.size}px`,
-            height: `${particle.size}px`,
-            left: `${particle.left}%`,
-            top: `${particle.top}%`,
-          }}
-          animate={{
-            y: [0, -20, 0],
-            opacity: [0.1, 0.4, 0.1],
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            delay: particle.delay,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-    </div>
-  );
-};
+// Componente de partículas cinematográfico
+const Particles = () => (
+  <div className="absolute inset-0 overflow-hidden">
+    {[...Array(15)].map((_, i) => (
+      <motion.div
+        key={i}
+        className="absolute rounded-full"
+        style={{
+          width: `${2 + Math.random() * 3}px`,
+          height: `${2 + Math.random() * 3}px`,
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+          background: `radial-gradient(circle, rgba(var(--primary), ${0.3 + Math.random() * 0.4}), transparent)`,
+        }}
+        animate={{
+          y: [0, -40 - Math.random() * 30, 0],
+          x: [0, Math.random() * 30 - 15, 0],
+          opacity: [0.1, 0.6 + Math.random() * 0.3, 0.1],
+          scale: [1, 1.5 + Math.random() * 0.5, 1],
+        }}
+        transition={{
+          duration: 8 + Math.random() * 6,
+          repeat: Infinity,
+          delay: Math.random() * 3,
+          ease: "easeInOut",
+        }}
+      />
+    ))}
+    {/* Partículas con trail */}
+    {[...Array(8)].map((_, i) => (
+      <motion.div
+        key={`trail-${i}`}
+        className="absolute w-1 h-1 bg-primary/40 rounded-full"
+        style={{
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+        }}
+        animate={{
+          x: [0, 100 + Math.random() * 100],
+          y: [-20 - Math.random() * 40, 20 + Math.random() * 40],
+          opacity: [0, 0.8, 0],
+        }}
+        transition={{
+          duration: 4 + Math.random() * 3,
+          repeat: Infinity,
+          delay: Math.random() * 2,
+          ease: "easeOut",
+        }}
+      />
+    ))}
+  </div>
+);
 
 export function QuienesSomos() {
   const heroRef = useRef(null);
@@ -264,12 +342,12 @@ export function QuienesSomos() {
   const ctaRef = useRef(null);
 
   
-  const heroInView = useInView(heroRef, { once: true, amount: 0.3 });
-  const essenceInView = useInView(essenceRef, { once: true, amount: 0.3 });
-  const missionInView = useInView(missionRef, { once: true, amount: 0.3 });
-  const differentiatorsInView = useInView(differentiatorsRef, { once: true, amount: 0.3 });
-  const historyInView = useInView(historyRef, { once: true, amount: 0.3 });
-  const ctaInView = useInView(ctaRef, { once: true, amount: 0.3 });
+  const heroInView = useInView(heroRef, { once: true });
+  const essenceInView = useInView(essenceRef, { once: true, margin: "-100px" });
+  const missionInView = useInView(missionRef, { once: true, margin: "-100px" });
+  const differentiatorsInView = useInView(differentiatorsRef, { once: true, margin: "-100px" });
+  const historyInView = useInView(historyRef, { once: true, margin: "-100px" });
+  const ctaInView = useInView(ctaRef, { once: true, margin: "-100px" });
 
   const handleWhatsAppClick = useCallback(() => {
     const message = encodeURIComponent("Hola, quiero conocer más sobre EXO digital studio");
@@ -327,7 +405,7 @@ export function QuienesSomos() {
               className="text-primary drop-shadow-2xl"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
-              transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+              transition={{ duration: 2, ease: [0.23, 1, 0.32, 1] }}
               whileHover={{ 
                 scale: 1.15, 
                 rotate: 8,
@@ -344,7 +422,7 @@ export function QuienesSomos() {
                 fill="none"
                 initial={{ pathLength: 0 }}
                 animate={{ pathLength: 1 }}
-                transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+                transition={{ duration: 1.8, ease: [0.23, 1, 0.32, 1] }}
               />
               <motion.path
                 d="M2 22L16 30L30 22"
@@ -355,7 +433,7 @@ export function QuienesSomos() {
                 fill="none"
                 initial={{ pathLength: 0 }}
                 animate={{ pathLength: 1 }}
-                transition={{ duration: 0.8, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+                transition={{ duration: 1.8, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
               />
             </motion.svg>
             {/* Aura animada alrededor del logo */}
@@ -366,7 +444,7 @@ export function QuienesSomos() {
                 opacity: [0.3, 0.6, 0.3],
               }}
               transition={{
-                duration: 4,
+                duration: 3,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
@@ -382,7 +460,7 @@ export function QuienesSomos() {
               className="text-6xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent relative"
               initial={{ backgroundPosition: "300% center" }}
               animate={{ backgroundPosition: "-100% center" }}
-              transition={{ duration: 6, ease: "linear", repeat: Infinity }}
+              transition={{ duration: 4, ease: "linear", repeat: Infinity }}
               style={{
                 backgroundSize: "400% auto",
                 textShadow: "0 0 40px rgba(var(--primary), 0.3)",
@@ -393,7 +471,7 @@ export function QuienesSomos() {
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
                 animate={{ x: ["-100%", "100%"] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 style={{ mixBlendMode: "overlay" }}
               />
             </motion.h1>
@@ -407,10 +485,10 @@ export function QuienesSomos() {
                   opacity: [0.1 - i * 0.03, 0.2 - i * 0.05, 0.1 - i * 0.03],
                 }}
                 transition={{
-                  duration: 6 + i * 0.5,
+                  duration: 4 + i * 0.5,
                   repeat: Infinity,
                   ease: "easeInOut",
-                  delay: i * 0.3,
+                  delay: i * 0.2,
                 }}
               >
                 ¿Quiénes Somos?
@@ -427,7 +505,7 @@ export function QuienesSomos() {
               className="inline-block"
               initial={{ x: -100, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
+              transition={{ duration: 1, delay: 1.2, ease: [0.23, 1, 0.32, 1] }}
             >
               Go Beyond Digital
             </motion.span>
@@ -435,7 +513,7 @@ export function QuienesSomos() {
               className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 h-1 bg-gradient-to-r from-transparent via-primary to-transparent"
               initial={{ width: 0, opacity: 0 }}
               animate={{ width: "200px", opacity: 1 }}
-              transition={{ duration: 1, delay: 1.2, ease: [0.23, 1, 0.32, 1] }}
+              transition={{ duration: 1.5, delay: 1.8, ease: [0.23, 1, 0.32, 1] }}
             />
             {/* Partículas decorativas */}
             {[...Array(6)].map((_, i) => (
@@ -469,19 +547,42 @@ export function QuienesSomos() {
               className="text-xl md:text-2xl leading-relaxed text-muted-foreground font-light"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1.2, ease: [0.23, 1, 0.32, 1] }}
+              transition={{ duration: 1.5, delay: 2, ease: [0.23, 1, 0.32, 1] }}
             >
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.6,
-                  delay: 1.2,
-                  ease: [0.23, 1, 0.32, 1]
-                }}
-              >
-                En EXO digital studio unimos conocimiento + IA para diseñar experiencias digitales que fluyen rápido, venden más y van más allá de los límites convencionales.
-              </motion.span>
+              {["En EXO digital studio unimos conocimiento + IA para diseñar experiencias digitales que fluyen rápido, ", "venden más y van más allá de los límites convencionales."].map((phrase, index) => (
+                <motion.span
+                  key={index}
+                  initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 2.2 + index * 0.4,
+                    ease: [0.23, 1, 0.32, 1]
+                  }}
+                  className="inline-block"
+                >
+                  {phrase.split(" ").map((word, wordIndex) => (
+                    <motion.span
+                      key={wordIndex}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.5,
+                        delay: 2.4 + index * 0.4 + wordIndex * 0.08,
+                        ease: [0.23, 1, 0.32, 1]
+                      }}
+                      className="inline-block mr-2"
+                      whileHover={{
+                        scale: 1.1,
+                        color: "hsl(var(--primary))",
+                        transition: { duration: 0.2 }
+                      }}
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
+                </motion.span>
+              ))}
             </motion.p>
           </motion.div>
         </motion.div>
@@ -531,7 +632,21 @@ export function QuienesSomos() {
                 variants={animationVariants.fadeInUp}
                 className={index === 2 ? "text-primary font-semibold" : ""}
               >
-                {text}
+                {text.split(" ").map((word, wordIndex) => (
+                  <motion.span
+                    key={wordIndex}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.4,
+                      delay: 0.8 + index * 0.3 + wordIndex * 0.05,
+                      ease: "easeOut"
+                    }}
+                    className="inline-block mr-2"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
               </motion.p>
             ))}
           </motion.div>
@@ -576,13 +691,17 @@ export function QuienesSomos() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
               >
-                <motion.span
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}
-                >
-                  Impulsar marcas y creadores con tecnología fluida, estética y funcional.
-                </motion.span>
+                {"Impulsar marcas y creadores con tecnología fluida, estética y funcional.".split(" ").map((word, index) => (
+                  <motion.span
+                    key={index}
+                    initial={{ opacity: 0, filter: "blur(4px)" }}
+                    animate={{ opacity: 1, filter: "blur(0px)" }}
+                    transition={{ duration: 0.3, delay: 0.6 + index * 0.1, ease: "easeOut" }}
+                    className="inline-block mr-2"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
               </motion.p>
             </motion.div>
             
@@ -612,13 +731,17 @@ export function QuienesSomos() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
               >
-                <motion.span
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.4, ease: "easeOut" }}
-                >
-                  Ser el estudio que lleva a las marcas más allá del marketing tradicional, hacia una exosfera digital donde la innovación y la rentabilidad se fusionan.
-                </motion.span>
+                {"Ser el estudio que lleva a las marcas más allá del marketing tradicional, hacia una exosfera digital donde la innovación y la rentabilidad se fusionan.".split(" ").map((word, index) => (
+                  <motion.span
+                    key={index}
+                    initial={{ opacity: 0, filter: "blur(4px)" }}
+                    animate={{ opacity: 1, filter: "blur(0px)" }}
+                    transition={{ duration: 0.3, delay: 0.7 + index * 0.05, ease: "easeOut" }}
+                    className="inline-block mr-2"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
               </motion.p>
             </motion.div>
           </div>
@@ -724,7 +847,7 @@ export function QuienesSomos() {
               className="text-5xl md:text-7xl font-black mb-8 bg-gradient-to-r from-white via-primary to-white bg-clip-text text-transparent relative"
               initial={{ backgroundPosition: "300% center" }}
               animate={{ backgroundPosition: "-100% center" }}
-              transition={{ duration: 6, ease: "linear", repeat: Infinity }}
+              transition={{ duration: 4, ease: "linear", repeat: Infinity }}
               style={{
                 backgroundSize: "400% auto",
               }}
@@ -734,7 +857,7 @@ export function QuienesSomos() {
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
                 animate={{ x: ["-100%", "100%"] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 style={{ mixBlendMode: "overlay" }}
               />
             </motion.h3>
@@ -770,9 +893,9 @@ export function QuienesSomos() {
                     scale: [1, 1.3, 1],
                   }}
                   transition={{
-                    duration: 4 + i * 0.3,
+                    duration: 3 + i * 0.4,
                     repeat: Infinity,
-                    delay: i * 0.3,
+                    delay: i * 0.2,
                   }}
                 />
               ))}
@@ -873,19 +996,23 @@ export function QuienesSomos() {
               className="text-xl md:text-2xl text-primary/80 font-light mt-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+              transition={{ duration: 1, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
             >
-              <motion.span
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.4,
-                  ease: [0.23, 1, 0.32, 1]
-                }}
-              >
-                El futuro no se espera, se crea.
-              </motion.span>
+              {"El futuro no se espera, se crea.".split(" ").map((word, index) => (
+                <motion.span
+                  key={index}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.8 + index * 0.1,
+                    ease: [0.23, 1, 0.32, 1]
+                  }}
+                  className="inline-block mr-2"
+                >
+                  {word}
+                </motion.span>
+              ))}
             </motion.p>
           </motion.div>
           
@@ -910,7 +1037,7 @@ export function QuienesSomos() {
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"
                   animate={{ x: ["-100%", "100%"] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 />
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-t from-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -929,9 +1056,9 @@ export function QuienesSomos() {
                       opacity: [0, 1, 0],
                     }}
                     transition={{
-                      duration: 3 + Math.random(),
+                      duration: 2 + Math.random(),
                       repeat: Infinity,
-                      delay: Math.random() * 1.5,
+                      delay: Math.random(),
                       ease: "easeInOut",
                     }}
                   />
@@ -962,7 +1089,7 @@ export function QuienesSomos() {
                   <motion.div
                     className="absolute inset-0 bg-primary/20 rounded-full"
                     animate={{ scale: [1, 1.2, 1], opacity: [0, 0.3, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                   />
                 </Link>
               </Button>
@@ -973,13 +1100,13 @@ export function QuienesSomos() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
+            transition={{ duration: 1, delay: 1.5, ease: [0.23, 1, 0.32, 1] }}
             className="mt-16"
           >
             <motion.p
               className="text-sm text-muted-foreground/60 font-light tracking-widest uppercase"
               animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
               EXO DIGITAL STUDIO • GO BEYOND DIGITAL
             </motion.p>
