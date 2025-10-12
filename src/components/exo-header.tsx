@@ -44,19 +44,16 @@ export function ExoHeader() {
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
     
-    // Para enlaces que no son "quienes-somos", usar la navegación normal
-    if (href.startsWith('#')) {
-      // Si estamos en la página /quienes-somos, redirigir a la página principal con hash
-      if (window.location.pathname.includes('/quienes-somos')) {
-        window.location.href = '/' + href;
-        return;
-      }
-      
-      // Si estamos en la página principal, hacer scroll suave
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
+    // Si estamos en la página /quienes-somos, redirigir a la página principal con hash
+    if (window.location.pathname.includes('/quienes-somos')) {
+      window.location.href = '/' + href;
+      return;
+    }
+    
+    // Si estamos en la página principal, hacer scroll suave
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -83,7 +80,7 @@ export function ExoHeader() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="flex items-center space-x-6"
             >
-              <Link href="/" className="flex items-center space-x-2">
+              <Link href="/" onClick={() => window.location.reload()} className="flex items-center space-x-2">
                 <motion.svg
                   width="32"
                   height="32"
@@ -151,10 +148,6 @@ export function ExoHeader() {
                 >
                   <Link
                     href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick(item.href);
-                    }}
                     className={`text-sm font-medium transition-colors duration-200 hover:text-primary ${
                       activeSection === item.href.substring(1) ? "text-primary" : "text-muted-foreground"
                     }`}
@@ -229,10 +222,6 @@ export function ExoHeader() {
                 >
                   <Link
                     href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick(item.href);
-                    }}
                     className={`block py-3 text-sm font-medium transition-colors duration-200 hover:text-primary ${
                       activeSection === item.href.substring(1) ? "text-primary" : "text-muted-foreground"
                     }`}
