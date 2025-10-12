@@ -1073,7 +1073,10 @@ export function QuienesSomos() {
                 asChild
                 className="group relative overflow-hidden border-2 border-primary/50 hover:border-primary text-primary hover:bg-primary/10 font-bold px-10 py-6 text-xl rounded-full transition-all duration-500 shadow-xl shadow-primary/20"
               >
-                <Link href="/#productos">
+                <Link href="/#productos" onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href = '/#productos';
+                }}>
                   <span className="relative z-10 flex items-center gap-3">
                     <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
                     <span>Ver productos</span>
