@@ -37,11 +37,14 @@ if (fs.existsSync(serverAppPath)) {
       const filePath = path.join(serverAppPath, file);
       let content = fs.readFileSync(filePath, 'utf8');
       
-      // Para subdominio, no reemplazamos rutas absolutas
-      // Las rutas permanecen como / (raíz del subdominio)
+      // Reemplazar rutas absolutas con el basePath para GitHub Pages
+      content = content.replace(/href="\//g, 'href="/EXOstudioV/');
+      content = content.replace(/src="\//g, 'src="/EXOstudioV/');
+      content = content.replace(/href='\//g, "href='/EXOstudioV/");
+      content = content.replace(/src='\//g, "src='/EXOstudioV/");
       
       fs.writeFileSync(path.join('out', file), content);
     });
 }
 
-console.log('Build estático completado con éxito para subdominio');
+console.log('Build estático completado con éxito');
