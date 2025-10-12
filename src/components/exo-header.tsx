@@ -44,16 +44,19 @@ export function ExoHeader() {
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
     
-    // Si estamos en la página /quienes-somos, redirigir a la página principal con hash
-    if (window.location.pathname.includes('/quienes-somos')) {
-      window.location.href = '/' + href;
-      return;
-    }
-    
-    // Si estamos en la página principal, hacer scroll suave
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    // Para enlaces que no son "quienes-somos", usar la navegación normal
+    if (href.startsWith('#')) {
+      // Si estamos en la página /quienes-somos, redirigir a la página principal con hash
+      if (window.location.pathname.includes('/quienes-somos')) {
+        window.location.href = '/' + href;
+        return;
+      }
+      
+      // Si estamos en la página principal, hacer scroll suave
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
@@ -122,6 +125,11 @@ export function ExoHeader() {
                 <Link
                   href="/quienes-somos"
                   className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 border border-border/50 px-3 py-1.5 rounded-full hover:border-primary/50 hover:bg-primary/5"
+                  onClick={(e) => {
+                    // Forzar navegación completa para evitar problemas con basePath
+                    e.preventDefault();
+                    window.location.href = '/quienes-somos';
+                  }}
                 >
                   ¿Quiénes Somos?
                 </Link>
