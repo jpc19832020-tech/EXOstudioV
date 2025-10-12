@@ -1073,12 +1073,9 @@ export function QuienesSomos() {
                 asChild
                 className="group relative overflow-hidden border-2 border-primary/50 hover:border-primary text-primary hover:bg-primary/10 font-bold px-10 py-6 text-xl rounded-full transition-all duration-500 shadow-xl shadow-primary/20"
               >
-                <Link href="/#productos" onClick={(e) => {
+                <Link href="https://jpc19832020-tech.github.io/EXOstudioV/#productos" onClick={(e) => {
                   e.preventDefault();
-                  // Determinar si estamos en producción o desarrollo
-                  const isProduction = process.env.NODE_ENV === 'production';
-                  const basePath = isProduction ? '/EXOstudioV' : '';
-                  window.location.href = `${basePath}/#productos`;
+                  window.location.href = "https://jpc19832020-tech.github.io/EXOstudioV/#productos";
                 }}>
                   <span className="relative z-10 flex items-center gap-3">
                     <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
