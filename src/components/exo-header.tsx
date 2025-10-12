@@ -45,8 +45,8 @@ export function ExoHeader() {
     setIsMobileMenuOpen(false);
     
     // Si estamos en la página /quienes-somos, redirigir a la página principal con hash
-    if (window.location.pathname === '/quienes-somos') {
-      window.location.href = '/' + href;
+    if (window.location.pathname === '/quienes-somos' || window.location.pathname === '/EXOstudioV/quienes-somos') {
+      window.location.href = '/EXOstudioV/' + href;
       return;
     }
     
@@ -80,7 +80,7 @@ export function ExoHeader() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="flex items-center space-x-6"
             >
-              <Link href="/" className="flex items-center space-x-2">
+              <Link href="/EXOstudioV/" className="flex items-center space-x-2">
                 <motion.svg
                   width="32"
                   height="32"
@@ -120,7 +120,7 @@ export function ExoHeader() {
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 <Link
-                  href="/quienes-somos"
+                  href="/EXOstudioV/quienes-somos.html"
                   className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 border border-border/50 px-3 py-1.5 rounded-full hover:border-primary/50 hover:bg-primary/5"
                 >
                   ¿Quiénes Somos?
