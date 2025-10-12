@@ -9,7 +9,6 @@ import { ExoFooter } from "@/components/exo-footer";
 import { WhatsAppFloat } from "@/components/whatsapp-float";
 import { SEOJsonLD } from "@/components/seo-json-ld";
 import { ThemeProvider } from "next-themes";
-import { Head } from "next/head";
 
 export default function Home() {
   return (

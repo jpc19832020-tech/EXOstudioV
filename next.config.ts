@@ -20,6 +20,19 @@ const nextConfig: NextConfig = {
     // 构建时忽略ESLint错误
     ignoreDuringBuilds: true,
   },
+  // Configuración para exportación estática (GitHub Pages)
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
+  // Base path para GitHub Pages (ajusta según tu repositorio)
+  basePath: process.env.NODE_ENV === 'production' ? '/EXOstudioV' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/EXOstudioV' : '',
+  // Desactivar optimización experimental de CSS que causa problemas
+  experimental: {
+    optimizeCss: false,
+  },
 };
 
 export default nextConfig;

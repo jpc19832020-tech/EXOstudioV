@@ -71,7 +71,6 @@ export function ExoFooter() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
       },
     },
   };
@@ -109,7 +108,7 @@ export function ExoFooter() {
                   className="text-primary"
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}
-                  transition={{ duration: 1, ease: "easeInOut" }}
+                  transition={{ duration: 1 }}
                 >
                   <motion.path
                     d="M12 2L3 7L12 12L21 7L12 2Z"
@@ -128,7 +127,7 @@ export function ExoFooter() {
                     fill="none"
                     initial={{ pathLength: 0 }}
                     animate={{ pathLength: 1 }}
-                    transition={{ duration: 1, delay: 0.3, ease: "easeInOut" }}
+                    transition={{ duration: 1, delay: 0.3 }}
                   />
                 </motion.svg>
                 <span className="text-lg font-bold">EXO digital studio</span>

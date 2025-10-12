@@ -11,7 +11,7 @@ interface Product {
   name: string;
   description: string;
   badge: string;
-  badgeVariant: "default" | "secondary" | "outline";
+  badgeVariant: "default" | "secondary" | "destructive" | "outline";
   features: string[];
   comingSoon: boolean;
   image?: string;

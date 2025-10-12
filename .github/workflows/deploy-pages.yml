@@ -27,19 +27,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      - name: Build artifact
-        # Since this is a static site, we just need to copy files
-        run: |
-          mkdir -p ./dist
-          cp -r * ./dist/
-          # Remove .github directory from dist
-          rm -rf ./dist/.github
+      - name: Install dependencies
+        run: npm ci
+      - name: Build static export
+        run: npm run build
+        env:
+          NODE_ENV: production
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ./out
 
   # Deployment job
   deploy:
