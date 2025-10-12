@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon --exec \"npx tsx server.ts\" --watch server.ts --watch src --ext ts,tsx,js,jsx 2>&1 | tee dev.log",
     "build": "next build",
-    "build:static": "next build && next export",
+    "build:static": "next build && mkdir out && xcopy /E /I .next\\static out\\static && xcopy /E /I public out\\public && for /r .next\\server\\app %i in (*.html) do copy \"%i\" out\\",
     "start": "NODE_ENV=production tsx server.ts 2>&1 | tee server.log",
     "lint": "next lint",
     "db:push": "prisma db push",
