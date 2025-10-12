@@ -247,8 +247,8 @@ export function ExoProducts() {
                   <CardHeader className="space-y-4">
                     {/* Product Image */}
                     {product.image && (
-                      <motion.div 
-                        className="relative w-full h-48 rounded-lg overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10"
+                      <motion.div
+                        className="relative w-full h-64 rounded-lg overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10"
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.6 }}
@@ -256,7 +256,7 @@ export function ExoProducts() {
                         <img
                           src={product.image}
                           alt={product.name}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-contain p-4"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                       </motion.div>
