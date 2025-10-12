@@ -1075,7 +1075,10 @@ export function QuienesSomos() {
               >
                 <Link href="/#productos" onClick={(e) => {
                   e.preventDefault();
-                  window.location.href = '/#productos';
+                  // Determinar si estamos en producción o desarrollo
+                  const isProduction = process.env.NODE_ENV === 'production';
+                  const basePath = isProduction ? '/EXOstudioV' : '';
+                  window.location.href = `${basePath}/#productos`;
                 }}>
                   <span className="relative z-10 flex items-center gap-3">
                     <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
