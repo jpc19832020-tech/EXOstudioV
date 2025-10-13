@@ -151,7 +151,7 @@ export function ExoProducts() {
           className="text-2xl font-bold mb-6 text-center"
           variants={animationVariants.item}
         >
-          Ejemplo de nuestro trabajo
+          Te mostramos nuestro trabajo
         </motion.h3>
         <motion.p 
           className="text-muted-foreground mb-8 text-center max-w-2xl mx-auto"
