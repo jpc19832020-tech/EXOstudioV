@@ -1,6 +1,6 @@
 # Despliegue en GitHub Pages
 
-Tu proyecto ya está configurado para desplegarse automáticamente en GitHub Pages usando GitHub Actions.
+Tu proyecto está configurado para desplegarse automáticamente en GitHub Pages usando GitHub Actions con un pipeline de CI/CD completo.
 
 ## 🚀 Configuración realizada
 
@@ -9,13 +9,20 @@ Tu proyecto ya está configurado para desplegarse automáticamente en GitHub Pag
    - Imágenes configuradas como `unoptimized: true`
    - Base path configurado para `/EXOstudioV`
 
-2. **Workflow de GitHub Actions actualizado**
-   - Archivo `.github/workflows/deploy-pages.yml` configurado
-   - Construye la aplicación antes de desplegar
-   - Usa el directorio `out` generado por Next.js
+2. **Workflows de GitHub Actions implementados**
+   - `.github/workflows/ci-cd.yml`: Pipeline principal de CI/CD con pruebas, linting, seguridad y despliegue
+   - `.github/workflows/dependency-update.yml`: Actualización automática de dependencias
+   - `.github/workflows/deploy-pages.yml`: Workflow legacy de despliegue
 
 3. **Scripts de build agregados**
    - Script `build:static` agregado a `package.json`
+
+4. **Configuración de calidad y seguridad**
+   - Integración con ESLint y TypeScript
+   - Pruebas automatizadas con cobertura de código
+   - Auditoría de seguridad con Snyk
+   - Análisis de rendimiento con Lighthouse CI
+   - Notificaciones de despliegue en Slack
 
 ## 📋 Pasos para desplegar
 
@@ -46,12 +53,18 @@ git push -u origin main
 
 ## 🔄 Flujo de despliegue automático
 
-Cada vez que hagas un push a la rama `main`:
+### Desarrollo (rama `develop`)
+1. Al hacer push a `develop`, se ejecuta el pipeline de CI
+2. Se verifican el código, se ejecutan pruebas y se construye la aplicación
+3. Se despliega a un entorno de staging en GitHub Pages
 
-1. GitHub Actions se ejecutará automáticamente
-2. Construirá tu aplicación Next.js
-3. Generará la versión estática
-4. La desplegará en GitHub Pages
+### Producción (rama `main`)
+1. Al hacer merge/push a `main`, se ejecuta el pipeline completo
+2. Se verifican el código, se ejecutan pruebas y análisis de seguridad
+3. Se construye la aplicación con optimizaciones
+4. Se despliega a producción en GitHub Pages
+5. Se ejecuta una auditoría de Lighthouse
+6. Se envían notificaciones del resultado
 
 ## 🌐 Acceder a tu sitio
 
@@ -116,9 +129,23 @@ Revisa los logs de GitHub Actions en la pestaña `Actions` de tu repositorio.
 
 ## 📊 Estado actual
 
-✅ Configuración estática completada  
-✅ GitHub Actions configurado  
-✅ Build local exitoso  
-✅ Listo para desplegar  
+✅ Configuración estática completada
+✅ GitHub Actions configurado
+✅ Build local exitoso
+✅ Pipeline de CI/CD implementado
+✅ Pruebas automatizadas configuradas
+✅ Análisis de seguridad implementado
+✅ Auditoría de rendimiento configurada
+✅ Actualización automática de dependencias
+✅ Listo para desplegar
 
-Tu proyecto está listo para ser desplegado en GitHub Pages. Haz push a tu repositorio y el despliegue se realizará automáticamente.
+Tu proyecto está listo para ser desplegado en GitHub Pages con un pipeline completo de CI/CD. Haz push a tu repositorio y el despliegue se realizará automáticamente con todas las verificaciones de calidad.
+
+## 📖 Documentación adicional
+
+Para más detalles sobre los workflows, consulta [`.github/workflows/README.md`](.github/workflows/README.md) donde encontrarás:
+
+- Explicación detallada de cada workflow
+- Configuración de secrets necesarios
+- Guía de solución de problemas
+- Personalización del pipeline
