@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 const navigation = [
-  { name: "Productos", href: "/productos" },
+  { name: "Productos", href: "#productos" },
 ];
 
 export function ExoHeader() {
@@ -41,15 +41,6 @@ export function ExoHeader() {
 
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
-    
-    // Para el botón de productos, redirigir a la página de productos
-    if (href.includes('/productos')) {
-      // Determinar si estamos en producción o desarrollo
-      const isProduction = process.env.NODE_ENV === 'production';
-      const basePath = isProduction ? '/EXOstudioV' : '';
-      window.location.href = `${basePath}${href}`;
-      return;
-    }
     
     // Determinar si estamos en producción o desarrollo
     const isProduction = process.env.NODE_ENV === 'production';

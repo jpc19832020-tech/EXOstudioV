@@ -2,6 +2,9 @@
 
 import { ExoHeader } from "@/components/exo-header";
 import { ExoHero } from "@/components/exo-hero";
+import { ExoPresentation } from "@/components/exo-presentation";
+import { ExoProducts } from "@/components/exo-products";
+import { ExoContact } from "@/components/exo-contact";
 import { ExoFooter } from "@/components/exo-footer";
 import { WhatsAppFloat } from "@/components/whatsapp-float";
 import { SEOJsonLD } from "@/components/seo-json-ld";
@@ -21,6 +24,9 @@ export default function Home() {
           <ExoHeader />
           <main>
             <ExoHero />
+            <ExoPresentation />
+            <ExoProducts />
+            <ExoContact />
           </main>
           <ExoFooter />
           <WhatsAppFloat />
