@@ -6,9 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 const navigation = [
-  { name: "Presentación", href: "#presentacion" },
-  { name: "Productos", href: "#productos" },
-  { name: "Contacto", href: "#contacto" },
+  { name: "Productos", href: "/productos" },
 ];
 
 export function ExoHeader() {
@@ -43,6 +41,15 @@ export function ExoHeader() {
 
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
+    
+    // Para el botón de productos, redirigir a la página de productos
+    if (href.includes('/productos')) {
+      // Determinar si estamos en producción o desarrollo
+      const isProduction = process.env.NODE_ENV === 'production';
+      const basePath = isProduction ? '/EXOstudioV' : '';
+      window.location.href = `${basePath}${href}`;
+      return;
+    }
     
     // Determinar si estamos en producción o desarrollo
     const isProduction = process.env.NODE_ENV === 'production';
@@ -161,19 +168,9 @@ export function ExoHeader() {
                       e.preventDefault();
                       handleNavClick(item.href);
                     }}
-                    className={`text-sm font-medium transition-colors duration-200 hover:text-primary ${
-                      activeSection === item.href.substring(1) ? "text-primary" : "text-muted-foreground"
-                    }`}
+                    className="text-sm font-medium transition-colors duration-200 hover:text-primary text-muted-foreground bg-primary/10 border border-primary/20 px-4 py-2 rounded-lg hover:bg-primary/20"
                   >
                     {item.name}
-                    <motion.div
-                      className="absolute -bottom-1 left-0 h-0.5 bg-primary"
-                      initial={{ width: 0 }}
-                      animate={{ 
-                        width: activeSection === item.href.substring(1) ? "100%" : "0%" 
-                      }}
-                      transition={{ duration: 0.2 }}
-                    />
                   </Link>
                 </motion.div>
               ))}
@@ -239,9 +236,7 @@ export function ExoHeader() {
                       e.preventDefault();
                       handleNavClick(item.href);
                     }}
-                    className={`block py-3 text-sm font-medium transition-colors duration-200 hover:text-primary ${
-                      activeSection === item.href.substring(1) ? "text-primary" : "text-muted-foreground"
-                    }`}
+                    className="block py-3 text-sm font-medium transition-colors duration-200 hover:text-primary text-muted-foreground"
                   >
                     {item.name}
                   </Link>
