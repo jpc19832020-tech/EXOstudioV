@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 const navigation = [
-  { name: "Productos", href: "https://jpc19832020-tech.github.io/EXOstudioV/productos" },
+  { name: "Productos", href: "/productos" },
 ];
 
 export function ExoHeader() {
@@ -42,9 +42,12 @@ export function ExoHeader() {
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
     
-    // Para el botón de productos, redirigir al subdominio externo
-    if (href.includes('productos.exo.digital')) {
-      window.open(href, '_blank');
+    // Para el botón de productos, redirigir a la página de productos
+    if (href === '/productos') {
+      // Determinar si estamos en producción o desarrollo
+      const isProduction = process.env.NODE_ENV === 'production';
+      const basePath = isProduction ? '/EXOstudioV' : '';
+      window.location.href = `${basePath}${href}`;
       return;
     }
     
