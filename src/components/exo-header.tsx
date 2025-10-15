@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 const navigation = [
-  { name: "Productos", href: "https://productos.exo.digital" },
+  { name: "Productos", href: "https://jpc19832020-tech.github.io/EXOstudioV/productos" },
 ];
 
 export function ExoHeader() {
