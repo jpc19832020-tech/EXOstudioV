@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 const navigation = [
-  { name: "Productos", href: "#productos" },
+  { name: "Productos", href: "https://productos.exo.digital" },
 ];
 
 export function ExoHeader() {
@@ -41,6 +41,12 @@ export function ExoHeader() {
 
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
+    
+    // Para el botón de productos, redirigir al subdominio externo
+    if (href.includes('productos.exo.digital')) {
+      window.open(href, '_blank');
+      return;
+    }
     
     // Determinar si estamos en producción o desarrollo
     const isProduction = process.env.NODE_ENV === 'production';
