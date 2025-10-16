@@ -224,8 +224,10 @@ jobs:
           echo "Validando salida del build..."
           
           # Verificar que se generaron las páginas de productos
-          if [ ! -f "out/productos/index.html" ]; then
+          if [ ! -f "out/productos.html" ]; then
             echo "❌ Error: No se generó la página de listado de productos"
+            echo "Buscando archivos HTML generados:"
+            find out -name "*.html" -type f
             exit 1
           fi
           
