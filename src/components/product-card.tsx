@@ -49,7 +49,7 @@ export function ProductCard({ product, onViewDetails }: ProductCardProps) {
       <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl">
         <CardHeader className="space-y-4">
           {/* Product Image */}
-          <div className="relative w-full h-48 rounded-lg overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
+          <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
             <Image
               src={product.imagenPrincipal}
               alt={`${product.nombre} - vista principal`}

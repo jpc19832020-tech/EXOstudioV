@@ -151,7 +151,7 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
                 className="space-y-4"
               >
                 {/* Main Image */}
-                <div className="relative w-full h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
+                <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
                   <Image
                     src={currentImage}
                     alt={`${product.nombre} - vista principal`}
@@ -169,7 +169,7 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
                       <button
                         key={index}
                         onClick={() => handleImageChange(index)}
-                        className={`relative w-full h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                        className={`relative w-full aspect-video rounded-lg overflow-hidden border-2 transition-all ${
                           currentImageIndex === index
                             ? "border-primary"
                             : "border-border hover:border-primary/50"
@@ -246,7 +246,7 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
                       {product.imagenesAdicionales.map((image, index) => (
                         <div
                           key={index}
-                          className="relative w-full h-32 rounded-lg overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10"
+                          className="relative w-full aspect-video rounded-lg overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10"
                         >
                           <Image
                             src={image}
