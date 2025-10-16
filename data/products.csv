@@ -1,3 +1,4 @@
-nombre;slug;categoria;descripcion_corta;caracteristicas;precio;moneda;imagenes;estado;cta_whatsapp
-Smart Card;smart-card;Tarjetas Digitales;Tarjeta de presentaciÃ³n inteligente. Comparte tu informaciÃ³n de contacto instantÃ¡neamente.;DiseÃ±o personalizable,AnÃ¡lisis de interacciones,Compatibilidad universal,ActualizaciÃ³n en tiempo real;100;PEN;/EXOstudioV/Imagenes_de_productos/hero.png;visible;Me interesa la Smart Card EXO
-Prueba;prueba;pruebas;simplemente una prueba;caracteristicas de prueba;10;PEN;/EXOstudioV/Imagenes_de_productos/hero.png;visible;Me interesa la prueba
+nombre;slug;categoria;descripcion_corta;caracteristicas;precio;moneda;imagenes;estado;cta_whatsapp,,,
+Smart Card;smart-card;Tarjetas Digitales;Tarjeta de presentación inteligente. Comparte tu información de contacto instantáneamente.;Diseño personalizable,Análisis de interacciones,Compatibilidad universal,Actualización en tiempo real;100;PEN;/EXOstudioV/Imagenes_de_productos/hero.png;visible;Me interesa la Smart Card EXO
+Prueba;prueba;pruebas;simplemente una prueba;caracteristicas de prueba;10;PEN;/EXOstudioV/Imagenes_de_productos/hero.png;visible;Me interesa la prueba,,,
+Tarjeta de Boda Interactiva;invitacion-boda-digital-interactiva;Tarjetas Digitales;Invitación digital con QR y enlace a web con mapa y confirmación;"Página web; QR personalizado; Mapa Google; Formulario RSVP";140;PEN;"Imagenes_de_productos/invitacion-boda-digital-interactiva/hero.png; Imagenes_de_productos/invitacion-boda-digital-interactiva/mock-1.png";visible;Me interesa la  Interactiva EXO,,,
