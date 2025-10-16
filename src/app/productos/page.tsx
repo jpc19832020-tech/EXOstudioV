@@ -12,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "@/components/ui/input";
 import { Search, Filter, Grid, List } from "lucide-react";
 import { ProductCard as ProductCardType } from "@/types/product";
-import { csvParser } from "@/lib/csv-parser";
+import { apiClient } from "@/lib/api-client";
 import { useRouter } from "next/navigation";
 
 export default function ProductosPage() {
@@ -28,9 +28,8 @@ export default function ProductosPage() {
   useEffect(() => {
     const loadProducts = async () => {
       try {
-        await csvParser.loadProducts();
-        const productsData = csvParser.getVisibleProducts();
-        const categoriesData = csvParser.getCategories();
+        const productsData = await apiClient.getProducts();
+        const categoriesData = apiClient.getCategories();
         
         setProducts(productsData);
         setFilteredProducts(productsData);

@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, MessageCircle, Check, Image as ImageIcon } from "lucide-react";
 import { ProductDetail as ProductDetailType } from "@/types/product";
-import { csvParser } from "@/lib/csv-parser";
+import { apiClient } from "@/lib/api-client";
 import Image from "next/image";
 
 export default function ProductDetailPage() {
@@ -26,8 +26,7 @@ export default function ProductDetailPage() {
   useEffect(() => {
     const loadProduct = async () => {
       try {
-        await csvParser.loadProducts();
-        const productData = csvParser.getProductBySlug(slug);
+        const productData = await apiClient.getProductBySlug(slug);
         
         if (productData) {
           setProduct(productData);
