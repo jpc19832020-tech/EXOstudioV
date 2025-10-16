@@ -35,6 +35,11 @@ function copyDir(src, dest) {
 copyDir('.next/static', 'out/_next/static');
 copyDir('public', 'out');
 
+// Copiar también el contenido de _next/static a _next/static en out
+if (fs.existsSync('.next/static')) {
+  copyDir('.next/static', 'out/_next/static');
+}
+
 // Copiar y procesar archivos HTML
 const serverAppPath = '.next/server/app';
 if (fs.existsSync(serverAppPath)) {
