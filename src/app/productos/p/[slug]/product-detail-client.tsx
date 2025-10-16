@@ -123,7 +123,7 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
       <div className="min-h-screen bg-background text-foreground flex flex-col">
         <ExoHeader />
         
-        <main className="flex-1">
+        <main className="flex-1 pt-20">
           <div className="container mx-auto px-4 py-8">
             {/* Breadcrumb */}
             <motion.div
@@ -299,6 +299,28 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
         
         <ExoFooter />
       </div>
+
+      {/* Floating Back Button */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{
+          duration: 0.5,
+          delay: 1.0,
+          type: "spring",
+          stiffness: 300,
+          damping: 20
+        }}
+        className="fixed bottom-8 left-8 z-50"
+      >
+        <Button
+          onClick={handleBackToCatalog}
+          className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg rounded-full px-6 py-3 flex items-center gap-2"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          Volver al catálogo
+        </Button>
+      </motion.div>
     </ThemeProvider>
   );
 }
