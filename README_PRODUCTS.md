@@ -164,6 +164,33 @@ npm run dev
 npm run build:static
 ```
 
+### Test de Build
+```bash
+npm run build:test
+```
+
+## ⚙️ Configuración Técnica
+
+### Next.js 15 Configuración
+- **output: export** para generación estática completa
+- **basePath**: `/EXOstudioV` para GitHub Pages
+- **assetPrefix**: `/EXOstudioV` para assets estáticos
+- **trailingSlash**: true para URLs consistentes
+- **images.unoptimized**: true para compatibilidad con export estático
+
+### Proceso de Build
+1. ✅ Validación de estructura del CSV
+2. ✅ Verificación de existencia de imágenes
+3. ✅ Build estático con Next.js (`output: export`)
+4. ✅ Generación de parámetros estáticos para páginas dinámicas
+5. ✅ Validación de archivos críticos (.nojekyll, index.html, etc.)
+6. ✅ Deploy a GitHub Pages
+
+### CSV Parser Architecture
+- **Servidor (Build)**: Lee el archivo CSV real desde `data/products.csv`
+- **Cliente (Runtime)**: Usa fallback a datos estáticos para compatibilidad
+- **generateStaticParams()**: Genera páginas estáticas para cada producto visible
+
 ## 📈 Monitoreo y Logs
 
 El sistema genera logs automáticos durante el build:

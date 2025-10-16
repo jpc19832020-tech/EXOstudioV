@@ -1,10 +1,17 @@
 const fs = require('fs');
 const path = require('path');
 
-// Crear directorio out si no existe
-if (!fs.existsSync('out')) {
-  fs.mkdirSync('out', { recursive: true });
+console.log('🚀 Iniciando build estático para GitHub Pages...');
+
+// Verificar que existe el directorio de salida de Next.js
+const nextOutPath = path.join(process.cwd(), 'out');
+if (!fs.existsSync(nextOutPath)) {
+  console.error('❌ Error: No se encontró el directorio "out". Ejecuta primero "npm run build"');
+  process.exit(1);
 }
+
+// Crear archivo .nojekyll para GitHub Pages
+fs.writeFileSync(path.join(nextOutPath, '.nojekyll'), '');
 
 // Función para copiar directorios recursivamente
 function copyDir(src, dest) {
@@ -12,39 +19,66 @@ function copyDir(src, dest) {
     fs.mkdirSync(dest, { recursive: true });
   }
   
-  fs.readdirSync(src).forEach(file => {
-    const srcPath = path.join(src, file);
-    const destPath = path.join(dest, file);
+  const entries = fs.readdirSync(src, { withFileTypes: true });
+  
+  for (const entry of entries) {
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
     
-    if (fs.lstatSync(srcPath).isDirectory()) {
+    if (entry.isDirectory()) {
       copyDir(srcPath, destPath);
     } else {
       fs.copyFileSync(srcPath, destPath);
     }
+  }
+}
+
+//Crear archivo .nojekyll para GitHub Pages
+fs.writeFileSync(path.join(nextOutPath, '.nojekyll'), '');
+
+// Verificar archivos críticos
+const criticalFiles = [
+  'index.html',
+  'productos/index.html'
+];
+
+console.log('📋 Verificando archivos críticos...');
+for (const file of criticalFiles) {
+  const filePath = path.join(nextOutPath, file);
+  if (fs.existsSync(filePath)) {
+    console.log(`✅ ${file} encontrado`);
+  } else {
+    console.log(`⚠️ ${file} no encontrado`);
+  }
+}
+
+// Verificar páginas de detalle de productos
+const productosDir = path.join(nextOutPath, 'productos', 'p');
+if (fs.existsSync(productosDir)) {
+  const productPages = fs.readdirSync(productosDir);
+  console.log(`📦 Se encontraron ${productPages.length} páginas de detalle de productos`);
+}
+
+// Listar estructura de directorios
+function listDir(dir, prefix = '') {
+  const items = fs.readdirSync(dir);
+  items.forEach(item => {
+    const fullPath = path.join(dir, item);
+    const stat = fs.statSync(fullPath);
+    
+    if (stat.isDirectory()) {
+      console.log(`${prefix}📁 ${item}/`);
+      if (prefix.length < 8) { // Limitar profundidad
+        listDir(fullPath, prefix + '  ');
+      }
+    } else {
+      console.log(`${prefix}📄 ${item}`);
+    }
   });
 }
 
-// Copiar archivos estáticos
-copyDir('.next/static', 'out/_next/static');
-copyDir('public', 'out');
+console.log('\n📂 Estructura generada:');
+listDir(nextOutPath);
 
-// Copiar y procesar archivos HTML
-const serverAppPath = '.next/server/app';
-if (fs.existsSync(serverAppPath)) {
-  fs.readdirSync(serverAppPath)
-    .filter(file => file.endsWith('.html'))
-    .forEach(file => {
-      const filePath = path.join(serverAppPath, file);
-      let content = fs.readFileSync(filePath, 'utf8');
-      
-      // Reemplazar rutas absolutas con el basePath para GitHub Pages
-      content = content.replace(/href="\//g, 'href="/EXOstudioV/');
-      content = content.replace(/src="\//g, 'src="/EXOstudioV/');
-      content = content.replace(/href='\//g, "href='/EXOstudioV/");
-      content = content.replace(/src='\//g, "src='/EXOstudioV/");
-      
-      fs.writeFileSync(path.join('out', file), content);
-    });
-}
-
-console.log('Build estático completado con éxito');
+console.log('\n✅ Build estático completado con éxito');
+console.log('🌐 El sitio está listo para deploy en GitHub Pages');
