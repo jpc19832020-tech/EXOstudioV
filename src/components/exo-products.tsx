@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ExternalLink, MessageCircle, Eye } from "lucide-react";
 import { ProductDetail } from "./product-detail";
 import { ProductCard as ProductCardType } from "@/types/product";
-import { apiClient } from "@/lib/api-client";
+import { staticDataClient } from "@/lib/static-data-client";
 import { useRouter } from "next/navigation";
 
 // Componente de logo de WhatsApp
@@ -104,7 +104,7 @@ export function ExoProducts() {
   useEffect(() => {
     const loadProducts = async () => {
       try {
-        const productsData = await apiClient.getProducts();
+        const productsData = await staticDataClient.getProducts();
         
         // Convert to the old format for compatibility
         const convertedProducts: Product[] = productsData.slice(0, 3).map((product, index) => ({

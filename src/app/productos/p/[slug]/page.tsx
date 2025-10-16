@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, MessageCircle, Check, Image as ImageIcon } from "lucide-react";
 import { ProductDetail as ProductDetailType } from "@/types/product";
-import { apiClient } from "@/lib/api-client";
+import { staticDataClient } from "@/lib/static-data-client";
 import Image from "next/image";
 
 export default function ProductDetailPage() {
@@ -26,7 +26,7 @@ export default function ProductDetailPage() {
   useEffect(() => {
     const loadProduct = async () => {
       try {
-        const productData = await apiClient.getProductBySlug(slug);
+        const productData = await staticDataClient.getProductBySlug(slug);
         
         if (productData) {
           setProduct(productData);

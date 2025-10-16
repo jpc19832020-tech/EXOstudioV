@@ -1,0 +1,22 @@
+[
+  {
+    "nombre": "Smart Card",
+    "slug": "smart-card",
+    "categoria": "Tarjetas Digitales",
+    "descripcion_corta": "Tarjeta de presentación inteligente. Comparte tu información de contacto instantáneamente.",
+    "caracteristicas": [
+      "Diseño personalizable",
+      "Análisis de interacciones",
+      "Compatibilidad universal",
+      "Actualización en tiempo real"
+    ],
+    "precio": {
+      "amount": 100,
+      "currency": "PEN",
+      "formatted": "S/ 100.00"
+    },
+    "imagenPrincipal": "Imagenes_de_productos/hero.png",
+    "imagenesAdicionales": [],
+    "cta_whatsapp": "Me interesa la Smart Card EXO"
+  }
+]

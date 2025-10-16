@@ -1,5 +1,12 @@
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
+
+console.log('🔄 Iniciando build estático...');
+
+// Generar datos estáticos de productos
+console.log('📊 Generando datos estáticos de productos...');
+execSync('node scripts/generate-products-data.js', { stdio: 'inherit' });
 
 // Crear directorio out si no existe
 if (!fs.existsSync('out')) {
