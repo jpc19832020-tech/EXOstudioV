@@ -49,14 +49,16 @@ export function ProductCard({ product, onViewDetails }: ProductCardProps) {
       <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl">
         <CardHeader className="space-y-4">
           {/* Product Image */}
-          <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
-            <Image
-              src={product.imagenPrincipal}
-              alt={`${product.nombre} - vista principal`}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
+          <div className="relative w-full rounded-lg overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
+            <div className="relative w-full pb-[56.25%]">
+              <Image
+                src={product.imagenPrincipal}
+                alt={`${product.nombre} - vista principal`}
+                fill
+                className="object-contain p-4"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </div>
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           </div>
           

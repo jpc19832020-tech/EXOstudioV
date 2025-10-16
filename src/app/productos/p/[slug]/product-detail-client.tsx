@@ -125,22 +125,6 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
         
         <main className="flex-1 pt-20">
           <div className="container mx-auto px-4 py-8">
-            {/* Breadcrumb */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-8"
-            >
-              <Button
-                variant="ghost"
-                onClick={handleBackToCatalog}
-                className="mb-4"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Volver al catálogo
-              </Button>
-            </motion.div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Product Images */}
@@ -151,14 +135,16 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
                 className="space-y-4"
               >
                 {/* Main Image */}
-                <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
-                  <Image
-                    src={currentImage}
-                    alt={`${product.nombre} - vista principal`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
+                <div className="relative w-full rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
+                  <div className="relative w-full pb-[56.25%]">
+                    <Image
+                      src={currentImage}
+                      alt={`${product.nombre} - vista principal`}
+                      fill
+                      className="object-contain p-4"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                 </div>
 
@@ -169,19 +155,21 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
                       <button
                         key={index}
                         onClick={() => handleImageChange(index)}
-                        className={`relative w-full aspect-video rounded-lg overflow-hidden border-2 transition-all ${
+                        className={`relative w-full rounded-lg overflow-hidden border-2 transition-all ${
                           currentImageIndex === index
                             ? "border-primary"
                             : "border-border hover:border-primary/50"
                         }`}
                       >
-                        <Image
-                          src={image}
-                          alt={`${product.nombre} - imagen ${index + 1}`}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 25vw, 12.5vw"
-                        />
+                        <div className="relative w-full pb-[56.25%]">
+                          <Image
+                            src={image}
+                            alt={`${product.nombre} - imagen ${index + 1}`}
+                            fill
+                            className="object-contain p-1"
+                            sizes="(max-width: 768px) 25vw, 12.5vw"
+                          />
+                        </div>
                       </button>
                     ))}
                   </div>
@@ -246,15 +234,17 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
                       {product.imagenesAdicionales.map((image, index) => (
                         <div
                           key={index}
-                          className="relative w-full aspect-video rounded-lg overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10"
+                          className="relative w-full rounded-lg overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10"
                         >
-                          <Image
-                            src={image}
-                            alt={`${product.nombre} - galería ${index + 1}`}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 50vw, 25vw"
-                          />
+                          <div className="relative w-full pb-[56.25%]">
+                            <Image
+                              src={image}
+                              alt={`${product.nombre} - galería ${index + 1}`}
+                              fill
+                              className="object-contain p-4"
+                              sizes="(max-width: 768px) 50vw, 25vw"
+                            />
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -276,18 +266,10 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
                     <div className="flex gap-4">
                       <Button
                         onClick={handleWhatsAppClick}
-                        className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
+                        className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
                       >
                         <MessageCircle className="w-5 h-5 mr-2" />
                         Contactar ahora
-                      </Button>
-                      <Button
-                        variant="outline"
-                        onClick={handleBackToCatalog}
-                        className="flex-1"
-                      >
-                        <ArrowLeft className="w-5 h-5 mr-2" />
-                        Ver más productos
                       </Button>
                     </div>
                   </div>
