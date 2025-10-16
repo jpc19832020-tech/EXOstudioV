@@ -50,6 +50,7 @@ if (fs.existsSync(serverAppPath)) {
       let content = fs.readFileSync(filePath, 'utf8');
       
       // Reemplazar rutas absolutas con el basePath para GitHub Pages
+      // Next.js no está aplicando el basePath correctamente en el build estático
       content = content.replace(/href="\//g, 'href="/EXOstudioV/');
       content = content.replace(/src="\//g, 'src="/EXOstudioV/');
       content = content.replace(/href='\//g, "href='/EXOstudioV/");
