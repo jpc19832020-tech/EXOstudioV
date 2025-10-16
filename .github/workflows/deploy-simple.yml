@@ -1,0 +1,197 @@
+name: Simple Deploy
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'data/products.csv'
+      - 'Imagenes_de_productos/**'
+      - 'src/app/productos/**'
+      - 'src/components/product-*.tsx'
+      - 'src/lib/csv-parser.ts'
+      - 'src/lib/static-data-client.ts'
+      - 'src/types/product.ts'
+      - 'scripts/generate-products-data.js'
+      - 'scripts/build-static.js'
+      - 'package.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate CSV structure
+        run: |
+          echo "Validando estructura del CSV..."
+          if [ ! -f "data/products.csv" ]; then
+            echo "❌ Error: No se encuentra el archivo data/products.csv"
+            exit 1
+          fi
+          
+          # Verificar encabezados requeridos
+          headers=$(head -n 1 data/products.csv | tr -d '\r\n')
+          required_headers="nombre;slug;categoria;descripcion_corta;caracteristicas;precio;moneda;imagenes;estado;cta_whatsapp"
+          
+          echo "Encabezados encontrados: $headers"
+          echo "Encabezados requeridos: $required_headers"
+          
+          if [[ "$headers" != "$required_headers" ]]; then
+            echo "❌ Error: Los encabezados del CSV no coinciden con la estructura requerida"
+            exit 1
+          fi
+          
+          # Validar número de columnas en cada fila
+          line_number=0
+          while IFS= read -r line; do
+            line_number=$((line_number + 1))
+            if [[ $line_number -eq 1 ]]; then
+              continue  # Saltar encabezado
+            fi
+            
+            # Contar columnas separadas por punto y coma
+            column_count=$(echo "$line" | grep -o ';' | wc -l)
+            expected_columns=9  # 10 columnas = 9 separadores
+            
+            if [[ $column_count -ne $expected_columns ]]; then
+              echo "❌ Error: Línea $line_number tiene $((column_count + 1)) columnas, se esperan 10"
+              echo "Línea problemática: $line"
+              exit 1
+            fi
+            
+          done < data/products.csv
+          
+          echo "✅ Estructura del CSV válida"
+
+      - name: Validate images existence
+        run: |
+          echo "Validando existencia de imágenes..."
+          
+          # Leer el CSV y verificar que las imágenes existan
+          line_number=0
+          while IFS=';' read -r nombre slug categoria descripcion_corta caracteristicas precio moneda imagenes estado cta_whatsapp; do
+            line_number=$((line_number + 1))
+            
+            # Saltar encabezado
+            if [[ "$nombre" == "nombre" ]]; then
+              continue
+            fi
+            
+            # Validar campos requeridos
+            if [[ -z "$nombre" || -z "$slug" || -z "$imagenes" ]]; then
+              echo "❌ Error: Línea $line_number tiene campos requeridos vacíos"
+              echo "nombre: '$nombre', slug: '$slug', imagenes: '$imagenes'"
+              exit 1
+            fi
+            
+            # Solo procesar productos visibles
+            if [[ "$estado" != "visible" ]]; then
+              echo "⏭️ Omitiendo producto oculto: $nombre"
+              continue
+            fi
+            
+            # Verificar imagen principal
+            IFS=',' read -ra IMAGE_ARRAY <<< "$imagenes"
+            main_image="${IMAGE_ARRAY[0]}"
+            
+            if [[ -z "$main_image" ]]; then
+              echo "❌ Error: El producto $nombre no tiene imagen principal"
+              exit 1
+            fi
+            
+            if [[ ! -f "$main_image" ]]; then
+              echo "❌ Error: No se encuentra la imagen principal $main_image para el producto $nombre"
+              exit 1
+            else
+              echo "✅ Imagen encontrada: $main_image"
+            fi
+            
+          done < data/products.csv
+          
+          echo "✅ Validación de imágenes completada"
+
+      - name: Generate static data
+        run: |
+          echo "🔄 Generando datos estáticos de productos..."
+          node scripts/generate-products-data.js
+          echo "✅ Datos estáticos generados"
+
+      - name: Build static site
+        run: |
+          echo "📦 Construyendo sitio estático..."
+          npm run build:static
+          echo "✅ Build completado"
+
+      - name: Validate build output
+        run: |
+          echo "Validando salida del build..."
+          
+          # Verificar que se generaron las páginas de productos
+          if [ ! -f "out/productos.html" ]; then
+            echo "❌ Error: No se generó la página de listado de productos"
+            echo "Buscando archivos generados:"
+            find out -name "*.html" -type f
+            exit 1
+          fi
+          
+          # Verificar que se generaron los datos estáticos
+          if [ ! -f "out/data/products.json" ]; then
+            echo "❌ Error: No se generaron los datos estáticos de productos"
+            exit 1
+          fi
+          
+          echo "✅ Validación del build completada"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: [build, deploy]
+    if: always()
+    steps:
+      - name: Notify build status
+        run: |
+          if [[ "${{ needs.build.result }}" == "success" && "${{ needs.deploy.result }}" == "success" ]]; then
+            echo "✅ Build y deploy completados exitosamente"
+            echo "🌐 Sitio disponible en: https://jpc19832020-tech.github.io/EXOstudioV/"
+          else
+            echo "❌ Error en el build o deploy"
+            echo "Build result: ${{ needs.build.result }}"
+            echo "Deploy result: ${{ needs.deploy.result }}"
+            exit 1
+          fi
