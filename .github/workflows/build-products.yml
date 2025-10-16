@@ -55,15 +55,36 @@ jobs:
           fi
           
           # Verificar encabezados requeridos
-          headers=$(head -n 1 data/products.csv)
+          headers=$(head -n 1 data/products.csv | tr -d '\r\n')
           required_headers="nombre;slug;categoria;descripcion_corta;caracteristicas;precio;moneda;imagenes;estado;cta_whatsapp"
+          
+          echo "Encabezados encontrados: $headers"
+          echo "Encabezados requeridos: $required_headers"
           
           if [[ "$headers" != "$required_headers" ]]; then
             echo "❌ Error: Los encabezados del CSV no coinciden con la estructura requerida"
-            echo "Encabezados encontrados: $headers"
-            echo "Encabezados requeridos: $required_headers"
             exit 1
           fi
+          
+          # Validar número de columnas en cada fila
+          line_number=0
+          while IFS= read -r line; do
+            line_number=$((line_number + 1))
+            if [[ $line_number -eq 1 ]]; then
+              continue  # Saltar encabezado
+            fi
+            
+            # Contar columnas separadas por punto y coma
+            column_count=$(echo "$line" | grep -o ';' | wc -l)
+            expected_columns=9  # 10 columnas = 9 separadores
+            
+            if [[ $column_count -ne $expected_columns ]]; then
+              echo "❌ Error: Línea $line_number tiene $((column_count + 1)) columnas, se esperan 10"
+              echo "Línea problemática: $line"
+              exit 1
+            fi
+            
+          done < data/products.csv
           
           echo "✅ Estructura del CSV válida"
 
@@ -72,14 +93,25 @@ jobs:
           echo "Validando existencia de imágenes..."
           
           # Leer el CSV y verificar que las imágenes existan
+          line_number=0
           while IFS=';' read -r nombre slug categoria descripcion_corta caracteristicas precio moneda imagenes estado cta_whatsapp; do
+            line_number=$((line_number + 1))
+            
             # Saltar encabezado
             if [[ "$nombre" == "nombre" ]]; then
               continue
             fi
             
+            # Validar campos requeridos
+            if [[ -z "$nombre" || -z "$slug" || -z "$imagenes" ]]; then
+              echo "❌ Error: Línea $line_number tiene campos requeridos vacíos"
+              echo "nombre: '$nombre', slug: '$slug', imagenes: '$imagenes'"
+              exit 1
+            fi
+            
             # Solo procesar productos visibles
             if [[ "$estado" != "visible" ]]; then
+              echo "⏭️ Omitiendo producto oculto: $nombre"
               continue
             fi
             
@@ -87,15 +119,102 @@ jobs:
             IFS=',' read -ra IMAGE_ARRAY <<< "$imagenes"
             main_image="${IMAGE_ARRAY[0]}"
             
+            if [[ -z "$main_image" ]]; then
+              echo "❌ Error: El producto $nombre no tiene imagen principal"
+              exit 1
+            fi
+            
             if [[ ! -f "$main_image" ]]; then
-              echo "⚠️ Advertencia: No se encuentra la imagen principal $main_image para el producto $nombre"
+              echo "❌ Error: No se encuentra la imagen principal $main_image para el producto $nombre"
+              exit 1
             else
               echo "✅ Imagen encontrada: $main_image"
             fi
             
+            # Verificar imágenes adicionales si existen
+            for ((i=1; i<${#IMAGE_ARRAY[@]}; i++)); do
+              additional_image="${IMAGE_ARRAY[$i]}"
+              if [[ -n "$additional_image" && ! -f "$additional_image" ]]; then
+                echo "⚠️ Advertencia: No se encuentra la imagen adicional $additional_image para el producto $nombre"
+              elif [[ -n "$additional_image" ]]; then
+                echo "✅ Imagen adicional encontrada: $additional_image"
+              fi
+            done
+            
           done < data/products.csv
           
           echo "✅ Validación de imágenes completada"
+
+      - name: Test CSV parsing
+        run: |
+          echo "Probando parser de CSV..."
+          
+          # Crear script de prueba
+          cat > test-csv-parser.js << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+          
+          // Simular el CSVParser para pruebas
+          function parseCSV(csvContent) {
+            const lines = csvContent.split('\n').filter(line => line.trim());
+            if (lines.length < 2) return [];
+            
+            const headers = lines[0].split(';').map(h => h.trim());
+            const products = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+              const values = lines[i].split(';').map(v => v.trim());
+              const product = {};
+              
+              headers.forEach((header, index) => {
+                product[header] = values[index] || '';
+              });
+              
+              // Validar campos requeridos
+              if (!product.nombre || !product.slug || !product.imagenes) {
+                console.log(`❌ Producto inválido línea ${i + 1}: campos requeridos faltantes`);
+                continue;
+              }
+              
+              if (product.estado !== 'visible') {
+                console.log(`⏭️ Omitiendo producto oculto: ${product.nombre}`);
+                continue;
+              }
+              
+              // Validar imagen principal
+              const imagenes = product.imagenes.split(',').map(img => img.trim());
+              if (!fs.existsSync(imagenes[0])) {
+                console.log(`❌ Imagen no encontrada: ${imagenes[0]} para producto ${product.nombre}`);
+                continue;
+              }
+              
+              products.push(product);
+              console.log(`✅ Producto válido: ${product.nombre}`);
+            }
+            
+            return products;
+          }
+          
+          try {
+            const csvPath = path.join(process.cwd(), 'data', 'products.csv');
+            const csvContent = fs.readFileSync(csvPath, 'utf-8');
+            const products = parseCSV(csvContent);
+            
+            console.log(`🎉 Se procesaron ${products.length} productos válidos`);
+            
+            if (products.length === 0) {
+              console.log('⚠️ No hay productos visibles para procesar');
+            }
+            
+            process.exit(0);
+          } catch (error) {
+            console.log('❌ Error en el test del CSV parser:', error.message);
+            process.exit(1);
+          }
+          EOF
+          
+          node test-csv-parser.js
+          rm test-csv-parser.js
 
       - name: Build static site
         run: npm run build:static
