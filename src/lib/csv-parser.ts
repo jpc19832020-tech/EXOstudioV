@@ -118,9 +118,16 @@ export class CSVParser {
       ? product.caracteristicas.split(/[,;]/).map((c: string) => c.trim()).filter((c: string) => c)
       : [];
 
-    // Parse images
-    const imagenes = product.imagenes 
-      ? product.imagenes.split(',').map((img: string) => img.trim()).filter((img: string) => img)
+    // Parse images and add basePath
+    const imagenes = product.imagenes
+      ? product.imagenes.split(',').map((img: string) => {
+          const trimmedImg = img.trim();
+          // Add basePath if not already present
+          if (trimmedImg.startsWith('/')) {
+            return trimmedImg;
+          }
+          return `/EXOstudioV/${trimmedImg}`;
+        }).filter((img: string) => img)
       : [];
 
     // Parse price
