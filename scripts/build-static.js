@@ -1,12 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
-
-console.log('🔄 Iniciando build estático...');
-
-// Generar datos estáticos de productos
-console.log('📊 Generando datos estáticos de productos...');
-execSync('node scripts/generate-products-data.js', { stdio: 'inherit' });
 
 // Crear directorio out si no existe
 if (!fs.existsSync('out')) {
@@ -35,11 +28,6 @@ function copyDir(src, dest) {
 copyDir('.next/static', 'out/_next/static');
 copyDir('public', 'out');
 
-// Copiar también el contenido de _next/static a _next/static en out
-if (fs.existsSync('.next/static')) {
-  copyDir('.next/static', 'out/_next/static');
-}
-
 // Copiar y procesar archivos HTML
 const serverAppPath = '.next/server/app';
 if (fs.existsSync(serverAppPath)) {
@@ -50,7 +38,6 @@ if (fs.existsSync(serverAppPath)) {
       let content = fs.readFileSync(filePath, 'utf8');
       
       // Reemplazar rutas absolutas con el basePath para GitHub Pages
-      // Next.js no está aplicando el basePath correctamente en el build estático
       content = content.replace(/href="\//g, 'href="/EXOstudioV/');
       content = content.replace(/src="\//g, 'src="/EXOstudioV/');
       content = content.replace(/href='\//g, "href='/EXOstudioV/");

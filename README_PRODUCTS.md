@@ -57,18 +57,6 @@ Coloca las imágenes en la carpeta [`Imagenes_de_productos/`](Imagenes_de_produc
 - La primera imagen en el campo `imagenes` será la principal
 - Nombra los archivos de forma descriptiva
 - Optimiza las imágenes para web (recomendado: max 500KB por imagen)
-- **IMPORTANTE**: Asegúrate que todas las imágenes referenciadas existan antes del deploy
-
-### 3. Validaciones Automáticas
-
-El sistema realiza las siguientes validaciones automáticas:
-
-- ✅ **Estructura del CSV**: Verifica que los encabezados sean correctos
-- ✅ **Número de columnas**: Cada fila debe tener exactamente 10 columnas
-- ✅ **Campos requeridos**: nombre, slug, e imagenes no pueden estar vacíos
-- ✅ **Existencia de imágenes**: Verifica que las imágenes referenciadas existan
-- ✅ **Slugs únicos**: Detecta y reporta slugs duplicados
-- ✅ **Productos visibles**: Solo procesa productos con estado = "visible"
 
 ### 3. Ejemplo Completo
 
@@ -186,39 +174,6 @@ El sistema genera logs automáticos durante el build:
 
 Revisa los logs en GitHub Actions para diagnosticar problemas.
 
-## 🔧 Solución de Problemas
-
-### Errores Comunes y Soluciones
-
-#### ❌ "Los encabezados del CSV no coinciden con la estructura requerida"
-**Causa**: Los encabezados del CSV no son exactamente los esperados.
-**Solución**: Asegúrate que la primera línea del CSV sea exactamente:
-```
-nombre;slug;categoria;descripcion_corta;caracteristicas;precio;moneda;imagenes;estado;cta_whatsapp
-```
-
-#### ❌ "Línea X tiene Y columnas, se esperan 10"
-**Causa**: Una fila tiene un número incorrecto de columnas.
-**Solución**: Verifica que no haya punto y coma adicionales en los campos. Las características deben ir en un solo campo separadas por comas.
-
-#### ❌ "No se encuentra la imagen principal"
-**Causa**: La imagen referenciada no existe en la carpeta `Imagenes_de_productos/`.
-**Solución**:
-1. Verifica que el nombre del archivo sea exactamente el mismo (incluyendo mayúsculas/minúsculas)
-2. Asegúrate que el archivo esté en la carpeta correcta
-3. Verifica que no haya espacios extraños en el nombre
-
-#### ❌ "Campos requeridos faltantes"
-**Causa**: Los campos nombre, slug o imagenes están vacíos.
-**Solución**: Completa todos los campos obligatorios para cada producto.
-
-### Tips para Evitar Errores
-
-1. **Usa un editor de CSV** como Google Sheets o Excel para mantener la estructura
-2. **Verifica las imágenes** antes de hacer commit
-3. **Testea localmente** con `npm run build:static` antes de push
-4. **Revisa los logs** del workflow en GitHub Actions para diagnóstico detallado
-
 ## 🔮 Funcionalidades Futuras
 
 - 🌐 Generación de WebP automática
@@ -232,11 +187,10 @@ nombre;slug;categoria;descripcion_corta;caracteristicas;precio;moneda;imagenes;e
 
 Si encuentras problemas:
 
-1. Revisa la sección de solución de problemas arriba
-2. Verifica la estructura del CSV
-3. Verifica que las imágenes existan
-4. Consulta los logs del build en GitHub Actions
-5. Asegúrate de seguir el formato de los campos obligatorios
+1. Revisa la estructura del CSV
+2. Verifica que las imágenes existan
+3. Consulta los logs del build en GitHub Actions
+4. Asegúrate de seguir el formato de los campos obligatorios
 
 ---
 

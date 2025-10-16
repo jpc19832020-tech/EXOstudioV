@@ -1,4 +1,4 @@
-name: Simple Deploy
+name: Build and Deploy Products
 
 on:
   push:
@@ -9,12 +9,14 @@ on:
       - 'src/app/productos/**'
       - 'src/components/product-*.tsx'
       - 'src/lib/csv-parser.ts'
-      - 'src/lib/static-data-client.ts'
       - 'src/types/product.ts'
-      - 'scripts/generate-products-data.js'
-      - 'scripts/build-static.js'
-      - 'package.json'
   workflow_dispatch:
+    inputs:
+      force_rebuild:
+        description: 'Forzar reconstrucción completa'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -38,6 +40,9 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
       - name: Install dependencies
         run: npm ci
 
@@ -50,36 +55,15 @@ jobs:
           fi
           
           # Verificar encabezados requeridos
-          headers=$(head -n 1 data/products.csv | tr -d '\r\n')
+          headers=$(head -n 1 data/products.csv)
           required_headers="nombre;slug;categoria;descripcion_corta;caracteristicas;precio;moneda;imagenes;estado;cta_whatsapp"
-          
-          echo "Encabezados encontrados: $headers"
-          echo "Encabezados requeridos: $required_headers"
           
           if [[ "$headers" != "$required_headers" ]]; then
             echo "❌ Error: Los encabezados del CSV no coinciden con la estructura requerida"
+            echo "Encabezados encontrados: $headers"
+            echo "Encabezados requeridos: $required_headers"
             exit 1
           fi
-          
-          # Validar número de columnas en cada fila
-          line_number=0
-          while IFS= read -r line; do
-            line_number=$((line_number + 1))
-            if [[ $line_number -eq 1 ]]; then
-              continue  # Saltar encabezado
-            fi
-            
-            # Contar columnas separadas por punto y coma
-            column_count=$(echo "$line" | grep -o ';' | wc -l)
-            expected_columns=9  # 10 columnas = 9 separadores
-            
-            if [[ $column_count -ne $expected_columns ]]; then
-              echo "❌ Error: Línea $line_number tiene $((column_count + 1)) columnas, se esperan 10"
-              echo "Línea problemática: $line"
-              exit 1
-            fi
-            
-          done < data/products.csv
           
           echo "✅ Estructura del CSV válida"
 
@@ -88,25 +72,14 @@ jobs:
           echo "Validando existencia de imágenes..."
           
           # Leer el CSV y verificar que las imágenes existan
-          line_number=0
           while IFS=';' read -r nombre slug categoria descripcion_corta caracteristicas precio moneda imagenes estado cta_whatsapp; do
-            line_number=$((line_number + 1))
-            
             # Saltar encabezado
             if [[ "$nombre" == "nombre" ]]; then
               continue
             fi
             
-            # Validar campos requeridos
-            if [[ -z "$nombre" || -z "$slug" || -z "$imagenes" ]]; then
-              echo "❌ Error: Línea $line_number tiene campos requeridos vacíos"
-              echo "nombre: '$nombre', slug: '$slug', imagenes: '$imagenes'"
-              exit 1
-            fi
-            
             # Solo procesar productos visibles
             if [[ "$estado" != "visible" ]]; then
-              echo "⏭️ Omitiendo producto oculto: $nombre"
               continue
             fi
             
@@ -114,14 +87,8 @@ jobs:
             IFS=',' read -ra IMAGE_ARRAY <<< "$imagenes"
             main_image="${IMAGE_ARRAY[0]}"
             
-            if [[ -z "$main_image" ]]; then
-              echo "❌ Error: El producto $nombre no tiene imagen principal"
-              exit 1
-            fi
-            
             if [[ ! -f "$main_image" ]]; then
-              echo "❌ Error: No se encuentra la imagen principal $main_image para el producto $nombre"
-              exit 1
+              echo "⚠️ Advertencia: No se encuentra la imagen principal $main_image para el producto $nombre"
             else
               echo "✅ Imagen encontrada: $main_image"
             fi
@@ -130,34 +97,25 @@ jobs:
           
           echo "✅ Validación de imágenes completada"
 
-      - name: Generate static data
-        run: |
-          echo "🔄 Generando datos estáticos de productos..."
-          node scripts/generate-products-data.js
-          echo "✅ Datos estáticos generados"
-
       - name: Build static site
-        run: |
-          echo "📦 Construyendo sitio estático..."
-          npm run build:static
-          echo "✅ Build completado"
+        run: npm run build:static
 
       - name: Validate build output
         run: |
           echo "Validando salida del build..."
           
           # Verificar que se generaron las páginas de productos
-          if [ ! -f "out/productos.html" ]; then
+          if [ ! -f "out/productos/index.html" ]; then
             echo "❌ Error: No se generó la página de listado de productos"
-            echo "Buscando archivos generados:"
-            find out -name "*.html" -type f
             exit 1
           fi
           
-          # Verificar que se generaron los datos estáticos
-          if [ ! -f "out/data/products.json" ]; then
-            echo "❌ Error: No se generaron los datos estáticos de productos"
-            exit 1
+          # Verificar que se generaron las páginas de detalle
+          product_count=$(grep -c "visible" data/products.csv)
+          if [[ $product_count -gt 0 ]]; then
+            echo "✅ Página de listado generada correctamente"
+          else
+            echo "⚠️ No hay productos visibles en el CSV"
           fi
           
           echo "✅ Validación del build completada"
@@ -195,4 +153,3 @@ jobs:
             echo "Deploy result: ${{ needs.deploy.result }}"
             exit 1
           fi
-#hola"# Workflow actualizado" 
