@@ -43,15 +43,7 @@ export class CSVParser {
     if (this.isLoaded) return;
     
     try {
-      // En el cliente, usar datos estáticos
-      if (typeof window !== 'undefined') {
-        this.products = STATIC_PRODUCTS;
-        this.productCards = this.processProductsToCards();
-        this.isLoaded = true;
-        return;
-      }
-
-      // En el servidor, intentar leer el CSV
+      // En el servidor, leer el archivo CSV directamente
       if (typeof window === 'undefined') {
         const fs = await import('fs');
         const pathModule = await import('path');
@@ -62,10 +54,22 @@ export class CSVParser {
         this.products = this.parseCSV(csvContent);
         this.productCards = this.processProductsToCards();
         this.isLoaded = true;
+        return;
       }
+
+      // En el cliente, cargar el CSV a través de fetch
+      const response = await fetch('/EXOstudioV/data/products.csv');
+      if (!response.ok) {
+        throw new Error(`Failed to fetch CSV: ${response.statusText}`);
+      }
+      const csvContent = await response.text();
+      
+      this.products = this.parseCSV(csvContent);
+      this.productCards = this.processProductsToCards();
+      this.isLoaded = true;
     } catch (error) {
       console.error('Error loading products:', error);
-      // Fallback a datos estáticos
+      // Fallback a datos estáticos solo como último recurso
       this.products = STATIC_PRODUCTS;
       this.productCards = this.processProductsToCards();
       this.isLoaded = true;
