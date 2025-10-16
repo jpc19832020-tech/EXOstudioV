@@ -30,6 +30,13 @@ EXO digital studio es una web moderna y ultrarrápida construida con Next.js 15,
 - **shadcn/ui** components
 - **next-themes** para modo dark/light
 
+### 🛍️ Sistema de Productos
+- **CSV-based**: Gestión de productos mediante archivo CSV
+- **Build automático**: GitHub Actions para despliegue
+- **Validaciones**: Verificación automática de datos e imágenes
+- **WhatsApp integration**: Contacto directo con clientes
+- **Responsive design**: Tarjetas y páginas de detalle optimizadas
+
 ## 📁 Estructura del Proyecto
 
 ```
@@ -161,7 +168,25 @@ npm run lint
 4. **Conversión**: Múltiples puntos de contacto (WhatsApp, email, formulario)
 5. **Retención**: Botón WhatsApp flotante siempre visible
 
-## 🛡️ Seguridad
+## 🛍️ Gestión de Productos
+
+### Cómo Agregar Productos
+1. **Editar CSV**: Modifica [`data/products.csv`](data/products.csv) con la información del producto
+2. **Agregar imágenes**: Coloca las imágenes en [`Imagenes_de_productos/`](Imagenes_de_productos/)
+3. **Push automático**: El build se activa automáticamente y publica los cambios
+
+### Estructura del CSV
+```csv
+nombre;slug;categoria;descripcion_corta;caracteristicas;precio;moneda;imagenes;estado;cta_whatsapp
+```
+
+### URLs Generadas
+- **Listado**: `/productos/`
+- **Detalle**: `/productos/p/{slug}/`
+
+📖 **Documentación completa**: [README_PRODUCTS.md](README_PRODUCTS.md)
+
+## �️ Seguridad
 
 - **Headers**: XSS Protection, Frame Options, Content Type nosniff
 - **HTTPS**: Forzado en producción

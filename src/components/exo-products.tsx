@@ -2,18 +2,21 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef, useState, useCallback, useMemo } from "react";
+import { useRef, useState, useCallback, useMemo, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ExternalLink, MessageCircle, Eye } from "lucide-react";
 import { ProductDetail } from "./product-detail";
+import { ProductCard as ProductCardType } from "@/types/product";
+import { csvParser } from "@/lib/csv-parser";
+import { useRouter } from "next/navigation";
 
 // Componente de logo de WhatsApp
 const WhatsAppIcon = ({ className = "" }: { className?: string }) => (
-  <svg 
+  <svg
     className={className}
-    viewBox="0 0 24 24" 
+    viewBox="0 0 24 24"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -46,26 +49,7 @@ interface EmbedConfig {
 
 // Constantes y configuración
 const WHATSAPP_NUMBER = "51925475680";
-const PROJECT_URL = "https://jpc19832020-tech.github.io/Jperez/";
-
-const products: Product[] = [
-  {
-    id: 1,
-    name: "SmartCard",
-    description: "Tarjeta de presentación inteligente. Comparte tu información de contacto instantáneamente con un solo toque.",
-    badge: "Nuevo",
-    badgeVariant: "default",
-    image: "/smartcard-image.png",
-    features: [
-      "Disponible en cualquier momento",
-      "Diseño personalizable",
-      "Análisis de interacciones",
-      "Compatibilidad universal",
-      "Actualización en tiempo real"
-    ],
-    comingSoon: false,
-  },
-];
+const PROJECT_URL = "https://jpc19832020-tech.github.io/EXOstudioV/";
 
 // Configuración del embed
 const embedConfig: EmbedConfig = {
@@ -113,17 +97,48 @@ export function ExoProducts() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [products, setProducts] = useState<ProductCardType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        await csvParser.loadProducts();
+        const productsData = csvParser.getVisibleProducts();
+        
+        // Convert to the old format for compatibility
+        const convertedProducts: Product[] = productsData.slice(0, 3).map((product, index) => ({
+          id: index + 1,
+          name: product.nombre,
+          description: product.descripcion_corta,
+          badge: product.categoria,
+          badgeVariant: "default" as const,
+          features: product.caracteristicas,
+          comingSoon: false,
+          image: product.imagenPrincipal
+        }));
+        
+        setProducts(productsData);
+      } catch (error) {
+        console.error("Error loading products:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
 
   // Manejadores de eventos con useCallback
-  const handleContactClick = useCallback((productName: string) => {
-    const message = encodeURIComponent(`Hola, estoy interesado en ${productName}`);
+  const handleContactClick = useCallback((productName: string, ctaMessage: string) => {
+    const message = encodeURIComponent(ctaMessage);
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank");
   }, []);
 
-  const handleViewDetails = useCallback((product: Product) => {
-    setSelectedProduct(product);
-    setIsDetailOpen(true);
-  }, []);
+  const handleViewDetails = useCallback((product: ProductCardType) => {
+    router.push(`/productos/p/${product.slug}`);
+  }, [router]);
 
   const handleCloseDetail = useCallback(() => {
     setIsDetailOpen(false);
@@ -228,25 +243,32 @@ export function ExoProducts() {
           </motion.div>
 
           {/* Products grid */}
-          <motion.div
-            variants={animationVariants.container}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-8 max-w-2xl mx-auto"
-          >
-            {products.map((product) => (
-              <motion.div
-                key={product.id}
-                variants={animationVariants.item}
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Card className={`h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl ${
-                  product.comingSoon ? "opacity-75" : ""
-                }`}>
-                  <CardHeader className="space-y-4">
-                    {/* Product Image */}
-                    {product.image && (
+          {isLoading ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-16"
+            >
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+              <p>Cargando productos...</p>
+            </motion.div>
+          ) : (
+            <motion.div
+              variants={animationVariants.container}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-8 max-w-2xl mx-auto"
+            >
+              {products.slice(0, 3).map((product) => (
+                <motion.div
+                  key={product.slug}
+                  variants={animationVariants.item}
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl">
+                    <CardHeader className="space-y-4">
+                      {/* Product Image */}
                       <motion.div
                         className="relative w-full h-64 rounded-lg overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10"
                         initial={{ opacity: 0, scale: 0.95 }}
@@ -254,83 +276,81 @@ export function ExoProducts() {
                         transition={{ duration: 0.6 }}
                       >
                         <img
-                          src={product.image}
-                          alt={product.name}
+                          src={product.imagenPrincipal}
+                          alt={product.nombre}
                           className="w-full h-full object-contain p-4"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                       </motion.div>
-                    )}
+                      
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-xl">{product.nombre}</CardTitle>
+                        <Badge variant="secondary" className="text-xs">
+                          {product.categoria}
+                        </Badge>
+                      </div>
+                    </CardHeader>
                     
-                    <div className="flex items-center justify-between">
-                      <CardTitle className="text-xl">{product.name}</CardTitle>
-                      <Badge variant={product.badgeVariant} className="text-xs">
-                        {product.badge}
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  
-                  <CardContent className="space-y-6">
-                    <p className="text-muted-foreground leading-relaxed">
-                      {product.description}
-                    </p>
-                    
-                    <div className="space-y-3">
-                      <h4 className="font-semibold text-sm">Características:</h4>
-                      <ul className="space-y-2">
-                        {product.features.map((feature, index) => (
-                          <motion.li
-                            key={index}
-                            className="flex items-center text-sm text-muted-foreground"
-                            variants={animationVariants.feature}
-                            initial="hidden"
-                            animate="visible"
-                            transition={{ delay: 0.1 * index }}
-                          >
-                            <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3 flex-shrink-0" />
-                            {feature}
-                          </motion.li>
-                        ))}
-                      </ul>
-                    </div>
-                    
-                    <div className="flex gap-3 pt-4">
-                      {!product.comingSoon ? (
-                        <>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="flex-1"
-                            onClick={() => handleContactClick(product.name)}
-                          >
-                            <WhatsAppIcon className="w-4 h-4 mr-2" />
-                            Contactar
-                          </Button>
-                          <Button
-                            size="sm"
-                            className="flex-1"
-                            onClick={() => handleViewDetails(product)}
-                          >
-                            <Eye className="w-4 h-4 mr-2" />
-                            Ver detalles
-                          </Button>
-                        </>
-                      ) : (
+                    <CardContent className="space-y-6">
+                      <p className="text-muted-foreground leading-relaxed">
+                        {product.descripcion_corta}
+                      </p>
+                      
+                      <div className="space-y-3">
+                        <h4 className="font-semibold text-sm">Características:</h4>
+                        <ul className="space-y-2">
+                          {product.caracteristicas.slice(0, 3).map((feature, index) => (
+                            <motion.li
+                              key={index}
+                              className="flex items-center text-sm text-muted-foreground"
+                              variants={animationVariants.feature}
+                              initial="hidden"
+                              animate="visible"
+                              transition={{ delay: 0.1 * index }}
+                            >
+                              <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3 flex-shrink-0" />
+                              {feature}
+                            </motion.li>
+                          ))}
+                          {product.caracteristicas.length > 3 && (
+                            <li className="text-xs text-muted-foreground italic">
+                              +{product.caracteristicas.length - 3} características más...
+                            </li>
+                          )}
+                        </ul>
+                      </div>
+                      
+                      <div className="flex items-center justify-between pt-2">
+                        <span className="text-lg font-semibold">
+                          {product.precio.formatted}
+                        </span>
+                      </div>
+                      
+                      <div className="flex gap-3 pt-4">
                         <Button
                           variant="outline"
                           size="sm"
-                          className="w-full"
-                          disabled
+                          className="flex-1"
+                          onClick={() => handleContactClick(product.nombre, product.cta_whatsapp)}
                         >
-                          Próximamente
+                          <WhatsAppIcon className="w-4 h-4 mr-2" />
+                          Cotizar
                         </Button>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
+                        <Button
+                          size="sm"
+                          className="flex-1"
+                          onClick={() => handleViewDetails(product)}
+                        >
+                          <Eye className="w-4 h-4 mr-2" />
+                          Ver detalles
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
 
           {/* Website Embed */}
           <motion.div
