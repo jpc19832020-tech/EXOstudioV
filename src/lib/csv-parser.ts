@@ -43,26 +43,23 @@ export class CSVParser {
     if (this.isLoaded) return;
     
     try {
-      // En el servidor, leer el archivo CSV directamente
+      // Usar el mismo archivo CSV tanto en servidor como cliente
+      let csvContent: string;
+      
       if (typeof window === 'undefined') {
+        // En el servidor, leer el archivo CSV directamente
         const fs = await import('fs');
         const pathModule = await import('path');
-        
-        const csvPath = pathModule.join(process.cwd(), 'data', 'products.csv');
-        const csvContent = fs.readFileSync(csvPath, 'utf-8');
-        
-        this.products = this.parseCSV(csvContent);
-        this.productCards = this.processProductsToCards();
-        this.isLoaded = true;
-        return;
+        const csvPath = pathModule.join(process.cwd(), 'public', 'data', 'products.csv');
+        csvContent = fs.readFileSync(csvPath, 'utf-8');
+      } else {
+        // En el cliente, cargar el CSV a través de fetch
+        const response = await fetch('/EXOstudioV/data/products.csv');
+        if (!response.ok) {
+          throw new Error(`Failed to fetch CSV: ${response.statusText}`);
+        }
+        csvContent = await response.text();
       }
-
-      // En el cliente, cargar el CSV a través de fetch
-      const response = await fetch('/EXOstudioV/data/products.csv');
-      if (!response.ok) {
-        throw new Error(`Failed to fetch CSV: ${response.statusText}`);
-      }
-      const csvContent = await response.text();
       
       this.products = this.parseCSV(csvContent);
       this.productCards = this.processProductsToCards();
