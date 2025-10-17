@@ -85,7 +85,7 @@ export class CSVParser {
     
     for (let i = 1; i < lines.length; i++) {
       try {
-        const values = lines[i].split(';').map(v => v.trim());
+        const values = this.parseCSVLine(lines[i]);
         const product = this.parseProductLine(headers, values);
         
         if (product && this.validateProduct(product)) {
@@ -106,6 +106,30 @@ export class CSVParser {
     return products;
   }
 
+  private parseCSVLine(line: string): string[] {
+    const values: string[] = [];
+    let current = '';
+    let inQuotes = false;
+    
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      
+      if (char === '"') {
+        inQuotes = !inQuotes;
+      } else if (char === ';' && !inQuotes) {
+        values.push(current.trim());
+        current = '';
+      } else {
+        current += char;
+      }
+    }
+    
+    // Add the last value
+    values.push(current.trim());
+    
+    return values;
+  }
+
   private parseProductLine(headers: string[], values: string[]): Product | null {
     const product: any = {};
     
@@ -114,13 +138,17 @@ export class CSVParser {
     });
 
     // Parse characteristics
-    const caracteristicas = product.caracteristicas 
-      ? product.caracteristicas.split(/[,;]/).map((c: string) => c.trim()).filter((c: string) => c)
+    const caracteristicas = product.caracteristicas
+      ? product.caracteristicas
+          .replace(/^"|"$/g, '') // Remove surrounding quotes
+          .split(/[,;]/).map((c: string) => c.trim()).filter((c: string) => c)
       : [];
 
     // Parse images and add basePath
     const imagenes = product.imagenes
-      ? product.imagenes.split(',').map((img: string) => {
+      ? product.imagenes
+          .replace(/^"|"$/g, '') // Remove surrounding quotes
+          .split(',').map((img: string) => {
           const trimmedImg = img.trim();
           // Add basePath if not already present
           if (trimmedImg.startsWith('/')) {
@@ -171,6 +199,7 @@ export class CSVParser {
 
     // Check if product is visible
     if (product.estado !== 'visible') {
+      console.warn(`Product not visible: ${product.nombre} (${product.slug}) with state: ${product.estado}`);
       return false;
     }
 
