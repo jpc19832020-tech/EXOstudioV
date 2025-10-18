@@ -46,7 +46,7 @@ export function ExoPresentation() {
   };
 
   return (
-    <section id="presentacion" className="py-24 bg-muted/30">
+    <section id="presentacion" className="py-24 bg-gradient-to-b from-muted/30 to-cyan/5">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* Text content */}
@@ -95,10 +95,10 @@ export function ExoPresentation() {
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.2 }}
               >
-                <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
+                <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-cyan/50 transition-all duration-300 hover:shadow-lg">
                   <CardContent className="p-8">
                     <motion.div
-                      className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-6"
+                      className="w-12 h-12 bg-gradient-to-br from-cyan/10 to-magenta/10 rounded-lg flex items-center justify-center text-cyan mb-6"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ duration: 0.2 }}
                     >

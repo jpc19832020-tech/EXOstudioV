@@ -97,36 +97,16 @@ export function ExoHeader() {
                 const basePath = isProduction ? '/EXOstudioV' : '';
                 window.location.href = `${basePath}/`;
               }} className="flex items-center space-x-2">
-                <motion.svg
+                <motion.img
+                  src="/logo-new.svg"
+                  alt="EXO digital studio logo"
                   width="32"
                   height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
                   className="text-primary"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 1.2, ease: "easeInOut" }}
-                >
-                  <motion.path
-                    d="M16 2L2 10L16 18L30 10L16 2Z"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                  />
-                  <motion.path
-                    d="M2 22L16 30L30 22"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 1.2, delay: 0.3, ease: "easeInOut" }}
-                  />
-                </motion.svg>
+                />
                 <span className="text-xl font-bold tracking-tight">EXO</span>
               </Link>
               
@@ -137,7 +117,7 @@ export function ExoHeader() {
               >
                 <Link
                   href="/quienes-somos"
-                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 border border-border/50 px-3 py-1.5 rounded-full hover:border-primary/50 hover:bg-primary/5"
+                  className="text-sm font-medium text-muted-foreground hover:text-cyan transition-colors duration-200 border border-border/50 px-3 py-1.5 rounded-full hover:border-cyan/50 hover:bg-cyan/5"
                   onClick={(e) => {
                     // Forzar navegación completa para evitar problemas con basePath
                     e.preventDefault();
@@ -168,7 +148,7 @@ export function ExoHeader() {
                       e.preventDefault();
                       handleNavClick(item.href);
                     }}
-                    className="text-sm font-medium transition-colors duration-200 hover:text-primary text-muted-foreground bg-primary/10 border border-primary/20 px-4 py-2 rounded-lg hover:bg-primary/20"
+                    className="text-sm font-medium transition-colors duration-200 hover:text-cyan text-muted-foreground bg-cyan/10 border border-cyan/20 px-4 py-2 rounded-lg hover:bg-cyan/20"
                   >
                     {item.name}
                   </Link>
@@ -236,7 +216,7 @@ export function ExoHeader() {
                       e.preventDefault();
                       handleNavClick(item.href);
                     }}
-                    className="block py-3 text-sm font-medium transition-colors duration-200 hover:text-primary text-muted-foreground"
+                    className="block py-3 text-sm font-medium transition-colors duration-200 hover:text-cyan text-muted-foreground"
                   >
                     {item.name}
                   </Link>

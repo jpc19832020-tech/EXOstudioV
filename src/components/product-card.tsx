@@ -46,10 +46,10 @@ export function ProductCard({ product, onViewDetails }: ProductCardProps) {
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
     >
-      <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl">
+      <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-cyan/50 transition-all duration-300 hover:shadow-xl">
         <CardHeader className="space-y-4">
           {/* Product Image */}
-          <div className="relative w-full rounded-lg overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
+          <div className="relative w-full rounded-lg overflow-hidden bg-gradient-to-br from-cyan/10 to-magenta/10">
             <div className="relative w-full pb-[56.25%]">
               <Image
                 src={product.imagenPrincipal}
@@ -83,7 +83,7 @@ export function ProductCard({ product, onViewDetails }: ProductCardProps) {
                   key={index}
                   className="flex items-center text-sm text-muted-foreground"
                 >
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3 flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 bg-cyan rounded-full mr-3 flex-shrink-0" />
                   {feature}
                 </li>
               ))}

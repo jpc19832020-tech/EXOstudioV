@@ -152,7 +152,7 @@ export function ProductDetail({ product, isOpen, onClose }: ProductDetailProps) 
                           transition={{ delay: 0.5 + index * 0.1 }}
                           className="flex items-start gap-3 p-4 bg-muted/30 rounded-lg"
                         >
-                          <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
+                          <div className="w-2 h-2 bg-cyan rounded-full mt-2 flex-shrink-0" />
                           <span className="text-foreground">{feature}</span>
                         </motion.div>
                       ))}
@@ -186,7 +186,7 @@ export function ProductDetail({ product, isOpen, onClose }: ProductDetailProps) 
                     <Button
                       size="lg"
                       onClick={handleContactClick}
-                      className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
+                      className="flex-1 bg-gradient-to-r from-cyan to-magenta text-white hover:from-cyan/90 hover:to-magenta/90"
                     >
                       <MessageCircle className="w-5 h-5 mr-2" />
                       Solicitar demostración

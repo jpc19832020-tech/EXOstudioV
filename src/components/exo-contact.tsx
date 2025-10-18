@@ -188,7 +188,7 @@ export function ExoContact() {
                         required
                         value={formData.name}
                         onChange={handleInputChange}
-                        className="bg-background/50 border-border/50 focus:border-primary/50"
+                        className="bg-background/50 border-border/50 focus:border-cyan/50"
                         placeholder="Tu nombre"
                       />
                     </div>
@@ -204,7 +204,7 @@ export function ExoContact() {
                         required
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="bg-background/50 border-border/50 focus:border-primary/50"
+                        className="bg-background/50 border-border/50 focus:border-cyan/50"
                         placeholder="tu@email.com"
                       />
                     </div>
@@ -220,7 +220,7 @@ export function ExoContact() {
                         rows={5}
                         value={formData.message}
                         onChange={handleInputChange}
-                        className="bg-background/50 border-border/50 focus:border-primary/50 resize-none"
+                        className="bg-background/50 border-border/50 focus:border-cyan/50 resize-none"
                         placeholder="Cuéntanos sobre tu proyecto..."
                       />
                     </div>
@@ -228,7 +228,7 @@ export function ExoContact() {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                      className="w-full bg-gradient-to-r from-cyan to-magenta text-white hover:from-cyan/90 hover:to-magenta/90"
                     >
                       {isSubmitting ? (
                         <motion.div
@@ -281,8 +281,8 @@ export function ExoContact() {
               {/* Email contact */}
               <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border/50">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-4">
-                    <Mail className="w-6 h-6 text-primary" />
+                  <div className="w-12 h-12 bg-gradient-to-br from-cyan/20 to-magenta/20 rounded-full flex items-center justify-center mr-4">
+                    <Mail className="w-6 h-6 text-cyan" />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold">Email</h3>

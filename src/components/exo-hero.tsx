@@ -76,7 +76,7 @@ export function ExoHero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/20" />
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-cyan/5" />
       
       {/* Animated particles */}
       <div className="absolute inset-0">
@@ -141,36 +141,16 @@ export function ExoHero() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
           >
-            <motion.svg
+            <motion.img
+              src="/logo-new.svg"
+              alt="EXO digital studio logo"
               width="80"
               height="80"
-              viewBox="0 0 80 80"
-              fill="none"
-              className="mx-auto text-primary"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
+              className="mx-auto"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 1.2, ease: "easeInOut" }}
-            >
-              <motion.path
-                d="M40 5L10 25L40 45L70 25L40 5Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-              />
-              <motion.path
-                d="M10 55L40 75L70 55"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 1.2, delay: 0.3, ease: "easeInOut" }}
-              />
-            </motion.svg>
+            />
             
             {/* Glow effect */}
             <motion.div
@@ -179,7 +159,7 @@ export function ExoHero() {
               animate={{ opacity: [0, 0.5, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
-              <div className="w-32 h-32 bg-primary/20 rounded-full blur-xl" />
+              <div className="w-32 h-32 bg-gradient-to-r from-cyan/20 to-magenta/20 rounded-full blur-xl" />
             </motion.div>
           </motion.div>
 
@@ -225,7 +205,7 @@ export function ExoHero() {
             {/* Ver Producto Button */}
             <motion.button
               onClick={handleProductsClick}
-              className="group relative px-8 py-4 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground rounded-xl font-semibold text-lg shadow-2xl hover:shadow-primary/25 transition-all duration-300 overflow-hidden min-w-[180px]"
+              className="group relative px-8 py-4 bg-gradient-to-r from-cyan to-magenta text-white rounded-xl font-semibold text-lg shadow-2xl hover:shadow-cyan/25 transition-all duration-300 overflow-hidden min-w-[180px]"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
               initial={{ opacity: 0, x: -50 }}
@@ -236,7 +216,7 @@ export function ExoHero() {
                 <ArrowRight className="mr-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                 Ver Producto
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/0 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan/0 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.button>
 
             {/* WhatsApp Button */}

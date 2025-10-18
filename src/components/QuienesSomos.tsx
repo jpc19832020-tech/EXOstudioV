@@ -397,45 +397,22 @@ export function QuienesSomos() {
             variants={animationVariants.heroLogo}
             className="flex justify-center mb-16"
           >
-            <motion.svg
+            <motion.img
+              src="/logo-new.svg"
+              alt="EXO digital studio logo"
               width="140"
               height="140"
-              viewBox="0 0 32 32"
-              fill="none"
-              className="text-primary drop-shadow-2xl"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
+              className="drop-shadow-2xl"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 2, ease: [0.23, 1, 0.32, 1] }}
-              whileHover={{ 
-                scale: 1.15, 
+              whileHover={{
+                scale: 1.15,
                 rotate: 8,
                 filter: "drop-shadow(0 0 30px rgba(var(--primary), 0.6))",
                 transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] }
               }}
-            >
-              <motion.path
-                d="M16 2L2 10L16 18L30 10L16 2Z"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 1.8, ease: [0.23, 1, 0.32, 1] }}
-              />
-              <motion.path
-                d="M2 22L16 30L30 22"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 1.8, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
-              />
-            </motion.svg>
+            />
             {/* Aura animada alrededor del logo */}
             <motion.div
               className="absolute inset-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl"

@@ -1,19 +1,24 @@
 /* EXO digital studio - Modern Minimal CSS */
 /* CSS Custom Properties (Variables) */
 :root {
-  /* Colors */
+  /* Colors - Nueva paleta EXO */
   --bg-primary: #0D0F14;
   --bg-secondary: #0F172A;
   --bg-tertiary: #1E293B;
   --text-primary: #E5E7EB;
   --text-secondary: #94A3B8;
   --text-muted: #64748B;
-  --accent-primary: #6EE7F9;
-  --accent-secondary: #A78BFA;
-  --accent-hover: #5DD4E8;
+  --accent-primary: #00C8FF; /* Cian brillante */
+  --accent-secondary: #FF1FB1; /* Magenta/fucsia vibrante */
+  --accent-hover: #00A6E6; /* Variación más oscura del cian */
   --border-color: rgba(148, 163, 184, 0.1);
   --glass-bg: rgba(15, 23, 42, 0.8);
   --glass-border: rgba(148, 163, 184, 0.2);
+  
+  /* Nuevos colores personalizados */
+  --cyan: #00C8FF;
+  --magenta: #FF1FB1;
+  --gradient-cyan-magenta: linear-gradient(90deg, #00C8FF 0%, #FF1FB1 100%);
   
   /* Typography */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;

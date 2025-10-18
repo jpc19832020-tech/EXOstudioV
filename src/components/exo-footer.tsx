@@ -100,36 +100,16 @@ export function ExoFooter() {
             {/* Column 1: Logo */}
             <motion.div variants={itemVariants} className="space-y-4">
               <div className="flex items-center space-x-2">
-                <motion.svg
+                <motion.img
+                  src="/logo-new.svg"
+                  alt="EXO digital studio logo"
                   width="24"
                   height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
                   className="text-primary"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 1 }}
-                >
-                  <motion.path
-                    d="M12 2L3 7L12 12L21 7L12 2Z"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                  />
-                  <motion.path
-                    d="M3 17L12 22L21 17"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 1, delay: 0.3 }}
-                  />
-                </motion.svg>
+                />
                 <span className="text-lg font-bold">EXO digital studio</span>
               </div>
               <p className="text-sm text-muted-foreground">
@@ -145,7 +125,7 @@ export function ExoFooter() {
                   <li key={link.name}>
                     <motion.button
                       onClick={() => handleNavClick(link.href)}
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+                      className="text-sm text-muted-foreground hover:text-cyan transition-colors duration-200"
                       whileHover={{ x: 4 }}
                       transition={{ duration: 0.2 }}
                     >
@@ -164,7 +144,7 @@ export function ExoFooter() {
                   <motion.button
                     key={social.name}
                     onClick={() => handleNavClick(social.href)}
-                    className="w-10 h-10 bg-muted/50 rounded-full flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all duration-200"
+                    className="w-10 h-10 bg-muted/50 rounded-full flex items-center justify-center text-muted-foreground hover:text-cyan hover:bg-cyan/10 transition-all duration-200"
                     whileHover={{ 
                       scale: 1.1,
                       rotate: [0, 5, -5, 0],

@@ -1,0 +1,35 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cyanGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#00C8FF" />
+      <stop offset="100%" stopColor="#00A6E6" />
+    </linearGradient>
+    <linearGradient id="magentaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#FF1FB1" />
+      <stop offset="100%" stopColor="#E60099" />
+    </linearGradient>
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#00C8FF" />
+      <stop offset="100%" stopColor="#FF1FB1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Primera forma (cian) -->
+  <path d="M40 10L15 25L40 40L65 25L40 10Z" 
+        stroke="url(#cyanGradient)" 
+        strokeWidth="3" 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+        fill="none" />
+  
+  <!-- Segunda forma (magenta) -->
+  <path d="M15 55L40 70L65 55" 
+        stroke="url(#magentaGradient)" 
+        strokeWidth="3" 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+        fill="none" />
+  
+  <!-- Elemento decorativo central con degradado -->
+  <circle cx="40" cy="35" r="3" fill="url(#mainGradient)" opacity="0.8" />
+</svg>

@@ -241,14 +241,14 @@ export function ExoProducts() {
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.2 }}
               >
-                <Card className={`h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl ${
+                <Card className={`h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-cyan/50 transition-all duration-300 hover:shadow-xl ${
                   product.comingSoon ? "opacity-75" : ""
                 }`}>
                   <CardHeader className="space-y-4">
                     {/* Product Image */}
                     {product.image && (
                       <motion.div
-                        className="relative w-full h-64 rounded-lg overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10"
+                        className="relative w-full h-64 rounded-lg overflow-hidden bg-gradient-to-br from-cyan/10 to-magenta/10"
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.6 }}
@@ -287,7 +287,7 @@ export function ExoProducts() {
                             animate="visible"
                             transition={{ delay: 0.1 * index }}
                           >
-                            <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3 flex-shrink-0" />
+                            <div className="w-1.5 h-1.5 bg-cyan rounded-full mr-3 flex-shrink-0" />
                             {feature}
                           </motion.li>
                         ))}
@@ -349,7 +349,7 @@ export function ExoProducts() {
             animate={isInView ? "visible" : "hidden"}
             className="text-center mt-16"
           >
-            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 border border-border/50">
+            <div className="bg-gradient-to-r from-cyan/10 to-magenta/10 rounded-2xl p-8 border border-border/50">
               <h3 className="text-2xl font-bold mb-4">
                 ¿Necesitas algo personalizado?
               </h3>
