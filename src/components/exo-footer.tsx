@@ -101,7 +101,7 @@ export function ExoFooter() {
             <motion.div variants={itemVariants} className="space-y-4">
               <div className="flex items-center space-x-2">
                 <motion.img
-                  src="/logo-new.svg"
+                  src="/EXOlogo_oficial1.png"
                   alt="EXO digital studio logo"
                   width="24"
                   height="24"

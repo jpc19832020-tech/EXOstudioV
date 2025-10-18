@@ -50,6 +50,8 @@ const config: Config = {
                         // Nuevos colores personalizados EXO
                         cyan: '#00C8FF',
                         magenta: '#FF1FB1',
+                        'gradient-exo': 'linear-gradient(90deg, #00C8FF 0%, #FF1FB1 100%)',
+                        'gradient-exo-hover': 'linear-gradient(90deg, #00A8E0 0%, #E0119F 100%)',
                         chart: {
                                 '1': 'hsl(var(--chart-1))',
                                 '2': 'hsl(var(--chart-2))',

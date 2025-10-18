@@ -77,10 +77,12 @@
   --sidebar-border: oklch(0.15 0.01 240);
   --sidebar-ring: oklch(0.72 0.21 190); /* Cian brillante */
   
-  /* Nuevos colores personalizados */
+  /* Nuevos colores personalizados EXO */
   --cyan: #00C8FF;
   --magenta: #FF1FB1;
   --gradient-cyan-magenta: linear-gradient(90deg, #00C8FF 0%, #FF1FB1 100%);
+  --gradient-exo-primary: linear-gradient(90deg, #00C8FF 0%, #FF1FB1 100%);
+  --gradient-exo-hover: linear-gradient(90deg, #00A8E0 0%, #E0119F 100%);
 }
 
 .light {

@@ -398,7 +398,7 @@ export function QuienesSomos() {
             className="flex justify-center mb-16"
           >
             <motion.img
-              src="/logo-new.svg"
+              src="/EXOlogo_oficial1.png"
               alt="EXO digital studio logo"
               width="140"
               height="140"
