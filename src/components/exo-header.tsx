@@ -96,18 +96,17 @@ export function ExoHeader() {
                 const isProduction = process.env.NODE_ENV === 'production';
                 const basePath = isProduction ? '/EXOstudioV' : '';
                 window.location.href = `${basePath}/`;
-              }} className="flex items-center space-x-2">
+              }} className="flex items-center">
                 <motion.img
                   src="/EXOstudioV/EXOlogo_oficial1.png"
                   alt="EXO digital studio logo"
-                  width="32"
-                  height="32"
+                  width="40"
+                  height="40"
                   className="text-primary"
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 1.2, ease: "easeInOut" }}
                 />
-                <span className="text-xl font-bold tracking-tight">EXO</span>
               </Link>
               
               <motion.div
