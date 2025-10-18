@@ -142,7 +142,7 @@ export function ExoHero() {
             transition={{ duration: 1.2, ease: "easeOut" }}
           >
             <motion.img
-              src="/EXOlogo_oficial1.png"
+              src="/EXOstudioV/EXOlogo_oficial1.png"
               alt="EXO digital studio logo"
               width="80"
               height="80"

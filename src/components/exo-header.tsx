@@ -98,7 +98,7 @@ export function ExoHeader() {
                 window.location.href = `${basePath}/`;
               }} className="flex items-center space-x-2">
                 <motion.img
-                  src="/EXOlogo_oficial1.png"
+                  src="/EXOstudioV/EXOlogo_oficial1.png"
                   alt="EXO digital studio logo"
                   width="32"
                   height="32"
