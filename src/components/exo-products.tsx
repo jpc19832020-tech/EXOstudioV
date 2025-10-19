@@ -146,7 +146,7 @@ export function ExoProducts() {
   // Componente de embed optimizado
   const WebsiteEmbed = useMemo(() => {
     return () => (
-      <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border/50">
+      <div className="bg-gradient-to-br from-primary/5 to-accent/5 backdrop-blur-sm rounded-2xl p-8 border-4 border-primary">
         <motion.h3 
           className="text-2xl font-bold mb-6 text-center"
           variants={animationVariants.item}
@@ -183,7 +183,7 @@ export function ExoProducts() {
           <Button
             variant="outline"
             onClick={handleOpenProject}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 border-accent text-accent hover:bg-accent hover:text-white"
           >
             <ExternalLink className="w-4 h-4" />
             Abrir en nueva pestaña
@@ -191,7 +191,7 @@ export function ExoProducts() {
           
           <Button
             onClick={handleContactForProject}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"
           >
             <WhatsAppIcon className="w-4 h-4" />
             Quiero un proyecto así
@@ -241,14 +241,14 @@ export function ExoProducts() {
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.2 }}
               >
-                <Card className={`h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-cyan/50 transition-all duration-300 hover:shadow-xl ${
+                <Card className={`h-full bg-primary/10 backdrop-blur-sm border-4 border-primary hover:border-accent transition-all duration-300 hover:shadow-xl hover:shadow-accent/30 ${
                   product.comingSoon ? "opacity-75" : ""
                 }`}>
                   <CardHeader className="space-y-4">
                     {/* Product Image */}
                     {product.image && (
                       <motion.div
-                        className="relative w-full h-64 rounded-lg overflow-hidden bg-gradient-to-br from-cyan/10 to-magenta/10"
+                        className="relative w-full h-64 rounded-lg overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20"
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.6 }}
@@ -264,7 +264,7 @@ export function ExoProducts() {
                     
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-xl">{product.name}</CardTitle>
-                      <Badge variant={product.badgeVariant} className="text-xs">
+                      <Badge variant={product.badgeVariant} className="text-xs bg-accent text-primary-foreground">
                         {product.badge}
                       </Badge>
                     </div>
@@ -287,7 +287,7 @@ export function ExoProducts() {
                             animate="visible"
                             transition={{ delay: 0.1 * index }}
                           >
-                            <div className="w-1.5 h-1.5 bg-cyan rounded-full mr-3 flex-shrink-0" />
+                            <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3 flex-shrink-0" />
                             {feature}
                           </motion.li>
                         ))}
@@ -300,7 +300,7 @@ export function ExoProducts() {
                           <Button
                             variant="outline"
                             size="sm"
-                            className="flex-1"
+                            className="flex-1 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
                             onClick={() => handleContactClick(product.name)}
                           >
                             <WhatsAppIcon className="w-4 h-4 mr-2" />
@@ -308,7 +308,7 @@ export function ExoProducts() {
                           </Button>
                           <Button
                             size="sm"
-                            className="flex-1"
+                            className="flex-1 bg-accent hover:bg-accent/90 text-white"
                             onClick={() => handleViewDetails(product)}
                           >
                             <Eye className="w-4 h-4 mr-2" />
@@ -349,7 +349,7 @@ export function ExoProducts() {
             animate={isInView ? "visible" : "hidden"}
             className="text-center mt-16"
           >
-            <div className="bg-gradient-to-r from-cyan/10 to-magenta/10 rounded-2xl p-8 border border-border/50">
+            <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-2xl p-8 border-4 border-accent">
               <h3 className="text-2xl font-bold mb-4">
                 ¿Necesitas algo personalizado?
               </h3>
@@ -360,7 +360,7 @@ export function ExoProducts() {
               <Button
                 size="lg"
                 onClick={handleContactCustom}
-                className="bg-primary text-primary-foreground hover:bg-primary/90"
+                className="bg-gradient-to-r from-primary to-accent text-white hover:from-primary/90 hover:to-accent/90"
               >
                 <WhatsAppIcon className="w-5 h-5 mr-2" />
                 Consultar proyecto personalizado

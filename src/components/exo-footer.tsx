@@ -87,7 +87,7 @@ export function ExoFooter() {
   };
 
   return (
-    <footer className="border-t border-border/50 bg-background/50 backdrop-blur-sm">
+    <footer className="border-t-4 border-gradient-to-r from-primary to-accent bg-background/50 backdrop-blur-sm">
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
@@ -105,12 +105,12 @@ export function ExoFooter() {
                   alt="EXO digital studio logo"
                   width="24"
                   height="24"
-                  className="text-primary"
+                  className="text-primary filter drop-shadow-lg drop-shadow-primary/50"
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 1 }}
                 />
-                <span className="text-lg font-bold">EXO digital studio</span>
+                <span className="text-lg font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">EXO digital studio</span>
               </div>
               <p className="text-sm text-muted-foreground">
                 Tecnología que fluye contigo.
@@ -125,7 +125,7 @@ export function ExoFooter() {
                   <li key={link.name}>
                     <motion.button
                       onClick={() => handleNavClick(link.href)}
-                      className="text-sm text-muted-foreground hover:text-cyan transition-colors duration-200"
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
                       whileHover={{ x: 4 }}
                       transition={{ duration: 0.2 }}
                     >
@@ -144,7 +144,7 @@ export function ExoFooter() {
                   <motion.button
                     key={social.name}
                     onClick={() => handleNavClick(social.href)}
-                    className="w-10 h-10 bg-muted/50 rounded-full flex items-center justify-center text-muted-foreground hover:text-cyan hover:bg-cyan/10 transition-all duration-200"
+                    className="w-10 h-10 bg-muted/50 rounded-full flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all duration-200"
                     whileHover={{ 
                       scale: 1.1,
                       rotate: [0, 5, -5, 0],
@@ -162,7 +162,7 @@ export function ExoFooter() {
           {/* Bottom section */}
           <motion.div
             variants={itemVariants}
-            className="mt-12 pt-8 border-t border-border/50 text-center"
+            className="mt-12 pt-8 border-t-2 border-gradient-to-r from-primary/50 to-accent/50 text-center"
           >
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} EXO digital studio. Todos los derechos reservados.

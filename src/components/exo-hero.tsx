@@ -76,14 +76,14 @@ export function ExoHero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-cyan/5" />
+      <div className="absolute inset-0 bg-gradient-radial from-primary/20 via-background to-accent/10" />
       
       {/* Animated particles */}
       <div className="absolute inset-0">
-        {[...Array(6)].map((_, i) => (
+        {[...Array(12)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-primary/20 rounded-full"
+            className={`absolute w-1 h-1 rounded-full ${i % 2 === 0 ? 'bg-primary/30' : 'bg-accent/30'}`}
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -92,6 +92,7 @@ export function ExoHero() {
               y: [0, -100, 0],
               x: [0, Math.random() * 100 - 50, 0],
               opacity: [0, 1, 0],
+              scale: [1, 1.5, 1],
             }}
             transition={{
               duration: 10 + Math.random() * 20,
@@ -107,7 +108,8 @@ export function ExoHero() {
       <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="currentColor" stopOpacity="0.1" />
+            <stop offset="0%" stopColor="#00BFFF" stopOpacity="0.3" />
+            <stop offset="50%" stopColor="#D946EF" stopOpacity="0.2" />
             <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
           </linearGradient>
         </defs>
@@ -121,7 +123,7 @@ export function ExoHero() {
             stroke="url(#lineGradient)"
             strokeWidth="1"
             animate={{
-              y2: [100, 110, 100],
+              y2: ["100%", "110%", "100%"],
             }}
             transition={{
               duration: 8 + i * 2,
@@ -173,7 +175,7 @@ export function ExoHero() {
             <span className="inline-block">
               Tecnología{" "}
               <motion.span
-                className="inline-block text-primary"
+                className="inline-block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
                 initial={{ letterSpacing: "0em" }}
                 animate={{ letterSpacing: ["0em", "0.02em", "0em"] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -205,7 +207,7 @@ export function ExoHero() {
             {/* Ver Producto Button */}
             <motion.button
               onClick={handleProductsClick}
-              className="group relative px-8 py-4 bg-gradient-to-r from-cyan to-magenta text-white rounded-xl font-semibold text-lg shadow-2xl hover:shadow-cyan/25 transition-all duration-300 overflow-hidden min-w-[180px]"
+              className="group relative px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-semibold text-lg shadow-2xl hover:shadow-primary/25 transition-all duration-300 overflow-hidden min-w-[180px]"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
               initial={{ opacity: 0, x: -50 }}
@@ -216,7 +218,7 @@ export function ExoHero() {
                 <ArrowRight className="mr-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                 Ver Producto
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan/0 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/0 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.button>
 
             {/* WhatsApp Button */}

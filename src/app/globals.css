@@ -51,13 +51,13 @@
   --card-foreground: oklch(0.95 0.01 240);
   --popover: oklch(0.09 0.01 240);
   --popover-foreground: oklch(0.95 0.01 240);
-  --primary: #00C8FF; /* Cian brillante #00C8FF */
+  --primary: #00BFFF; /* Azul EXO #00BFFF */
   --primary-foreground: oklch(0.07 0.01 240);
   --secondary: oklch(0.15 0.01 240);
   --secondary-foreground: oklch(0.95 0.01 240);
   --muted: oklch(0.12 0.01 240);
   --muted-foreground: oklch(0.65 0.01 240);
-  --accent: #FF1FB1; /* Magenta/fucsia #FF1FB1 */
+  --accent: #D946EF; /* Magenta EXO #D946EF */
   --accent-foreground: oklch(0.07 0.01 240);
   --destructive: oklch(0.65 0.20 0);
   --border: oklch(0.15 0.01 240);
@@ -78,11 +78,11 @@
   --sidebar-ring: #00C8FF; /* Cian brillante */
   
   /* Nuevos colores personalizados EXO */
-  --cyan: #00C8FF;
-  --magenta: #FF1FB1;
-  --gradient-cyan-magenta: linear-gradient(90deg, #00C8FF 0%, #FF1FB1 100%);
-  --gradient-exo-primary: linear-gradient(90deg, #00C8FF 0%, #FF1FB1 100%);
-  --gradient-exo-hover: linear-gradient(90deg, #00A8E0 0%, #E0119F 100%);
+  --cyan: #00BFFF;
+  --magenta: #D946EF;
+  --gradient-cyan-magenta: linear-gradient(90deg, #00BFFF 0%, #D946EF 100%);
+  --gradient-exo-primary: linear-gradient(90deg, #00BFFF 0%, #D946EF 100%);
+  --gradient-exo-hover: linear-gradient(90deg, #0099E6 0%, #C735EF 100%);
 }
 
 .light {
@@ -93,13 +93,13 @@
   --card-foreground: oklch(0.07 0.01 240);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.07 0.01 240);
-  --primary: #00C8FF; /* Cian brillante #00C8FF */
+  --primary: #00BFFF; /* Azul EXO #00BFFF */
   --primary-foreground: oklch(0.98 0.01 240);
   --secondary: oklch(0.94 0.01 240);
   --secondary-foreground: oklch(0.07 0.01 240);
   --muted: oklch(0.92 0.01 240);
   --muted-foreground: oklch(0.45 0.01 240);
-  --accent: #FF1FB1; /* Magenta/fucsia #FF1FB1 */
+  --accent: #D946EF; /* Magenta EXO #D946EF */
   --accent-foreground: oklch(0.98 0.01 240);
   --destructive: oklch(0.65 0.20 0);
   --border: oklch(0.88 0.01 240);
@@ -193,5 +193,72 @@
   
   .animate-spin-slow {
     animation: spin-slow 20s linear infinite;
+  }
+  
+  /* EXO Color Transitions */
+  @keyframes colorShift {
+    0%, 100% {
+      filter: hue-rotate(0deg);
+    }
+    50% {
+      filter: hue-rotate(30deg);
+    }
+  }
+  
+  @keyframes gradientShift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  @keyframes borderPulse {
+    0%, 100% {
+      border-color: #00BFFF;
+    }
+    50% {
+      border-color: #D946EF;
+    }
+  }
+  
+  @keyframes textGradient {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  .animate-color-shift {
+    animation: colorShift 8s ease-in-out infinite;
+  }
+  
+  .animate-gradient-shift {
+    animation: gradientShift 6s ease-in-out infinite;
+    background-size: 200% 200%;
+  }
+  
+  .animate-border-pulse {
+    animation: borderPulse 3s ease-in-out infinite;
+  }
+  
+  .animate-text-gradient {
+    animation: textGradient 4s ease-in-out infinite;
+    background-size: 200% 200%;
+  }
+  
+  /* Radial gradient background */
+  .bg-gradient-radial {
+    background: radial-gradient(circle at center, #00BFFF 0%, transparent 70%, #D946EF 100%);
+  }
+  
+  /* Animated gradient border */
+  .border-gradient-animated {
+    background: linear-gradient(90deg, #00BFFF, #D946EF, #00BFFF);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease-in-out infinite;
   }
 }

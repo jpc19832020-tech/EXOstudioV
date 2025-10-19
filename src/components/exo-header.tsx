@@ -116,7 +116,7 @@ export function ExoHeader() {
               >
                 <Link
                   href="/quienes-somos"
-                  className="text-sm font-medium text-muted-foreground hover:text-cyan transition-colors duration-200 border border-border/50 px-3 py-1.5 rounded-full hover:border-cyan/50 hover:bg-cyan/5"
+                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 border border-accent/50 px-3 py-1.5 rounded-full hover:border-accent hover:bg-primary/10"
                   onClick={(e) => {
                     // Forzar navegación completa para evitar problemas con basePath
                     e.preventDefault();
@@ -147,7 +147,7 @@ export function ExoHeader() {
                       e.preventDefault();
                       handleNavClick(item.href);
                     }}
-                    className="text-sm font-medium transition-colors duration-200 hover:text-cyan text-muted-foreground bg-cyan/10 border border-cyan/20 px-4 py-2 rounded-lg hover:bg-cyan/20"
+                    className="text-sm font-medium transition-colors duration-200 hover:text-primary text-muted-foreground bg-primary/10 border border-primary/20 px-4 py-2 rounded-lg hover:bg-primary/20"
                   >
                     {item.name}
                   </Link>
@@ -215,7 +215,7 @@ export function ExoHeader() {
                       e.preventDefault();
                       handleNavClick(item.href);
                     }}
-                    className="block py-3 text-sm font-medium transition-colors duration-200 hover:text-cyan text-muted-foreground"
+                    className="block py-3 text-sm font-medium transition-colors duration-200 hover:text-primary text-muted-foreground"
                   >
                     {item.name}
                   </Link>

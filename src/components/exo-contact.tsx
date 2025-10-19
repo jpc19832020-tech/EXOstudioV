@@ -154,7 +154,7 @@ export function ExoContact() {
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
             >
-              <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border/50">
+              <div className="bg-primary/10 backdrop-blur-sm rounded-2xl p-8 border-4 border-primary">
                 <h3 className="text-2xl font-semibold mb-6">Envíanos un mensaje</h3>
                 
                 <p className="text-muted-foreground mb-6">
@@ -188,7 +188,7 @@ export function ExoContact() {
                         required
                         value={formData.name}
                         onChange={handleInputChange}
-                        className="bg-background/50 border-border/50 focus:border-cyan/50"
+                        className="bg-background/50 border-primary/30 focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
                         placeholder="Tu nombre"
                       />
                     </div>
@@ -204,7 +204,7 @@ export function ExoContact() {
                         required
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="bg-background/50 border-border/50 focus:border-cyan/50"
+                        className="bg-background/50 border-primary/30 focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
                         placeholder="tu@email.com"
                       />
                     </div>
@@ -220,7 +220,7 @@ export function ExoContact() {
                         rows={5}
                         value={formData.message}
                         onChange={handleInputChange}
-                        className="bg-background/50 border-border/50 focus:border-cyan/50 resize-none"
+                        className="bg-background/50 border-primary/30 focus:border-accent/50 focus:ring-2 focus:ring-accent/20 resize-none"
                         placeholder="Cuéntanos sobre tu proyecto..."
                       />
                     </div>
@@ -228,7 +228,7 @@ export function ExoContact() {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-gradient-to-r from-cyan to-magenta text-white hover:from-cyan/90 hover:to-magenta/90"
+                      className="w-full bg-gradient-to-r from-primary to-accent text-white hover:from-primary/90 hover:to-accent/90"
                     >
                       {isSubmitting ? (
                         <motion.div
@@ -256,10 +256,10 @@ export function ExoContact() {
               className="space-y-8"
             >
               {/* WhatsApp CTA */}
-              <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 border border-border/50">
+              <div className="bg-primary/20 backdrop-blur-sm rounded-2xl p-8 border-4 border-primary hover:border-accent/50 transition-all duration-300">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mr-4">
-                    <WhatsAppIcon className="w-6 h-6 text-green-500" />
+                  <div className="w-12 h-12 bg-primary/30 rounded-full flex items-center justify-center mr-4">
+                    <WhatsAppIcon className="w-6 h-6 text-primary" />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold">WhatsApp directo</h3>
@@ -271,7 +271,7 @@ export function ExoContact() {
                 </p>
                 <Button
                   onClick={handleWhatsAppClick}
-                  className="w-full bg-green-500 text-white hover:bg-green-600"
+                  className="w-full bg-primary text-white hover:bg-primary/90 border-2 border-primary hover:border-accent"
                 >
                   <WhatsAppIcon className="w-4 h-4 mr-2" />
                   Abrir WhatsApp
@@ -279,10 +279,10 @@ export function ExoContact() {
               </div>
 
               {/* Email contact */}
-              <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border/50">
+              <div className="bg-accent/20 backdrop-blur-sm rounded-2xl p-8 border-4 border-accent hover:border-primary/50 transition-all duration-300">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-cyan/20 to-magenta/20 rounded-full flex items-center justify-center mr-4">
-                    <Mail className="w-6 h-6 text-cyan" />
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary/30 to-accent/30 rounded-full flex items-center justify-center mr-4">
+                    <Mail className="w-6 h-6 text-accent" />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold">Email</h3>
@@ -294,7 +294,7 @@ export function ExoContact() {
                 </p>
                 <Button
                   variant="outline"
-                  className="w-full"
+                  className="w-full border-accent text-accent hover:bg-accent hover:text-white"
                   onClick={() => window.open("mailto:hola@exo.digital", "_blank")}
                 >
                   <Mail className="w-4 h-4 mr-2" />
@@ -303,14 +303,14 @@ export function ExoContact() {
               </div>
 
               {/* Social Media */}
-              <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border/50">
+              <div className="bg-gradient-to-br from-primary/10 to-accent/10 backdrop-blur-sm rounded-2xl p-8 border-4 border-primary">
                 <h3 className="text-xl font-semibold mb-6">Contáctanos en redes sociales</h3>
                 <div className="grid grid-cols-3 gap-4">
                   <Button
                     variant="outline"
                     size="lg"
                     onClick={() => handleSocialClick("instagram")}
-                    className="flex flex-col items-center gap-2 h-auto py-4 hover:bg-gradient-to-br hover:from-pink-500/10 hover:to-orange-500/10 hover:border-pink-500/50"
+                    className="flex flex-col items-center gap-2 h-auto py-4 hover:bg-accent/10 hover:border-accent/50"
                   >
                     <Instagram className="w-6 h-6 text-pink-500" />
                     <span className="text-xs">Instagram</span>
@@ -320,7 +320,7 @@ export function ExoContact() {
                     variant="outline"
                     size="lg"
                     onClick={() => handleSocialClick("tiktok")}
-                    className="flex flex-col items-center gap-2 h-auto py-4 hover:bg-black/10 hover:border-black/50"
+                    className="flex flex-col items-center gap-2 h-auto py-4 hover:bg-primary/10 hover:border-primary/50"
                   >
                     <TikTokIcon className="w-6 h-6" />
                     <span className="text-xs">TikTok</span>
@@ -330,7 +330,7 @@ export function ExoContact() {
                     variant="outline"
                     size="lg"
                     onClick={() => handleSocialClick("facebook")}
-                    className="flex flex-col items-center gap-2 h-auto py-4 hover:bg-blue-500/10 hover:border-blue-500/50"
+                    className="flex flex-col items-center gap-2 h-auto py-4 hover:bg-primary/10 hover:border-primary/50"
                   >
                     <Facebook className="w-6 h-6 text-blue-500" />
                     <span className="text-xs">Facebook</span>

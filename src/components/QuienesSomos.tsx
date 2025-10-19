@@ -382,7 +382,7 @@ export function QuienesSomos() {
       {/* Hero Section */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-background via-background/95 to-background/90"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary/10 via-background/95 to-accent/10"
       >
         <LightLines />
         
@@ -434,7 +434,7 @@ export function QuienesSomos() {
             className="relative inline-block mb-8"
           >
             <motion.h1
-              className="text-6xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent relative"
+              className="text-6xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent relative"
               initial={{ backgroundPosition: "300% center" }}
               animate={{ backgroundPosition: "-100% center" }}
               transition={{ duration: 4, ease: "linear", repeat: Infinity }}
@@ -446,7 +446,7 @@ export function QuienesSomos() {
               ¿Quiénes Somos?
               {/* Efecto de brillo */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/30 to-transparent"
                 animate={{ x: ["-100%", "100%"] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 style={{ mixBlendMode: "overlay" }}
@@ -568,9 +568,9 @@ export function QuienesSomos() {
       {/* Bloque 1 - Nuestra Esencia */}
       <section
         ref={essenceRef}
-        className="relative py-24 px-4 bg-gradient-to-b from-background to-muted/20"
+        className="relative py-24 px-4 bg-gradient-to-b from-background to-primary/20"
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         
@@ -633,7 +633,7 @@ export function QuienesSomos() {
       {/* Bloque 2 - Misión y Visión */}
       <section
         ref={missionRef}
-        className="relative py-24 px-4 bg-background"
+        className="relative py-24 px-4 bg-gradient-to-r from-background/95 to-accent/5"
       >
         <motion.div
           initial="hidden"
@@ -728,7 +728,7 @@ export function QuienesSomos() {
       {/* Bloque 3 - Diferenciadores */}
       <section
         ref={differentiatorsRef}
-        className="relative py-24 px-4 bg-gradient-to-b from-background to-muted/20"
+        className="relative py-24 px-4 bg-gradient-to-b from-background to-accent/20"
       >
         <motion.div
           initial="hidden"
@@ -751,8 +751,8 @@ export function QuienesSomos() {
                 whileHover="hover"
                 className="group"
               >
-                <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <Card className="h-full bg-card/50 backdrop-blur-sm border-t-4 border-l-4 border-primary border-r-4 border-b-4 border-accent hover:border-t-accent hover:border-l-accent hover:border-r-primary hover:border-b-primary transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <CardContent className="p-6 relative z-10">
                     <div className="text-primary mb-4 transform group-hover:-translate-y-1 transition-transform duration-300">
                       {item.icon}
@@ -774,21 +774,21 @@ export function QuienesSomos() {
       {/* Bloque 4 - Nuestra Historia */}
       <section
         ref={historyRef}
-        className="relative py-32 px-4 bg-black text-white overflow-hidden"
+        className="relative py-32 px-4 bg-gradient-to-br from-primary/20 via-black to-accent/20 text-white overflow-hidden"
       >
         {/* Enhanced Background Effects */}
         <div className="absolute inset-0 overflow-hidden">
           {/* Animated gradient orbs */}
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-primary/10 to-blue-500/10 rounded-full blur-3xl animate-spin-slow"></div>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-3xl animate-spin-slow"></div>
           
           {/* Light rays */}
           <div className="absolute inset-0">
             {[...Array(6)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+                className="absolute h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"
                 style={{ 
                   top: `${10 + i * 15}%`,
                   width: '100%',
@@ -821,7 +821,7 @@ export function QuienesSomos() {
             className="text-center mb-20"
           >
             <motion.h3
-              className="text-5xl md:text-7xl font-black mb-8 bg-gradient-to-r from-white via-primary to-white bg-clip-text text-transparent relative"
+              className="text-5xl md:text-7xl font-black mb-8 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent relative"
               initial={{ backgroundPosition: "300% center" }}
               animate={{ backgroundPosition: "-100% center" }}
               transition={{ duration: 4, ease: "linear", repeat: Infinity }}
@@ -832,7 +832,7 @@ export function QuienesSomos() {
               Nuestra Historia
               {/* Sweep effect */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent"
                 animate={{ x: ["-100%", "100%"] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 style={{ mixBlendMode: "overlay" }}
@@ -841,7 +841,7 @@ export function QuienesSomos() {
             
             {/* Decorative line */}
             <motion.div
-              className="w-32 h-1 bg-gradient-to-r from-primary to-blue-500 mx-auto rounded-full"
+              className="w-32 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"
               initial={{ width: 0, opacity: 0 }}
               animate={{ width: "128px", opacity: 1 }}
               transition={{ duration: 1, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
@@ -901,7 +901,7 @@ export function QuienesSomos() {
       {/* Cierre Cinematográfico */}
       <section
         ref={ctaRef}
-        className="relative py-32 px-4 bg-gradient-to-br from-black via-primary/30 to-black overflow-hidden"
+        className="relative py-32 px-4 bg-gradient-to-br from-primary/20 via-black to-accent/20 overflow-hidden"
       >
         {/* Efectos de fondo cinematográficos */}
         <div className="absolute inset-0">
@@ -929,7 +929,7 @@ export function QuienesSomos() {
             className="mb-12"
           >
             <motion.h3
-              className="text-5xl md:text-6xl lg:text-7xl font-black text-white relative z-50"
+              className="text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent relative z-50"
               style={{
                 filter: "drop-shadow(0 0 30px rgba(var(--primary), 0.5))",
               }}
@@ -938,7 +938,7 @@ export function QuienesSomos() {
                 Tu próxima versión ocurre cuando decides ir más allá.
                 {/* Efecto de brillo sweep */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/40 to-transparent"
                   animate={{ x: ["-200%", "200%"] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                   style={{ mixBlendMode: "overlay" }}
@@ -970,7 +970,7 @@ export function QuienesSomos() {
             
             {/* Subtítulo cinemático */}
             <motion.p
-              className="text-xl md:text-2xl text-primary/80 font-light mt-6"
+              className="text-xl md:text-2xl text-accent font-light mt-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
@@ -1004,7 +1004,7 @@ export function QuienesSomos() {
               <Button
                 size="lg"
                 onClick={handleWhatsAppClick}
-                className="group relative overflow-hidden bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white font-bold px-10 py-6 text-xl rounded-full border-2 border-green-400/30 transition-all duration-500 shadow-2xl shadow-green-500/25"
+                className="group relative overflow-hidden bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white font-bold px-10 py-6 text-xl rounded-full border-2 border-primary/30 transition-all duration-500 shadow-2xl shadow-primary/25"
               >
                 <span className="relative z-10 flex items-center gap-3">
                   <WhatsAppIcon className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
@@ -1048,7 +1048,7 @@ export function QuienesSomos() {
                 size="lg"
                 variant="outline"
                 asChild
-                className="group relative overflow-hidden border-2 border-primary/50 hover:border-primary text-primary hover:bg-primary/10 font-bold px-10 py-6 text-xl rounded-full transition-all duration-500 shadow-xl shadow-primary/20"
+                className="group relative overflow-hidden border-2 border-accent/50 hover:border-accent text-accent hover:bg-accent/10 font-bold px-10 py-6 text-xl rounded-full transition-all duration-500 shadow-xl shadow-accent/20"
               >
                 <Link href="https://jpc19832020-tech.github.io/EXOstudioV/#productos" onClick={(e) => {
                   e.preventDefault();
