@@ -614,7 +614,7 @@ export function QuienesSomos() {
               },
               {
                 title: "PROPÓSITO",
-                description: "Ir más allá de lo digital",
+                description: "Ir más allá",
                 detail: "Combinando conocimiento, creatividad e inteligencia artificial"
               }
             ].map((item, index) => (
