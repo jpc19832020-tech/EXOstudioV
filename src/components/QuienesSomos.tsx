@@ -625,8 +625,16 @@ export function QuienesSomos() {
                 whileHover={{ y: -10 }}
               >
                 <div className="h-full bg-gradient-to-b from-white/5 to-white/[0.02] backdrop-blur-sm border border-white/10 rounded-2xl p-8 transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-xl">
-                  <div className="mb-6">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center text-3xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">
+                  <div className="mb-6 flex justify-center">
+                    <div className={`${
+                      item.title === "PROPÓSITO"
+                        ? "px-6 py-4 min-w-[120px]"
+                        : "w-16 h-16"
+                    } bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center ${
+                      item.title === "PROPÓSITO"
+                        ? "text-xl font-bold"
+                        : "text-3xl font-bold"
+                    } text-primary group-hover:scale-110 transition-transform duration-300`}>
                       {item.title}
                     </div>
                   </div>
