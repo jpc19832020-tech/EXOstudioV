@@ -74,167 +74,201 @@ export function ExoHero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-radial from-primary/20 via-background to-accent/10" />
-      
-      {/* Animated particles */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+      {/* Animated gradient background */}
       <div className="absolute inset-0">
-        {[...Array(12)].map((_, i) => (
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5 animate-gradient-shift" />
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-tr from-accent/10 via-transparent to-primary/10"
+          animate={{
+            opacity: [0.3, 0.7, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </div>
+      
+      {/* Floating geometric shapes */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
-            className={`absolute w-1 h-1 rounded-full ${i % 2 === 0 ? 'bg-primary/30' : 'bg-accent/30'}`}
+            className={`absolute ${i % 2 === 0 ? 'w-32 h-32' : 'w-24 h-24'} rounded-full ${i % 2 === 0 ? 'bg-primary/10' : 'bg-accent/10'} blur-xl`}
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${10 + i * 15}%`,
+              top: `${20 + (i % 3) * 25}%`,
             }}
             animate={{
-              y: [0, -100, 0],
-              x: [0, Math.random() * 100 - 50, 0],
-              opacity: [0, 1, 0],
-              scale: [1, 1.5, 1],
+              y: [0, -30, 0],
+              x: [0, 20, 0],
+              scale: [1, 1.2, 1],
             }}
             transition={{
-              duration: 10 + Math.random() * 20,
+              duration: 15 + i * 2,
               repeat: Infinity,
-              delay: Math.random() * 5,
               ease: "easeInOut",
+              delay: i * 1,
             }}
           />
         ))}
       </div>
 
-      {/* Isometric lines */}
-      <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#00BFFF" stopOpacity="0.3" />
-            <stop offset="50%" stopColor="#D946EF" stopOpacity="0.2" />
-            <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-        {[...Array(5)].map((_, i) => (
-          <motion.line
-            key={i}
-            x1={`${20 + i * 15}%`}
-            y1="0"
-            x2={`${30 + i * 10}%`}
-            y2="100%"
-            stroke="url(#lineGradient)"
-            strokeWidth="1"
-            animate={{
-              y2: ["100%", "110%", "100%"],
-            }}
-            transition={{
-              duration: 8 + i * 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </svg>
-
-      <div className="relative container mx-auto px-4 pt-32 pb-20">
-        <div className="max-w-5xl mx-auto text-center">
-          {/* Logo animation */}
+      <div className="relative z-10 container mx-auto px-4 pt-32 pb-20">
+        <div className="max-w-6xl mx-auto text-center">
+          {/* Logo with enhanced animation */}
           <motion.div
-            className="mb-12"
-            initial={{ opacity: 0, scale: 0.8 }}
+            className="mb-16 relative"
+            initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
           >
-            <motion.img
-              src="/EXOstudioV/EXOlogo_oficial1.png"
-              alt="EXO digital studio logo"
-              width="80"
-              height="80"
-              className="mx-auto"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1.2, ease: "easeInOut" }}
-            />
-            
-            {/* Glow effect */}
             <motion.div
-              className="absolute inset-0 flex items-center justify-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0, 0.5, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="relative inline-block"
+              whileHover={{
+                scale: 1.1,
+                rotate: 5,
+                transition: { duration: 0.3 }
+              }}
             >
-              <div className="w-32 h-32 bg-gradient-to-r from-cyan/20 to-magenta/20 rounded-full blur-xl" />
+              <motion.img
+                src="/EXOstudioV/EXOlogo_oficial1.png"
+                alt="EXO digital studio logo"
+                width="120"
+                height="120"
+                className="relative z-10"
+                animate={{
+                  filter: [
+                    "drop-shadow(0 0 20px rgba(0, 191, 255, 0.3))",
+                    "drop-shadow(0 0 30px rgba(217, 70, 239, 0.4))",
+                    "drop-shadow(0 0 20px rgba(0, 191, 255, 0.3))"
+                  ]
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              
+              {/* Animated ring around logo */}
+              <motion.div
+                className="absolute inset-0 border-2 border-primary/30 rounded-full"
+                animate={{
+                  scale: [1, 1.3, 1],
+                  opacity: [0.5, 0, 0.5],
+                  rotate: [0, 180, 360]
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
             </motion.div>
           </motion.div>
 
-          {/* Main title */}
-          <motion.h1
-            className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 text-balance"
-            initial={{ opacity: 0, y: 40 }}
+          {/* Enhanced main title */}
+          <motion.div
+            className="mb-8"
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+            transition={{ duration: 1.2, delay: 0.5, ease: "easeOut" }}
           >
-            <span className="inline-block">
-              Tecnología{" "}
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black leading-none">
               <motion.span
-                className="inline-block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
-                initial={{ letterSpacing: "0em" }}
-                animate={{ letterSpacing: ["0em", "0.02em", "0em"] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                className="block text-foreground"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+              >
+                Tecnología
+              </motion.span>
+              <motion.span
+                className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-text-gradient"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.9 }}
               >
                 que fluye
               </motion.span>
-            </span>
-            <br />
-            <span className="inline-block">contigo.</span>
-          </motion.h1>
+              <motion.span
+                className="block text-foreground"
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 1.1 }}
+              >
+                contigo.
+              </motion.span>
+            </h1>
+          </motion.div>
 
-          {/* Subtitle */}
+          {/* Enhanced subtitle */}
           <motion.p
-            className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto text-balance"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-xl md:text-2xl text-muted-foreground mb-16 max-w-4xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+            transition={{ duration: 1, delay: 1.3, ease: "easeOut" }}
           >
-            EXO digital studio — productos y experiencias digitales rápidas, elegantes y diferentes.
+            <span className="text-foreground font-semibold">EXO digital studio</span> —
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-medium">
+              {" "}productos y experiencias digitales rápidas, elegantes y diferentes.
+            </span>
           </motion.p>
 
-          {/* CTA buttons */}
+          {/* Enhanced CTA buttons */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            className="flex flex-col sm:flex-row gap-8 justify-center items-center mb-16"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 1.5, ease: "easeOut" }}
           >
             {/* Ver Producto Button */}
             <motion.button
               onClick={handleProductsClick}
-              className="group relative px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-semibold text-lg shadow-2xl hover:shadow-primary/25 transition-all duration-300 overflow-hidden min-w-[180px]"
-              whileHover={{ scale: 1.05, y: -2 }}
+              className="group relative px-10 py-5 bg-gradient-to-r from-primary to-accent text-white rounded-2xl font-bold text-xl shadow-2xl hover:shadow-primary/40 transition-all duration-500 overflow-hidden min-w-[200px]"
+              whileHover={{
+                scale: 1.05,
+                y: -5,
+                boxShadow: "0 20px 40px rgba(0, 191, 255, 0.4)"
+              }}
               whileTap={{ scale: 0.98 }}
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
             >
               <span className="relative z-10 flex items-center justify-center">
-                <ArrowRight className="mr-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                <ArrowRight className="mr-3 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
                 Ver Producto
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/0 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              
+              {/* Animated background effect */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+                animate={{ x: ["-100%", "100%"] }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  repeatDelay: 3
+                }}
+              />
             </motion.button>
 
             {/* WhatsApp Button */}
             <motion.button
               onClick={handleWhatsAppClick}
-              className="group relative px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl font-semibold text-lg shadow-2xl hover:shadow-green-500/25 transition-all duration-300 overflow-hidden min-w-[220px]"
-              whileHover={{ scale: 1.05, y: -2 }}
+              className="group relative px-10 py-5 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-2xl font-bold text-xl shadow-2xl hover:shadow-green-500/40 transition-all duration-500 overflow-hidden min-w-[250px]"
+              whileHover={{
+                scale: 1.05,
+                y: -5,
+                boxShadow: "0 20px 40px rgba(34, 197, 94, 0.4)"
+              }}
               whileTap={{ scale: 0.98 }}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.9 }}
             >
               <span className="relative z-10 flex items-center justify-center">
-                <svg 
-                  className="mr-2 w-5 h-5 group-hover:scale-110 transition-transform duration-300" 
-                  viewBox="0 0 24 24" 
+                <svg
+                  className="mr-3 w-6 h-6 group-hover:scale-110 transition-transform duration-300"
+                  viewBox="0 0 24 24"
                   fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -242,32 +276,41 @@ export function ExoHero() {
                 </svg>
                 Escríbenos por WhatsApp
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-white/0 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              
+              {/* Animated background effect */}
               <motion.div
-                className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full opacity-0"
-                animate={{ scale: [0, 1, 0], opacity: [0, 1, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+                animate={{ x: ["-100%", "100%"] }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  repeatDelay: 3
+                }}
               />
             </motion.button>
           </motion.div>
 
-          {/* Scroll indicator */}
+          {/* Enhanced scroll indicator */}
           <motion.div
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.2 }}
+            className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 2 }}
           >
             <motion.div
-              className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center"
+              className="flex flex-col items-center gap-2"
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <motion.div
-                className="w-1 h-3 bg-primary rounded-full mt-2"
-                animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
+              <div className="w-8 h-12 border-2 border-primary/40 rounded-full flex justify-center">
+                <motion.div
+                  className="w-1.5 h-4 bg-gradient-to-b from-primary to-accent rounded-full mt-2"
+                  animate={{ y: [0, 16, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+              </div>
+              <span className="text-xs text-muted-foreground font-medium">Desliza</span>
             </motion.div>
           </motion.div>
         </div>
