@@ -568,102 +568,74 @@ export function QuienesSomos() {
       {/* Bloque 1 - Nuestra Esencia */}
       <section
         ref={essenceRef}
-        className="relative py-24 px-4 bg-gradient-to-br from-background via-primary/5 to-accent/5 overflow-hidden"
+        className="relative py-32 px-4 bg-gradient-to-br from-background via-primary/3 to-accent/3 overflow-hidden"
       >
-        {/* Background geometric patterns */}
+        {/* Elegant background elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full filter blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
-        </div>
-        
-        {/* Animated grid pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="1"/>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-          </svg>
+          {/* Subtle gradient mesh */}
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/5 via-transparent to-accent/5"></div>
+          
+          {/* Floating geometric shapes */}
+          <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tl from-accent/10 to-transparent rounded-full blur-3xl"></div>
         </div>
         
         <motion.div
           initial="hidden"
           animate={essenceInView ? "visible" : "hidden"}
           variants={animationVariants.sectionBlock}
-          className="relative z-10 max-w-5xl mx-auto"
+          className="relative z-10 max-w-6xl mx-auto"
         >
-          {/* Glass morphism card */}
+          {/* Elegant title */}
           <motion.div
-            variants={animationVariants.scaleIn}
-            className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-10 md:p-16 shadow-2xl"
-            whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+            variants={animationVariants.textReveal}
+            className="text-center mb-20"
           >
-            {/* Floating elements inside card */}
-            <div className="absolute inset-0 overflow-hidden rounded-3xl">
-              {[...Array(6)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className={`absolute w-2 h-2 rounded-full ${i % 2 === 0 ? 'bg-primary/30' : 'bg-accent/30'}`}
-                  style={{
-                    left: `${10 + (i * 15)}%`,
-                    top: `${10 + (i * 12)}%`,
-                  }}
-                  animate={{
-                    y: [0, -20, 0],
-                    x: [0, 10, 0],
-                    opacity: [0.2, 0.6, 0.2],
-                  }}
-                  transition={{
-                    duration: 4 + i * 0.5,
-                    repeat: Infinity,
-                    delay: i * 0.3,
-                  }}
-                />
-              ))}
-            </div>
-            
-            <div className="relative z-10">
-              <motion.h3
-                variants={animationVariants.textReveal}
-                className="text-4xl md:text-5xl font-black mb-12 text-center bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent"
-              >
+            <h3 className="text-5xl md:text-6xl font-light mb-6 tracking-wide">
+              <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
                 Nuestra Esencia
-              </motion.h3>
-              
-              <div className="grid md:grid-cols-3 gap-8">
-                {[
-                  {
-                    title: "EX",
-                    description: "Experience / Expand / Expertise",
-                    icon: "🌟"
-                  },
-                  {
-                    title: "O",
-                    description: "Opportunity / Optimization / Orbit",
-                    icon: "🚀"
-                  },
-                  {
-                    title: "PROPÓSITO",
-                    description: "Ir más allá de lo digital combinando conocimiento, creatividad e IA",
-                    icon: "✨"
-                  }
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    variants={animationVariants.fadeInUp}
-                    className="text-center"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <div className="text-4xl mb-4">{item.icon}</div>
-                    <h4 className="text-2xl font-bold mb-3 text-primary">{item.title}</h4>
-                    <p className="text-muted-foreground leading-relaxed">{item.description}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+              </span>
+            </h3>
+            <div className="w-32 h-px bg-gradient-to-r from-primary to-accent mx-auto"></div>
           </motion.div>
+          
+          {/* Elegant content cards */}
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "EX",
+                description: "Experience / Expand / Expertise",
+                detail: "La experiencia que expande tu conocimiento y pericia"
+              },
+              {
+                title: "O",
+                description: "Opportunity / Optimization / Orbit",
+                detail: "La oportunidad de optimizar tu órbita digital"
+              },
+              {
+                title: "PROPÓSITO",
+                description: "Ir más allá de lo digital",
+                detail: "Combinando conocimiento, creatividad e inteligencia artificial"
+              }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                variants={animationVariants.fadeInUp}
+                className="group"
+                whileHover={{ y: -10 }}
+              >
+                <div className="h-full bg-gradient-to-b from-white/5 to-white/[0.02] backdrop-blur-sm border border-white/10 rounded-2xl p-8 transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-xl">
+                  <div className="mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center text-3xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">
+                      {item.title}
+                    </div>
+                  </div>
+                  <h4 className="text-xl font-semibold mb-3 text-foreground">{item.description}</h4>
+                  <p className="text-muted-foreground leading-relaxed">{item.detail}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </section>
 
@@ -811,48 +783,31 @@ export function QuienesSomos() {
       {/* Bloque 4 - Nuestra Historia */}
       <section
         ref={historyRef}
-        className="relative py-32 px-4 bg-gradient-to-br from-background via-primary/5 to-accent/5 overflow-hidden"
+        className="relative py-32 px-4 bg-gradient-to-br from-background via-accent/3 to-primary/3 overflow-hidden"
       >
-        {/* Enhanced Background Effects */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Timeline path */}
-          <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="timelineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#00BFFF" stopOpacity="0.3" />
-                <stop offset="100%" stopColor="#8E1EFC" stopOpacity="0.3" />
-              </linearGradient>
-            </defs>
-            <motion.path
-              d="M 0 50% Q 25 30% 50 50% T 100 50%"
-              stroke="url(#timelineGradient)"
-              strokeWidth="2"
-              fill="none"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 2, ease: "easeInOut" }}
-            />
-          </svg>
+        {/* Elegant background */}
+        <div className="absolute inset-0">
+          {/* Subtle gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-accent/5"></div>
           
           {/* Floating elements */}
-          {[...Array(8)].map((_, i) => (
+          {[...Array(6)].map((_, i) => (
             <motion.div
               key={i}
-              className={`absolute ${i % 2 === 0 ? 'w-20 h-20' : 'w-16 h-16'} rounded-full ${i % 2 === 0 ? 'bg-primary/10' : 'bg-accent/10'} blur-xl`}
+              className={`absolute ${i % 2 === 0 ? 'w-32 h-32' : 'w-24 h-24'} rounded-full ${i % 2 === 0 ? 'bg-primary/5' : 'bg-accent/5'} blur-2xl`}
               style={{
-                left: `${10 + i * 12}%`,
-                top: `${20 + (i % 4) * 20}%`,
+                left: `${15 + i * 12}%`,
+                top: `${10 + (i % 3) * 30}%`,
               }}
               animate={{
-                y: [0, -30, 0],
-                x: [0, 20, 0],
-                scale: [1, 1.2, 1],
-                opacity: [0.2, 0.6, 0.2],
+                y: [0, -20, 0],
+                x: [0, 15, 0],
+                opacity: [0.1, 0.3, 0.1],
               }}
               transition={{
-                duration: 8 + i * 2,
+                duration: 10 + i * 2,
                 repeat: Infinity,
-                delay: i * 0.5,
+                delay: i * 1,
                 ease: "easeInOut",
               }}
             />
@@ -863,81 +818,56 @@ export function QuienesSomos() {
           initial="hidden"
           animate={historyInView ? "visible" : "hidden"}
           variants={animationVariants.sectionBlock}
-          className="relative z-10 max-w-6xl mx-auto"
+          className="relative z-10 max-w-5xl mx-auto"
         >
-          {/* Title */}
+          {/* Elegant title */}
           <motion.div
             variants={animationVariants.textReveal}
             className="text-center mb-20"
           >
-            <motion.h3
-              className="text-5xl md:text-7xl font-black mb-8 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent relative"
-            >
-              Nuestra Historia
-              {/* Decorative underline */}
-              <motion.div
-                className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-primary to-accent rounded-full"
-                initial={{ width: 0 }}
-                animate={{ width: "128px" }}
-                transition={{ duration: 1, delay: 0.5 }}
-              />
-            </motion.h3>
+            <h3 className="text-5xl md:text-6xl font-light mb-6 tracking-wide">
+              <span className="bg-gradient-to-r from-accent via-primary to-accent bg-clip-text text-transparent">
+                Nuestra Historia
+              </span>
+            </h3>
+            <div className="w-32 h-px bg-gradient-to-r from-accent to-primary mx-auto"></div>
           </motion.div>
           
-          {/* Timeline cards */}
-          <div className="relative">
-            {/* Central line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary via-accent to-primary rounded-full"></div>
+          {/* Elegant story cards */}
+          <div className="grid md:grid-cols-2 gap-12">
+            <motion.div
+              variants={animationVariants.slideInFromLeft}
+              className="relative"
+            >
+              <div className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm border border-white/10 rounded-3xl p-10 shadow-xl">
+                <div className="mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center text-2xl">
+                    💡
+                  </div>
+                </div>
+                <h4 className="text-2xl font-light mb-6 text-primary">El Origen</h4>
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  EXO nació de la idea de que la tecnología no debe ser complicada: debe impulsar, enseñar y multiplicar resultados.
+                </p>
+              </div>
+            </motion.div>
             
-            <div className="space-y-16">
-              {/* Origin story */}
-              <motion.div
-                variants={animationVariants.slideInFromLeft}
-                className="relative flex items-center"
-              >
-                <div className="w-full md:w-5/12 md:pr-8 text-right">
-                  <motion.div
-                    className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 shadow-xl"
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    <div className="text-3xl mb-4">💡</div>
-                    <h4 className="text-2xl font-bold mb-4 text-primary">El Origen</h4>
-                    <p className="text-lg leading-relaxed">
-                      EXO nació de la idea de que la tecnología no debe ser complicada: debe impulsar, enseñar y multiplicar resultados.
-                    </p>
-                  </motion.div>
+            <motion.div
+              variants={animationVariants.slideInFromRight}
+              className="relative"
+            >
+              <div className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm border border-white/10 rounded-3xl p-10 shadow-xl">
+                <div className="mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-primary/20 rounded-full flex items-center justify-center text-2xl">
+                    🚀
+                  </div>
                 </div>
-                
-                {/* Timeline dot */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-primary rounded-full border-4 border-background z-10"></div>
-                
-                <div className="hidden md:block md:w-5/12 md:pl-8"></div>
-              </motion.div>
-              
-              {/* Evolution story */}
-              <motion.div
-                variants={animationVariants.slideInFromRight}
-                className="relative flex items-center"
-              >
-                <div className="hidden md:block md:w-5/12 md:pr-8"></div>
-                
-                {/* Timeline dot */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-accent rounded-full border-4 border-background z-10"></div>
-                
-                <div className="w-full md:w-5/12 md:pl-8">
-                  <motion.div
-                    className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 shadow-xl"
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    <div className="text-3xl mb-4">🚀</div>
-                    <h4 className="text-2xl font-bold mb-4 text-accent">La Evolución</h4>
-                    <p className="text-lg leading-relaxed">
-                      Cuando las mentes se juntan hacen grandes cosas, y con EXO unimos IA, creatividad y ventas para que cada persona y negocio vaya más allá de lo digital.
-                    </p>
-                  </motion.div>
-                </div>
-              </motion.div>
-            </div>
+                <h4 className="text-2xl font-light mb-6 text-accent">La Evolución</h4>
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  Cuando las mentes se juntan hacen grandes cosas, y con EXO unimos IA, creatividad y ventas para que cada persona y negocio vaya más allá de lo digital.
+                </p>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
       </section>
