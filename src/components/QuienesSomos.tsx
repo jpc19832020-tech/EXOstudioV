@@ -568,64 +568,101 @@ export function QuienesSomos() {
       {/* Bloque 1 - Nuestra Esencia */}
       <section
         ref={essenceRef}
-        className="relative py-24 px-4 bg-gradient-to-b from-background to-primary/20"
+        className="relative py-24 px-4 bg-gradient-to-br from-background via-primary/5 to-accent/5 overflow-hidden"
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+        {/* Background geometric patterns */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full filter blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
+        </div>
+        
+        {/* Animated grid pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+          </svg>
+        </div>
         
         <motion.div
           initial="hidden"
           animate={essenceInView ? "visible" : "hidden"}
           variants={animationVariants.sectionBlock}
-          className="relative z-10 max-w-4xl mx-auto text-center"
+          className="relative z-10 max-w-5xl mx-auto"
         >
-          <motion.h3
-            variants={animationVariants.textReveal}
-            className="text-3xl md:text-4xl font-bold mb-8 relative inline-block"
-          >
-            <span className="relative z-10">Nuestra Esencia</span>
-            <motion.div
-              className="absolute inset-0 bg-primary/10 blur-xl"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-            />
-          </motion.h3>
-          
+          {/* Glass morphism card */}
           <motion.div
-            variants={animationVariants.staggerContainer}
-            initial="hidden"
-            animate={essenceInView ? "visible" : "hidden"}
-            className="space-y-6 text-lg leading-relaxed"
+            variants={animationVariants.scaleIn}
+            className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-10 md:p-16 shadow-2xl"
+            whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
           >
-            {[
-              "EXO viene de EX (Experience / Expand / Expertise) y O (Opportunity / Optimization / Orbit).",
-              "Evocamos la exosfera, el límite superior, el espacio donde se trasciende lo convencional.",
-              "Nuestro propósito: ayudarte a ir más allá de lo digital, combinando conocimiento, creatividad e inteligencia artificial."
-            ].map((text, index) => (
-              <motion.p
-                key={index}
-                variants={animationVariants.fadeInUp}
-                className={index === 2 ? "text-primary font-semibold" : ""}
+            {/* Floating elements inside card */}
+            <div className="absolute inset-0 overflow-hidden rounded-3xl">
+              {[...Array(6)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className={`absolute w-2 h-2 rounded-full ${i % 2 === 0 ? 'bg-primary/30' : 'bg-accent/30'}`}
+                  style={{
+                    left: `${10 + (i * 15)}%`,
+                    top: `${10 + (i * 12)}%`,
+                  }}
+                  animate={{
+                    y: [0, -20, 0],
+                    x: [0, 10, 0],
+                    opacity: [0.2, 0.6, 0.2],
+                  }}
+                  transition={{
+                    duration: 4 + i * 0.5,
+                    repeat: Infinity,
+                    delay: i * 0.3,
+                  }}
+                />
+              ))}
+            </div>
+            
+            <div className="relative z-10">
+              <motion.h3
+                variants={animationVariants.textReveal}
+                className="text-4xl md:text-5xl font-black mb-12 text-center bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent"
               >
-                {text.split(" ").map((word, wordIndex) => (
-                  <motion.span
-                    key={wordIndex}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.4,
-                      delay: 0.8 + index * 0.3 + wordIndex * 0.05,
-                      ease: "easeOut"
-                    }}
-                    className="inline-block mr-2"
+                Nuestra Esencia
+              </motion.h3>
+              
+              <div className="grid md:grid-cols-3 gap-8">
+                {[
+                  {
+                    title: "EX",
+                    description: "Experience / Expand / Expertise",
+                    icon: "🌟"
+                  },
+                  {
+                    title: "O",
+                    description: "Opportunity / Optimization / Orbit",
+                    icon: "🚀"
+                  },
+                  {
+                    title: "PROPÓSITO",
+                    description: "Ir más allá de lo digital combinando conocimiento, creatividad e IA",
+                    icon: "✨"
+                  }
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    variants={animationVariants.fadeInUp}
+                    className="text-center"
+                    whileHover={{ scale: 1.05 }}
                   >
-                    {word}
-                  </motion.span>
+                    <div className="text-4xl mb-4">{item.icon}</div>
+                    <h4 className="text-2xl font-bold mb-3 text-primary">{item.title}</h4>
+                    <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+                  </motion.div>
                 ))}
-              </motion.p>
-            ))}
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </section>
@@ -774,40 +811,53 @@ export function QuienesSomos() {
       {/* Bloque 4 - Nuestra Historia */}
       <section
         ref={historyRef}
-        className="relative py-32 px-4 bg-gradient-to-br from-primary/20 via-black to-accent/20 text-white overflow-hidden"
+        className="relative py-32 px-4 bg-gradient-to-br from-background via-primary/5 to-accent/5 overflow-hidden"
       >
         {/* Enhanced Background Effects */}
         <div className="absolute inset-0 overflow-hidden">
-          {/* Animated gradient orbs */}
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-3xl animate-spin-slow"></div>
+          {/* Timeline path */}
+          <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="timelineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#00BFFF" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#8E1EFC" stopOpacity="0.3" />
+              </linearGradient>
+            </defs>
+            <motion.path
+              d="M 0 50% Q 25 30% 50 50% T 100 50%"
+              stroke="url(#timelineGradient)"
+              strokeWidth="2"
+              fill="none"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 2, ease: "easeInOut" }}
+            />
+          </svg>
           
-          {/* Light rays */}
-          <div className="absolute inset-0">
-            {[...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"
-                style={{ 
-                  top: `${10 + i * 15}%`,
-                  width: '100%',
-                }}
-                initial={{ x: "-200%", opacity: 0 }}
-                animate={{ x: "200%", opacity: [0, 0.6, 0.6, 0] }}
-                transition={{
-                  duration: 8 + i * 0.5,
-                  repeat: Infinity,
-                  delay: i * 0.5,
-                  ease: "easeInOut",
-                  times: [0, 0.1, 0.9, 1],
-                }}
-              />
-            ))}
-          </div>
+          {/* Floating elements */}
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={i}
+              className={`absolute ${i % 2 === 0 ? 'w-20 h-20' : 'w-16 h-16'} rounded-full ${i % 2 === 0 ? 'bg-primary/10' : 'bg-accent/10'} blur-xl`}
+              style={{
+                left: `${10 + i * 12}%`,
+                top: `${20 + (i % 4) * 20}%`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                x: [0, 20, 0],
+                scale: [1, 1.2, 1],
+                opacity: [0.2, 0.6, 0.2],
+              }}
+              transition={{
+                duration: 8 + i * 2,
+                repeat: Infinity,
+                delay: i * 0.5,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
         </div>
-        
-        <Particles />
         
         <motion.div
           initial="hidden"
@@ -815,86 +865,80 @@ export function QuienesSomos() {
           variants={animationVariants.sectionBlock}
           className="relative z-10 max-w-6xl mx-auto"
         >
-          {/* Enhanced Title */}
+          {/* Title */}
           <motion.div
             variants={animationVariants.textReveal}
             className="text-center mb-20"
           >
             <motion.h3
               className="text-5xl md:text-7xl font-black mb-8 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent relative"
-              initial={{ backgroundPosition: "300% center" }}
-              animate={{ backgroundPosition: "-100% center" }}
-              transition={{ duration: 4, ease: "linear", repeat: Infinity }}
-              style={{
-                backgroundSize: "400% auto",
-              }}
             >
               Nuestra Historia
-              {/* Sweep effect */}
+              {/* Decorative underline */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent"
-                animate={{ x: ["-100%", "100%"] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                style={{ mixBlendMode: "overlay" }}
+                className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-primary to-accent rounded-full"
+                initial={{ width: 0 }}
+                animate={{ width: "128px" }}
+                transition={{ duration: 1, delay: 0.5 }}
               />
             </motion.h3>
-            
-            {/* Decorative line */}
-            <motion.div
-              className="w-32 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"
-              initial={{ width: 0, opacity: 0 }}
-              animate={{ width: "128px", opacity: 1 }}
-              transition={{ duration: 1, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
-            />
           </motion.div>
           
-          {/* Glass Card Content */}
-          <motion.div
-            variants={animationVariants.scaleIn}
-            className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-12 md:p-16 shadow-2xl"
-            whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
-          >
-            {/* Floating particles inside card */}
-            <div className="absolute inset-0 overflow-hidden rounded-3xl">
-              {[...Array(8)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-2 h-2 bg-primary rounded-full"
-                  style={{
-                    left: `${10 + (i * 12)}%`,
-                    top: `${10 + (i * 10)}%`,
-                  }}
-                  animate={{
-                    y: [0, -25, 0],
-                    opacity: [0.2, 0.8, 0.2],
-                    scale: [1, 1.3, 1],
-                  }}
-                  transition={{
-                    duration: 3 + i * 0.4,
-                    repeat: Infinity,
-                    delay: i * 0.2,
-                  }}
-                />
-              ))}
-            </div>
+          {/* Timeline cards */}
+          <div className="relative">
+            {/* Central line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary via-accent to-primary rounded-full"></div>
             
-            <div className="relative z-10 space-y-8">
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="space-y-6 text-lg leading-relaxed"
+            <div className="space-y-16">
+              {/* Origin story */}
+              <motion.div
+                variants={animationVariants.slideInFromLeft}
+                className="relative flex items-center"
               >
-                <p className="text-xl font-light">
-                  EXO nació de la idea de que la tecnología no debe ser complicada: debe impulsar, enseñar y multiplicar resultados.
-                </p>
-                <p className="text-xl font-light text-primary">
-                  Cuando las mentes se juntan hacen grandes cosas, y con EXO unimos IA, creatividad y ventas 
-                  para que cada persona y negocio vaya más allá de lo digital.
-                </p>
+                <div className="w-full md:w-5/12 md:pr-8 text-right">
+                  <motion.div
+                    className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 shadow-xl"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <div className="text-3xl mb-4">💡</div>
+                    <h4 className="text-2xl font-bold mb-4 text-primary">El Origen</h4>
+                    <p className="text-lg leading-relaxed">
+                      EXO nació de la idea de que la tecnología no debe ser complicada: debe impulsar, enseñar y multiplicar resultados.
+                    </p>
+                  </motion.div>
+                </div>
+                
+                {/* Timeline dot */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-primary rounded-full border-4 border-background z-10"></div>
+                
+                <div className="hidden md:block md:w-5/12 md:pl-8"></div>
+              </motion.div>
+              
+              {/* Evolution story */}
+              <motion.div
+                variants={animationVariants.slideInFromRight}
+                className="relative flex items-center"
+              >
+                <div className="hidden md:block md:w-5/12 md:pr-8"></div>
+                
+                {/* Timeline dot */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-accent rounded-full border-4 border-background z-10"></div>
+                
+                <div className="w-full md:w-5/12 md:pl-8">
+                  <motion.div
+                    className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 shadow-xl"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <div className="text-3xl mb-4">🚀</div>
+                    <h4 className="text-2xl font-bold mb-4 text-accent">La Evolución</h4>
+                    <p className="text-lg leading-relaxed">
+                      Cuando las mentes se juntan hacen grandes cosas, y con EXO unimos IA, creatividad y ventas para que cada persona y negocio vaya más allá de lo digital.
+                    </p>
+                  </motion.div>
+                </div>
               </motion.div>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       </section>
 
