@@ -142,7 +142,7 @@ export function ExoHero() {
                 animate={{
                   filter: [
                     "drop-shadow(0 0 20px rgba(0, 191, 255, 0.3))",
-                    "drop-shadow(0 0 30px rgba(217, 70, 239, 0.4))",
+                    "drop-shadow(0 0 30px rgba(142, 30, 252, 0.4))",
                     "drop-shadow(0 0 20px rgba(0, 191, 255, 0.3))"
                   ]
                 }}
