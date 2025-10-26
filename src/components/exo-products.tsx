@@ -405,7 +405,7 @@ export function ExoProducts() {
                     onClick={() => window.open(PRODUCTS_URL, "_blank", "noopener,noreferrer")}
                   >
                     <motion.div
-                      className="relative w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 backdrop-blur-md border-2 border-primary/50 rounded-2xl cursor-pointer shadow-2xl"
+                      className="relative w-16 h-24 bg-gradient-to-br from-primary/20 to-accent/20 backdrop-blur-md border-2 border-primary/50 rounded-2xl cursor-pointer shadow-2xl"
                       animate={{
                         y: [0, -8, 0],
                         rotate: [0, 2, 0],
@@ -456,28 +456,6 @@ export function ExoProducts() {
                           />
                         </motion.svg>
                       </motion.div>
-  
-                      {/* Partículas orbitando */}
-                      {[...Array(3)].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          className="absolute w-1.5 h-1.5 bg-accent rounded-full"
-                          style={{
-                            top: "50%",
-                            left: "50%",
-                          }}
-                          animate={{
-                            rotate: [0, 360],
-                            x: [0, 30 * Math.cos((i * 120) * Math.PI / 180)],
-                            y: [0, 30 * Math.sin((i * 120) * Math.PI / 180)],
-                          }}
-                          transition={{
-                            duration: 3 + i,
-                            repeat: Infinity,
-                            ease: "linear",
-                          }}
-                        />
-                      ))}
   
                       {/* Efecto de luz proyectada */}
                       {isCardHovered && (
