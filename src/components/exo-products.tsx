@@ -410,17 +410,36 @@ export function ExoProducts() {
                         y: [0, -8, 0],
                         rotate: [0, 2, 0],
                       }}
-                      transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
                       whileHover={{
                         scale: 1.2,
                         rotate: 5,
                         boxShadow: "0 20px 40px rgba(0, 191, 255, 0.4)"
                       }}
                       whileTap={{ scale: 0.9 }}
+                      transition={{
+                        y: {
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        },
+                        rotate: {
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        },
+                        scale: {
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 20,
+                          duration: 0.3
+                        },
+                        default: {
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 20,
+                          duration: 0.3
+                        }
+                      }}
                     >
                       {/* Icono animado que cambia de forma */}
                       <motion.div
