@@ -46,7 +46,45 @@ interface EmbedConfig {
 
 // Constantes y configuración
 const WHATSAPP_NUMBER = "51925475680";
-const PROJECT_URL = "https://jpc19832020-tech.github.io/EXOstudioV/";
+const PROJECT_URL = "https://jpc19832020-tech.github.io/Jperez/";
+const PRODUCTS_URL = "https://jpc19832020-tech.github.io/EXOstudioV/productos/";
+
+// Función de efecto de clic para partículas
+const createClickEffect = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const button = e.currentTarget;
+  const rect = button.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  
+  // Crear partículas
+  for (let i = 0; i < 8; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'absolute w-2 h-2 bg-white rounded-full pointer-events-none';
+    particle.style.left = x + 'px';
+    particle.style.top = y + 'px';
+    particle.style.transform = 'translate(-50%, -50%)';
+    
+    button.appendChild(particle);
+    
+    // Animar partícula
+    const angle = (Math.PI * 2 * i) / 8;
+    const velocity = 100 + Math.random() * 50;
+    
+    particle.animate([
+      {
+        transform: 'translate(-50%, -50%) scale(1)',
+        opacity: 1
+      },
+      {
+        transform: `translate(${Math.cos(angle) * velocity - 50}px, ${Math.sin(angle) * velocity - 50}px) scale(0)`,
+        opacity: 0
+      }
+    ], {
+      duration: 600,
+      easing: 'ease-out'
+    }).onfinish = () => particle.remove();
+  }
+};
 
 const products: Product[] = [
   {
@@ -141,6 +179,13 @@ export function ExoProducts() {
 
   const handleContactCustom = useCallback(() => {
     window.open(`https://wa.me/${WHATSAPP_NUMBER}`, "_blank");
+  }, []);
+
+  const handleViewAllProducts = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+    createClickEffect(e);
+    setTimeout(() => {
+      window.open(PRODUCTS_URL, "_blank", "noopener,noreferrer");
+    }, 200);
   }, []);
 
   // Componente de embed optimizado
@@ -264,9 +309,38 @@ export function ExoProducts() {
                     
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-xl">{product.name}</CardTitle>
-                      <Badge variant={product.badgeVariant} className="text-xs bg-accent text-primary-foreground">
-                        {product.badge}
-                      </Badge>
+                      <div className="flex items-center gap-2">
+                        <motion.button
+                          onClick={handleViewAllProducts}
+                          className="group relative px-3 py-1.5 border border-primary/50 text-primary bg-primary/5 rounded-lg hover:bg-gradient-exo hover:text-white hover:border-transparent transition-all duration-300 overflow-hidden animate-border-pulse text-sm font-medium"
+                          whileHover={{
+                            scale: 1.05,
+                            y: -2,
+                            boxShadow: "0 8px 25px rgba(0, 191, 255, 0.3)"
+                          }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <span className="relative z-10 flex items-center">
+                            <ExternalLink className="w-3 h-3 mr-1.5 animate-spin-slow" />
+                            Ver todos
+                          </span>
+                          
+                          {/* Animated background effect */}
+                          <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+                            animate={{ x: ["-100%", "100%"] }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                              repeatDelay: 3
+                            }}
+                          />
+                        </motion.button>
+                        <Badge variant={product.badgeVariant} className="text-xs bg-accent text-primary-foreground">
+                          {product.badge}
+                        </Badge>
+                      </div>
                     </div>
                   </CardHeader>
                   
