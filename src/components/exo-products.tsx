@@ -408,11 +408,9 @@ export function ExoProducts() {
                       className="relative w-16 h-24 bg-gradient-to-br from-primary/20 to-accent/20 backdrop-blur-md border-2 border-primary/50 rounded-2xl cursor-pointer shadow-2xl"
                       animate={{
                         y: [0, -8, 0],
-                        rotate: [0, 2, 0],
                       }}
                       whileHover={{
                         scale: 1.2,
-                        rotate: 5,
                         boxShadow: "0 20px 40px rgba(0, 191, 255, 0.4)"
                       }}
                       whileTap={{ scale: 0.9 }}
@@ -422,22 +420,17 @@ export function ExoProducts() {
                           repeat: Infinity,
                           ease: "easeInOut"
                         },
-                        rotate: {
-                          duration: 4,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        },
                         scale: {
                           type: "spring",
                           stiffness: 300,
-                          damping: 20,
-                          duration: 0.3
+                          damping: 25,
+                          duration: 0.4
                         },
-                        default: {
+                        boxShadow: {
                           type: "spring",
                           stiffness: 300,
-                          damping: 20,
-                          duration: 0.3
+                          damping: 25,
+                          duration: 0.4
                         }
                       }}
                     >
