@@ -280,15 +280,139 @@ export function ExoProducts() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-8 max-w-2xl mx-auto"
           >
             {products.map((product) => (
-              <motion.div
-                key={product.id}
-                variants={animationVariants.item}
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Card className={`h-full bg-primary/10 backdrop-blur-sm border-4 border-primary hover:border-accent transition-all duration-300 hover:shadow-xl hover:shadow-accent/30 ${
-                  product.comingSoon ? "opacity-75" : ""
-                }`}>
+              <div key={product.id} className="relative">
+                {/* Botón "Ver todos los productos" fuera de la tarjeta */}
+                <motion.div
+                  variants={animationVariants.item}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.5,
+                    ease: "easeOut"
+                  }}
+                  className="absolute -right-32 top-8 z-10 hidden lg:block"
+                >
+                  <motion.button
+                    onClick={handleViewAllProducts}
+                    className="group relative px-4 py-2 border border-primary/50 text-primary bg-primary/5 rounded-lg hover:bg-gradient-exo hover:text-white hover:border-transparent transition-all duration-300 overflow-hidden animate-border-pulse text-sm font-medium shadow-lg"
+                    whileHover={{
+                      scale: 1.05,
+                      y: -2,
+                      boxShadow: "0 8px 25px rgba(0, 191, 255, 0.3)"
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                    animate={{
+                      y: [0, -5, 0],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <span className="relative z-10 flex items-center">
+                      <ExternalLink className="w-4 h-4 mr-2 animate-spin-slow" />
+                      Ver todos los productos
+                    </span>
+                    
+                    {/* Animated background effect */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+                      animate={{ x: ["-100%", "100%"] }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        repeatDelay: 3
+                      }}
+                    />
+                    
+                    {/* Efecto de pulso constante */}
+                    <motion.div
+                      className="absolute inset-0 bg-primary/20 rounded-lg"
+                      animate={{
+                        opacity: [0, 0.3, 0],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  </motion.button>
+                </motion.div>
+
+                {/* Botón para móviles (debajo de la tarjeta) */}
+                <motion.div
+                  variants={animationVariants.item}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.5,
+                    ease: "easeOut"
+                  }}
+                  className="lg:hidden mt-4"
+                >
+                  <motion.button
+                    onClick={handleViewAllProducts}
+                    className="group relative w-full px-4 py-2 border border-primary/50 text-primary bg-primary/5 rounded-lg hover:bg-gradient-exo hover:text-white hover:border-transparent transition-all duration-300 overflow-hidden animate-border-pulse text-sm font-medium shadow-lg"
+                    whileHover={{
+                      scale: 1.02,
+                      y: -2,
+                      boxShadow: "0 8px 25px rgba(0, 191, 255, 0.3)"
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                    animate={{
+                      y: [0, -3, 0],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <span className="relative z-10 flex items-center justify-center">
+                      <ExternalLink className="w-4 h-4 mr-2 animate-spin-slow" />
+                      Ver todos los productos
+                    </span>
+                    
+                    {/* Animated background effect */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+                      animate={{ x: ["-100%", "100%"] }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        repeatDelay: 3
+                      }}
+                    />
+                    
+                    {/* Efecto de pulso constante */}
+                    <motion.div
+                      className="absolute inset-0 bg-primary/20 rounded-lg"
+                      animate={{
+                        opacity: [0, 0.3, 0],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  </motion.button>
+                </motion.div>
+
+                <motion.div
+                  variants={animationVariants.item}
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Card className={`h-full bg-primary/10 backdrop-blur-sm border-4 border-primary hover:border-accent transition-all duration-300 hover:shadow-xl hover:shadow-accent/30 ${
+                    product.comingSoon ? "opacity-75" : ""
+                  }`}>
                   <CardHeader className="space-y-4">
                     {/* Product Image */}
                     {product.image && (
@@ -309,38 +433,9 @@ export function ExoProducts() {
                     
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-xl">{product.name}</CardTitle>
-                      <div className="flex items-center gap-2">
-                        <motion.button
-                          onClick={handleViewAllProducts}
-                          className="group relative px-3 py-1.5 border border-primary/50 text-primary bg-primary/5 rounded-lg hover:bg-gradient-exo hover:text-white hover:border-transparent transition-all duration-300 overflow-hidden animate-border-pulse text-sm font-medium"
-                          whileHover={{
-                            scale: 1.05,
-                            y: -2,
-                            boxShadow: "0 8px 25px rgba(0, 191, 255, 0.3)"
-                          }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <span className="relative z-10 flex items-center">
-                            <ExternalLink className="w-3 h-3 mr-1.5 animate-spin-slow" />
-                            Ver todos
-                          </span>
-                          
-                          {/* Animated background effect */}
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
-                            animate={{ x: ["-100%", "100%"] }}
-                            transition={{
-                              duration: 2,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                              repeatDelay: 3
-                            }}
-                          />
-                        </motion.button>
-                        <Badge variant={product.badgeVariant} className="text-xs bg-accent text-primary-foreground">
-                          {product.badge}
-                        </Badge>
-                      </div>
+                      <Badge variant={product.badgeVariant} className="text-xs bg-accent text-primary-foreground">
+                        {product.badge}
+                      </Badge>
                     </div>
                   </CardHeader>
                   
@@ -401,8 +496,9 @@ export function ExoProducts() {
                       )}
                     </div>
                   </CardContent>
-                </Card>
-              </motion.div>
+                  </Card>
+                </motion.div>
+              </div>
             ))}
           </motion.div>
 
