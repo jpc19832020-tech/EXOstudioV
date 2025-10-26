@@ -188,6 +188,9 @@ export function ExoProducts() {
     }, 200);
   }, []);
 
+  const [isCardHovered, setIsCardHovered] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
+
   // Componente de embed optimizado
   const WebsiteEmbed = useMemo(() => {
     return () => (
@@ -280,15 +283,15 @@ export function ExoProducts() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-8 max-w-2xl mx-auto"
           >
             {products.map((product) => (
-              <motion.div
-                key={product.id}
-                variants={animationVariants.item}
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Card className={`h-full bg-primary/10 backdrop-blur-sm border-4 border-primary hover:border-accent transition-all duration-300 hover:shadow-xl hover:shadow-accent/30 ${
-                  product.comingSoon ? "opacity-75" : ""
-                }`}>
+              <div key={product.id} className="relative">
+                <motion.div
+                  variants={animationVariants.item}
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Card className={`h-full bg-primary/10 backdrop-blur-sm border-4 border-primary hover:border-accent transition-all duration-300 hover:shadow-xl hover:shadow-accent/30 ${
+                    product.comingSoon ? "opacity-75" : ""
+                  }`}>
                   <CardHeader className="space-y-4">
                     {/* Product Image */}
                     {product.image && (
@@ -372,8 +375,199 @@ export function ExoProducts() {
                       )}
                     </div>
                   </CardContent>
-                  </Card>
-                </motion.div>
+                    </Card>
+                  </motion.div>
+  
+                  {/* Tarjeta flotante interactiva */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 100, rotate: 45, scale: 0 }}
+                    animate={{
+                      opacity: 1,
+                      x: 0,
+                      rotate: 0,
+                      scale: 1,
+                      transition: {
+                        duration: 0.8,
+                        delay: 2,
+                        type: "spring",
+                        stiffness: 100
+                      }
+                    }}
+                    className="absolute -right-20 top-1/2 -translate-y-1/2 z-20 hidden lg:block"
+                    onMouseEnter={() => {
+                      setIsCardHovered(true);
+                      setShowPreview(true);
+                    }}
+                    onMouseLeave={() => {
+                      setIsCardHovered(false);
+                      setTimeout(() => setShowPreview(false), 300);
+                    }}
+                    onClick={() => window.open(PRODUCTS_URL, "_blank", "noopener,noreferrer")}
+                  >
+                    <motion.div
+                      className="relative w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 backdrop-blur-md border-2 border-primary/50 rounded-2xl cursor-pointer shadow-2xl"
+                      animate={{
+                        y: [0, -8, 0],
+                        rotate: [0, 2, 0],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      whileHover={{
+                        scale: 1.2,
+                        rotate: 5,
+                        boxShadow: "0 20px 40px rgba(0, 191, 255, 0.4)"
+                      }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      {/* Icono animado que cambia de forma */}
+                      <motion.div
+                        className="absolute inset-0 flex items-center justify-center"
+                        animate={{
+                          rotate: isCardHovered ? 180 : 0,
+                        }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <motion.svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          className="text-primary"
+                          animate={{
+                            pathLength: [0.5, 1],
+                          }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          <motion.path
+                            d="M5 12h14M12 5l7 7-7 7"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            animate={{
+                              d: isCardHovered
+                                ? "M5 12h14M12 5l7 7-7 7"
+                                : "M4 6h16M4 12h16M4 18h16"
+                            }}
+                            transition={{ duration: 0.4 }}
+                          />
+                        </motion.svg>
+                      </motion.div>
+  
+                      {/* Partículas orbitando */}
+                      {[...Array(3)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          className="absolute w-1.5 h-1.5 bg-accent rounded-full"
+                          style={{
+                            top: "50%",
+                            left: "50%",
+                          }}
+                          animate={{
+                            rotate: [0, 360],
+                            x: [0, 30 * Math.cos((i * 120) * Math.PI / 180)],
+                            y: [0, 30 * Math.sin((i * 120) * Math.PI / 180)],
+                          }}
+                          transition={{
+                            duration: 3 + i,
+                            repeat: Infinity,
+                            ease: "linear",
+                          }}
+                        />
+                      ))}
+  
+                      {/* Efecto de luz proyectada */}
+                      {isCardHovered && (
+                        <motion.div
+                          className="absolute -left-20 top-1/2 -translate-y-1/2 w-20 h-0.5 bg-gradient-to-l from-primary/50 to-transparent"
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: 1 }}
+                          transition={{ duration: 0.4 }}
+                        />
+                      )}
+                    </motion.div>
+  
+                    {/* Vista previa miniatura */}
+                    {showPreview && (
+                      <motion.div
+                        className="absolute top-full mt-2 right-0 w-48 bg-background/95 backdrop-blur-md border border-primary/30 rounded-lg p-2 shadow-xl"
+                        initial={{ opacity: 0, scale: 0.8, y: -10 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.8, y: -10 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="text-xs font-medium text-primary mb-1">Ver todos los productos</div>
+                        <div className="text-xs text-muted-foreground">Explora nuestro catálogo completo</div>
+                        <div className="mt-2 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded border border-primary/20 flex items-center justify-center">
+                          <motion.div
+                            animate={{
+                              opacity: [0.3, 1, 0.3],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                            }}
+                          >
+                            <ExternalLink className="w-6 h-6 text-primary" />
+                          </motion.div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </motion.div>
+  
+                  {/* Versión móvil - indicador inferior */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        duration: 0.6,
+                        delay: 2.5
+                      }
+                    }}
+                    className="lg:hidden mt-6"
+                  >
+                    <motion.div
+                      className="relative w-full h-12 bg-gradient-to-r from-primary/10 to-accent/10 backdrop-blur-sm border border-primary/30 rounded-full overflow-hidden cursor-pointer"
+                      onClick={() => window.open(PRODUCTS_URL, "_blank", "noopener,noreferrer")}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <motion.div
+                          animate={{
+                            x: [0, 10, 0],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          }}
+                          className="flex items-center text-primary font-medium text-sm"
+                        >
+                          <span className="mr-2">Desliza para ver todos los productos</span>
+                          <ExternalLink className="w-4 h-4" />
+                        </motion.div>
+                      </div>
+                      
+                      {/* Efecto de onda */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent"
+                        animate={{
+                          x: ["-100%", "200%"],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      />
+                    </motion.div>
+                  </motion.div>
+                </div>
               ))}
             </motion.div>
 
