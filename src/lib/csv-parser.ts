@@ -147,11 +147,12 @@ export class CSVParser {
           .replace(/^"|"$/g, '') // Remove surrounding quotes
           .split(',').map((img: string) => {
           const trimmedImg = img.trim();
-          // Add basePath if not already present
-          if (trimmedImg.startsWith('/')) {
-            return trimmedImg;
+          // Remove quotes and check if already has path
+          const cleanImg = trimmedImg.replace(/^"|"$/g, '');
+          if (cleanImg.startsWith('/EXOstudioV/')) {
+            return cleanImg;
           }
-          return `/EXOstudioV/${trimmedImg}`;
+          return cleanImg.startsWith('/') ? cleanImg : `/EXOstudioV/${cleanImg}`;
         }).filter((img: string) => img)
       : [];
 
