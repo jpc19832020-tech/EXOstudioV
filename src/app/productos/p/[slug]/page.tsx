@@ -1,6 +1,6 @@
 import { ProductDetail as ProductDetailType } from "@/types/product";
 import { csvParser } from "@/lib/csv-parser";
-import ProductDetailClient from "./product-detail-client";
+import ProductDetailClient from "./product-detail-client-innovador";
 
 // Generar parámetros estáticos para el build
 export async function generateStaticParams() {
