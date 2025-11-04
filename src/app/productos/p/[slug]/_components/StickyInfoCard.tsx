@@ -1,10 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, MessageCircle, Clock } from "lucide-react";
 import Image from "next/image";
+import { ProfessionalResult } from "./ProfessionalResult";
 
 interface StickyInfoCardProps {
   name: string;
@@ -20,15 +22,16 @@ interface StickyInfoCardProps {
   onWhatsapp: () => void;
 }
 
-export function StickyInfoCard({ 
-  name, 
-  category, 
-  shortDesc, 
-  price, 
-  features, 
-  image, 
-  onWhatsapp 
+export function StickyInfoCard({
+  name,
+  category,
+  shortDesc,
+  price,
+  features,
+  image,
+  onWhatsapp
 }: StickyInfoCardProps) {
+  const [showResult, setShowResult] = useState<boolean>(false);
   return (
     <>
       {/* Desktop sticky card */}
@@ -94,19 +97,57 @@ export function StickyInfoCard({
               ))}
             </div>
 
-            {/* CTA Button */}
-            <Button
-              onClick={onWhatsapp}
-              size="lg"
-              className="w-full rounded-full font-semibold transition-all duration-300 hover:scale-105"
-              style={{
-                backgroundColor: '#35B6FF',
-                boxShadow: '0 0 28px rgba(53, 182, 255, 0.25)'
-              }}
-            >
-              <MessageCircle className="w-5 h-5 mr-2" />
-              Cotizar por WhatsApp
-            </Button>
+            {/* CTA Button with Arrow */}
+            <div className="relative">
+              <Button
+                onClick={() => {
+                  onWhatsapp();
+                  setShowResult(true);
+                }}
+                size="lg"
+                className="w-full rounded-full font-semibold transition-all duration-300 hover:scale-105"
+                style={{
+                  backgroundColor: '#35B6FF',
+                  boxShadow: '0 0 28px rgba(53, 182, 255, 0.25)'
+                }}
+              >
+                <MessageCircle className="w-5 h-5 mr-2" />
+                Cotizar por WhatsApp
+              </Button>
+              
+              {/* Arrow pointing down */}
+              <motion.div
+                className="absolute -bottom-8 left-1/2 -translate-x-1/2 z-50"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <div className="relative">
+                  {/* Arrow shaft */}
+                  <div
+                    className="w-0.5 h-6 mx-auto"
+                    style={{ backgroundColor: '#35B6FF' }}
+                  />
+                   
+                  {/* Arrow head */}
+                  <motion.div
+                    className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8"
+                    style={{
+                      borderColor: '#35B6FF transparent transparent',
+                      borderBottomWidth: '0px',
+                      borderLeftWidth: '2px',
+                      borderRightWidth: '2px',
+                      borderTopWidth: '8px'
+                    }}
+                    animate={{
+                      pathLength: [0, 1],
+                      pathOffset: 0
+                    }}
+                    transition={{ duration: 0.8, ease: "easeInOut" }}
+                  />
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </motion.div>

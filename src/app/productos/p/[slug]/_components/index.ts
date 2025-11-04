@@ -11,3 +11,4 @@ export { MasonryGallery } from './MasonryGallery';
 export { FaqCompact } from './FaqCompact';
 export { FinalCtaWhatsapp } from './FinalCtaWhatsapp';
 export { FloatingWhatsappBar } from './FloatingWhatsappBar';
+export { ProfessionalResult } from './ProfessionalResult';
