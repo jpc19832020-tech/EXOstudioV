@@ -1,0 +1,172 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo -->
+  <rect width="800" height="600" fill="#f8fafc"/>
+  
+  <!-- Título -->
+  <text x="400" y="30" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#1e293b">
+    ¿Cómo funcionan las múltiples imágenes?
+  </text>
+  
+  <!-- CSV con múltiples imágenes -->
+  <g transform="translate(50, 70)">
+    <rect width="300" height="120" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+    <text x="150" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#0c4a6e">
+      Archivo CSV
+    </text>
+    <text x="150" y="45" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#0c4a6e">
+      (products.csv)
+    </text>
+    <line x1="20" y1="55" x2="280" y2="55" stroke="#0284c7" stroke-width="1"/>
+    <text x="20" y="75" font-family="monospace" font-size="10" fill="#0c4a6e">
+      imagenes:
+    </text>
+    <text x="20" y="90" font-family="monospace" font-size="9" fill="#0c4a6e">
+      "imagen1.png,imagen2.png,imagen3.png"
+    </text>
+    <text x="20" y="105" font-family="Arial, sans-serif" font-size="10" fill="#0c4a6e">
+      ← Separadas por comas
+    </text>
+  </g>
+  
+  <!-- Flecha de procesamiento -->
+  <path d="M 200 190 L 200 240" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Procesamiento del sistema -->
+  <g transform="translate(50, 240)">
+    <rect width="300" height="100" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="150" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#14532d">
+      Procesamiento Automático
+    </text>
+    <text x="150" y="45" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#14532d">
+      (csv-parser.ts)
+    </text>
+    <line x1="20" y1="55" x2="280" y2="55" stroke="#16a34a" stroke-width="1"/>
+    <text x="20" y="75" font-family="Arial, sans-serif" font-size="10" fill="#14532d">
+      • Separa las imágenes por comas
+    </text>
+    <text x="20" y="90" font-family="Arial, sans-serif" font-size="10" fill="#14532d">
+      • La primera es la imagen principal
+    </text>
+  </g>
+  
+  <!-- Flecha de distribución -->
+  <path d="M 200 340 L 200 390" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Resultado en la web -->
+  <g transform="translate(50, 390)">
+    <rect width="300" height="140" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="150" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#78350f">
+      Resultado en la Web
+    </text>
+    <line x1="20" y1="35" x2="280" y2="35" stroke="#d97706" stroke-width="1"/>
+    <text x="20" y="55" font-family="Arial, sans-serif" font-size="10" fill="#78350f">
+      📋 Tarjeta de producto:
+    </text>
+    <text x="20" y="70" font-family="Arial, sans-serif" font-size="9" fill="#78350f">
+      • Muestra solo la primera imagen (imagen1.png)
+    </text>
+    <text x="20" y="90" font-family="Arial, sans-serif" font-size="10" fill="#78350f">
+      🔍 Vista de detalles:
+    </text>
+    <text x="20" y="105" font-family="Arial, sans-serif" font-size="9" fill="#78350f">
+      • Muestra todas las imágenes
+    </text>
+    <text x="20" y="120" font-family="Arial, sans-serif" font-size="9" fill="#78350f">
+      • Permite navegar entre ellas
+    </text>
+  </g>
+  
+  <!-- Ejemplo visual -->
+  <g transform="translate(450, 100)">
+    <text x="150" y="0" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1e293b">
+      Ejemplo Práctico
+    </text>
+    
+    <!-- Tarjeta de producto -->
+    <g transform="translate(0, 20)">
+      <rect width="150" height="180" rx="8" fill="white" stroke="#e2e8f0" stroke-width="2"/>
+      <rect x="10" y="10" width="130" height="80" rx="4" fill="#f1f5f9"/>
+      <text x="75" y="55" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#64748b">
+        [Imagen Principal]
+      </text>
+      <text x="75" y="65" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#64748b">
+        hero.png
+      </text>
+      <text x="75" y="110" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1e293b">
+        Smart Card
+      </text>
+      <text x="75" y="130" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#64748b">
+        S/ 100.00
+      </text>
+      <rect x="10" y="145" width="60" height="25" rx="4" fill="#10b981"/>
+      <text x="40" y="160" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">
+        Cotizar
+      </text>
+      <rect x="80" y="145" width="60" height="25" rx="4" fill="#3b82f6"/>
+      <text x="110" y="160" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">
+        Detalles
+      </text>
+    </g>
+    
+    <!-- Flecha -->
+    <path d="M 75 220 L 75 250" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    
+    <!-- Vista de detalles -->
+    <g transform="translate(0, 260)">
+      <rect width="300" height="200" rx="8" fill="white" stroke="#e2e8f0" stroke-width="2"/>
+      <text x="150" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1e293b">
+        Vista de Detalles - Todas las imágenes
+      </text>
+      
+      <!-- Galería de imágenes -->
+      <rect x="20" y="35" width="60" height="40" rx="4" fill="#f1f5f9"/>
+      <text x="50" y="58" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#64748b">
+        hero.png
+      </text>
+      
+      <rect x="90" y="35" width="60" height="40" rx="4" fill="#f1f5f9"/>
+      <text x="120" y="58" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#64748b">
+        mock-1.png
+      </text>
+      
+      <rect x="160" y="35" width="60" height="40" rx="4" fill="#f1f5f9"/>
+      <text x="190" y="58" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#64748b">
+        mock-2.png
+      </text>
+      
+      <rect x="230" y="35" width="60" height="40" rx="4" fill="#e0f2fe"/>
+      <text x="260" y="58" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#0284c7">
+        + más
+      </text>
+      
+      <!-- Imagen principal grande -->
+      <rect x="20" y="85" width="260" height="80" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="150" y="130" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#64748b">
+        [Imagen seleccionada en grande]
+      </text>
+      
+      <!-- Controles -->
+      <circle cx="150" cy="180" r="8" fill="#3b82f6"/>
+      <circle cx="170" cy="180" r="8" fill="#e2e8f0"/>
+      <circle cx="190" cy="180" r="8" fill="#e2e8f0"/>
+    </g>
+  </g>
+  
+  <!-- Notas importantes -->
+  <g transform="translate(50, 550)">
+    <rect width="700" height="40" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1"/>
+    <text x="350" y="15" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#7f1d1d">
+      💡 Recuerda:
+    </text>
+    <text x="350" y="30" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#7f1d1d">
+      • Siempre usa comillas para envolver las rutas de imágenes • La primera imagen será la principal • Puedes agregar tantas como quieras
+    </text>
+  </g>
+  
+  <!-- Definición de flecha -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+</svg>

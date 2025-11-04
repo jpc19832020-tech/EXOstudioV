@@ -1,0 +1,148 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo -->
+  <rect width="800" height="600" fill="#f8fafc"/>
+  
+  <!-- Título -->
+  <text x="400" y="30" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#1e293b">
+    ¿Cómo funciona tu sección de productos?
+  </text>
+  
+  <!-- Base de datos CSV -->
+  <g transform="translate(50, 70)">
+    <rect width="160" height="120" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+    <text x="80" y="30" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#0c4a6e">
+      Base de Datos
+    </text>
+    <text x="80" y="50" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#0c4a6e">
+      (products.csv)
+    </text>
+    <line x1="20" y1="60" x2="140" y2="60" stroke="#0284c7" stroke-width="1"/>
+    <text x="20" y="80" font-family="Arial, sans-serif" font-size="10" fill="#0c4a6e">
+      • Smart Card
+    </text>
+    <text x="20" y="95" font-family="Arial, sans-serif" font-size="10" fill="#0c4a6e">
+      • Tarjeta de Boda
+    </text>
+    <text x="20" y="110" font-family="Arial, sans-serif" font-size="10" fill="#0c4a6e">
+      • Logo Esencial
+    </text>
+  </g>
+  
+  <!-- Flecha de carga -->
+  <path d="M 210 130 L 280 130" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Página de productos -->
+  <g transform="translate(280, 70)">
+    <rect width="240" height="120" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="120" y="30" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#14532d">
+      Página de Productos
+    </text>
+    <text x="120" y="50" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#14532d">
+      (productos/page.tsx)
+    </text>
+    <line x1="20" y1="60" x2="220" y2="60" stroke="#16a34a" stroke-width="1"/>
+    <text x="20" y="80" font-family="Arial, sans-serif" font-size="10" fill="#14532d">
+      • Carga productos desde CSV
+    </text>
+    <text x="20" y="95" font-family="Arial, sans-serif" font-size="10" fill="#14532d">
+      • Aplica filtros y búsqueda
+    </text>
+    <text x="20" y="110" font-family="Arial, sans-serif" font-size="10" fill="#14532d">
+      • Muestra en cuadrícula
+    </text>
+  </g>
+  
+  <!-- Flecha de visualización -->
+  <path d="M 520 130 L 590 130" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Tarjetas de producto -->
+  <g transform="translate(590, 70)">
+    <rect width="160" height="120" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="80" y="30" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#78350f">
+      Tarjetas de Producto
+    </text>
+    <text x="80" y="50" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#78350f">
+      (product-card.tsx)
+    </text>
+    <line x1="20" y1="60" x2="140" y2="60" stroke="#d97706" stroke-width="1"/>
+    <text x="20" y="80" font-family="Arial, sans-serif" font-size="10" fill="#78350f">
+      • Imagen del producto
+    </text>
+    <text x="20" y="95" font-family="Arial, sans-serif" font-size="10" fill="#78350f">
+      • Nombre y precio
+    </text>
+    <text x="20" y="110" font-family="Arial, sans-serif" font-size="10" fill="#78350f">
+      • Botones de acción
+    </text>
+  </g>
+  
+  <!-- Ejemplo de tarjeta -->
+  <g transform="translate(200, 230)">
+    <rect width="180" height="220" rx="8" fill="white" stroke="#e2e8f0" stroke-width="2"/>
+    <rect x="10" y="10" width="160" height="80" rx="4" fill="#f1f5f9"/>
+    <text x="90" y="55" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#64748b">
+      [Imagen del producto]
+    </text>
+    <text x="90" y="110" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e293b">
+      Smart Card
+    </text>
+    <text x="90" y="130" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#64748b">
+      Tarjeta digital inteligente
+    </text>
+    <text x="90" y="150" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#0284c7">
+      S/ 100.00
+    </text>
+    <rect x="10" y="170" width="75" height="30" rx="4" fill="#10b981"/>
+    <text x="47" y="190" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">
+      Cotizar
+    </text>
+    <rect x="95" y="170" width="75" height="30" rx="4" fill="#3b82f6"/>
+    <text x="132" y="190" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">
+      Ver detalles
+    </text>
+  </g>
+  
+  <!-- Flecha a detalles -->
+  <path d="M 290 450 L 290 490" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Modal de detalles -->
+  <g transform="translate(200, 490)">
+    <rect width="180" height="80" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="90" y="25" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#4c1d95">
+      Ventana de Detalles
+    </text>
+    <text x="90" y="45" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#4c1d95">
+      (product-detail.tsx)
+    </text>
+    <text x="90" y="65" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#4c1d95">
+      Información completa
+    </text>
+  </g>
+  
+  <!-- Flecha a WhatsApp -->
+  <path d="M 380 340 L 450 340" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- WhatsApp -->
+  <g transform="translate(450, 300)">
+    <rect width="120" height="80" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="60" y="25" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#14532d">
+      WhatsApp
+    </text>
+    <text x="60" y="45" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#14532d">
+      Contacto directo
+    </text>
+    <text x="60" y="65" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#14532d">
+      con clientes
+    </text>
+  </g>
+  
+  <!-- Flecha de retorno -->
+  <path d="M 510 380 L 510 420 L 290 420 L 290 460" stroke="#64748b" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+  
+  <!-- Definición de flecha -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+</svg>
