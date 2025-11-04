@@ -8,9 +8,8 @@ import { ExoFooter } from "@/components/exo-footer";
 import { ThemeProvider } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, MessageCircle, Check, Image as ImageIcon } from "lucide-react";
-import { ProductDetail as ProductDetailType } from "@/types/product";
+import { ProductDetail } from "@/types/product";
 import { csvParser } from "@/lib/csv-parser";
 import Image from "next/image";
 
@@ -21,7 +20,7 @@ interface ProductDetailClientProps {
 export default function ProductDetailClient({ slug }: ProductDetailClientProps) {
   const router = useRouter();
   
-  const [product, setProduct] = useState<ProductDetailType | null>(null);
+  const [product, setProduct] = useState<ProductDetail | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
@@ -152,7 +151,7 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
             </div>
           </div>
           
-          <ExoHeader />
+          {/* <ExoHeader /> */}
           
           <main className="flex-1 pt-20 relative z-10">
             <div className="container mx-auto px-6 py-12 max-w-7xl">
@@ -274,7 +273,7 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
                         initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
                         animate={{ opacity: 1, scale: 1, rotate: 0 }}
                         transition={{ delay: 1.3 + index * 0.1 }}
-                        className="relative aspect-square bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden cursor-pointer border-2 border-gray-200 transition-all hover:border-cyan/40"
+                        className="relative aspect-square bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden cursor-pointer border-2 border-gray-200 transition-all hover:border-cyan/40 group"
                         onClick={() => handleImageChange(index)}
                         whileHover={{ scale: 1.1, rotate: 5 }}
                         whileTap={{ scale: 0.95, rotate: -5 }}
@@ -298,7 +297,6 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
                   </div>
                 </motion.div>
               )}
-              </div>
 
               {/* Floating Information Panel */}
               <motion.div
@@ -383,7 +381,6 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
                   </div>
                 </div>
               </motion.div>
-              </div>
 
               {/* Interactive CTA Section */}
               <motion.div
@@ -396,7 +393,7 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
                   {/* Animated background */}
                   <div className="absolute inset-0 bg-gradient-to-r from-cyan/10 via-magenta/10 to-cyan/10 opacity-30">
                     <div className="h-full w-full" style={{
-                      backgroundImage: `radial-gradient(circle at 20% 80%, rgba(0, 191, 255, 0.1) 0%, transparent 70%), radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 70%)`,
+                      backgroundImage: `radial-gradient(circle at 20% 80%, rgba(0, 191, 255, 0.1) 0%, transparent 70%), radial-gradient(circle at 80% 20%, rgba(142, 30, 252, 0.1) 0%, transparent 70%)`,
                       backgroundSize: '100% 100%'
                     }}></div>
                   </div>
@@ -465,37 +462,37 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
           </main>
           
           <ExoFooter />
-        </div>
-
-        {/* Interactive Floating Elements */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2, delay: 2 }}
-          className="fixed bottom-8 right-8 z-50"
-        >
-          <Button
-            onClick={handleBackToCatalog}
-            className="relative bg-gradient-to-r from-cyan to-magenta hover:from-cyan/90 hover:to-magenta/90 text-white font-bold px-6 py-3 rounded-full shadow-2xl overflow-hidden group"
-            onMouseEnter={(e) => {
-              const button = e.currentTarget;
-              const glow = document.createElement('div');
-              glow.className = 'absolute inset-0 bg-gradient-to-r from-cyan to-magenta rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10';
-              button.appendChild(glow);
-              
-              setTimeout(() => {
-                glow.remove();
-              }, 300);
-            }}
-            onMouseLeave={(e) => {
-              const glows = e.currentTarget.querySelectorAll('.group-hover .opacity-100');
-              glows.forEach(glow => glow.remove());
-            }}
+          
+          {/* Interactive Floating Elements */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2, delay: 2 }}
+            className="fixed bottom-8 right-8 z-50"
           >
-            <ArrowLeft className="w-5 h-5" />
-            Volver
-          </Button>
-        </motion.div>
+            <Button
+              onClick={handleBackToCatalog}
+              className="relative bg-gradient-to-r from-cyan to-magenta hover:from-cyan/90 hover:to-magenta/90 text-white font-bold px-6 py-3 rounded-full shadow-2xl overflow-hidden group"
+              onMouseEnter={(e) => {
+                const button = e.currentTarget;
+                const glow = document.createElement('div');
+                glow.className = 'absolute inset-0 bg-gradient-to-r from-cyan to-magenta rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10';
+                button.appendChild(glow);
+                
+                setTimeout(() => {
+                  glow.remove();
+                }, 300);
+              }}
+              onMouseLeave={(e) => {
+                const glows = e.currentTarget.querySelectorAll('.group-hover .opacity-100');
+                glows.forEach(glow => glow.remove());
+              }}
+            >
+              <ArrowLeft className="w-5 h-5" />
+              Volver
+            </Button>
+          </motion.div>
+        </div>
       </ThemeProvider>
     );
   }
@@ -634,8 +631,8 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
                             />
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 )}
 

@@ -48,8 +48,8 @@ const config: Config = {
                         input: 'hsl(var(--input))',
                         ring: 'hsl(var(--ring))',
                         // Nuevos colores personalizados EXO
-                        cyan: '#00C8FF',
-                        magenta: '#FF1FB1',
+                        cyan: '#00BFFF',
+                        magenta: '#8E1EFC',
                         'gradient-exo': 'linear-gradient(90deg, #00C8FF 0%, #FF1FB1 100%)',
                         'gradient-exo-hover': 'linear-gradient(90deg, #00A8E0 0%, #E0119F 100%)',
                         chart: {
