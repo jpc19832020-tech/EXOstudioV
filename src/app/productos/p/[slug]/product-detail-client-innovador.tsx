@@ -21,7 +21,8 @@ import {
   MasonryGallery,
   FaqCompact,
   FinalCtaWhatsapp,
-  FloatingWhatsappBar
+  FloatingWhatsappBar,
+  LogoFooter
 } from "./_components";
 
 interface ProductDetailClientProps {
@@ -167,7 +168,7 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
       {/* Deliverables Accordion */}
       <DeliverablesAccordion />
 
-      {/* Behind the Symbol */}
+      {/* Behind Symbol */}
       <BehindTheSymbol images={product.todasLasImagenes} />
 
       {/* Masonry Gallery */}
@@ -185,6 +186,9 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
         onClick={handleWhatsAppClick}
         isVisible={showFloatingBar}
       />
+
+      {/* Custom Footer */}
+      <LogoFooter />
     </LogoBlueprintLayout>
   );
 }
