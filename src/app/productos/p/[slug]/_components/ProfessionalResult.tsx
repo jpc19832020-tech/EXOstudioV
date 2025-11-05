@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, X, ArrowRight } from "lucide-react";
+import { Check, X, ArrowRight, MessageCircle } from "lucide-react";
 
 interface ProfessionalResultProps {
   isVisible: boolean;
@@ -121,6 +121,21 @@ export function ProfessionalResult({ isVisible, onClose }: ProfessionalResultPro
           }}
         >
           <X className="w-6 h-6 text-white" />
+        </motion.button>
+
+        {/* WhatsApp button - only on desktop */}
+        <motion.button
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          onClick={() => window.open(`https://wa.me/51925475680?text=${encodeURIComponent('Hola EXO, quiero cotizar Logo Esencial')}`, '_blank')}
+          className="hidden lg:flex absolute top-6 left-6 w-12 h-12 rounded-full transition-all duration-300 hover:scale-110"
+          style={{
+            backgroundColor: '#35B6FF',
+            border: '1px solid rgba(255,255,255,.12)'
+          }}
+        >
+          <MessageCircle className="w-6 h-6 text-white" />
         </motion.button>
       </motion.div>
     </AnimatePresence>
