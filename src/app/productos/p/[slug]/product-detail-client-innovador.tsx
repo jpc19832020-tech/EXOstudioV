@@ -21,7 +21,8 @@ import {
   MasonryGallery,
   FaqCompact,
   FinalCtaWhatsapp,
-  FloatingWhatsappBar,
+  MobileFloatingButtons,
+  DesktopBackButton,
   LogoFooter
 } from "./_components";
 
@@ -180,12 +181,14 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
       {/* Final CTA */}
       <FinalCtaWhatsapp onClick={handleWhatsAppClick} />
 
-      {/* Floating WhatsApp Bar - Mobile */}
-      <FloatingWhatsappBar
+      {/* Mobile Floating Buttons */}
+      <MobileFloatingButtons
         productName={product.nombre}
-        onClick={handleWhatsAppClick}
-        isVisible={showFloatingBar}
+        onWhatsappClick={handleWhatsAppClick}
       />
+
+      {/* Desktop Back Button */}
+      <DesktopBackButton />
 
       {/* Custom Footer */}
       <LogoFooter />

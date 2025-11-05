@@ -13,3 +13,5 @@ export { FinalCtaWhatsapp } from './FinalCtaWhatsapp';
 export { FloatingWhatsappBar } from './FloatingWhatsappBar';
 export { ProfessionalResult } from './ProfessionalResult';
 export { LogoFooter } from './LogoFooter';
+export { MobileFloatingButtons } from './MobileFloatingButtons';
+export { DesktopBackButton } from './DesktopBackButton';
