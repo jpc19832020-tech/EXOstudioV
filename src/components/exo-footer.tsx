@@ -38,7 +38,7 @@ const socialLinks = [
   },
   {
     name: "Email",
-    href: "mailto:hola@exo.digital",
+    href: "mailto:exo.digitalstudio@gmail.com",
     icon: <Mail className="w-5 h-5" />,
   },
 ];

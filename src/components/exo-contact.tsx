@@ -295,10 +295,10 @@ export function ExoContact() {
                 <Button
                   variant="outline"
                   className="w-full border-accent text-accent hover:bg-accent hover:text-white"
-                  onClick={() => window.open("mailto:hola@exo.digital", "_blank")}
+                  onClick={() => window.open("mailto:exo.digitalstudio@gmail.com", "_blank")}
                 >
                   <Mail className="w-4 h-4 mr-2" />
-                  hola@exo.digital
+                  exo.digitalstudio@gmail.com
                 </Button>
               </div>
 

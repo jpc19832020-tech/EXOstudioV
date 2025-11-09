@@ -8,7 +8,7 @@ export const SOCIAL_LINKS = {
   INSTAGRAM: 'https://www.instagram.com/exo_digitalstudio/',
   TIKTOK: 'https://www.tiktok.com/@exodigital_studio?_t=ZS-90UlvsZVMMm&_r=1',
   FACEBOOK: 'https://www.facebook.com/profile.php?id=61581476738289',
-  EMAIL: 'mailto:hola@exo.digital'
+  EMAIL: 'mailto:exo.digitalstudio@gmail.com'
 } as const;
 
 export const COMPANY_INFO = {
