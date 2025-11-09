@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { ProductDetail } from "@/types/product";
+import { useWhatsApp } from "@/hooks/useWhatsApp";
+import { useScrollThrottle } from "@/hooks/useScrollThrottle";
+import { validateProduct } from "@/lib/validation";
 import { csvParser } from "@/lib/csv-parser";
 
 // Import all Blueprint components
@@ -29,6 +32,7 @@ import {
 interface ProductDetailClientProps {
   slug: string;
 }
+  
 
 export default function ProductDetailClient({ slug }: ProductDetailClientProps) {
   const router = useRouter();
