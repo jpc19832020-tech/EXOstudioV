@@ -6,28 +6,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 const navigation = [
-  { 
-    name: "Productos", 
+  {
+    name: "Productos",
     href: "/productos",
     description: "Descubre nuestros servicios digitales"
   },
-  { 
-    name: "Servicios", 
-    href: "/servicios",
-    description: "Soluciones personalizadas para tu negocio"
-  },
-  { 
-    name: "Portafolio", 
-    href: "/portafolio",
-    description: "Casos de éxito y proyectos destacados"
-  },
-  { 
-    name: "Blog", 
-    href: "/blog",
-    description: "Artículos sobre diseño y tecnología"
-  },
-  { 
-    name: "Contacto", 
+  {
+    name: "Contacto",
     href: "/contacto",
     description: "Conversemos sobre tu proyecto"
   }
@@ -62,7 +47,8 @@ export function ExoHeader() {
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
     
-    if (href === '/productos') {
+    // Para productos y contacto, redirigir directamente
+    if (href === '/productos' || href === '/contacto') {
       const isProduction = process.env.NODE_ENV === 'production';
       const basePath = isProduction ? '/EXOstudioV' : '';
       window.location.href = `${basePath}${href}`;
