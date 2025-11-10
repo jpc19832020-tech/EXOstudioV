@@ -133,7 +133,7 @@ export function ProductCard({ product, onViewDetails }: ProductCardProps) {
               </span>
             </div>
             
-            <div className="flex gap-3 pt-4">
+            <div className="flex gap-2 pt-4">
               <Button
                 variant="outline"
                 size="sm"
@@ -145,21 +145,31 @@ export function ProductCard({ product, onViewDetails }: ProductCardProps) {
               </Button>
               
               {product.demo_url ? (
-                <Button
-                  asChild
-                  size="sm"
-                  className="flex-1 bg-[var(--c-secondary)] text-[var(--c-bg)] hover:bg-[var(--c-primary)] focus-visible:ring-2 focus-visible:ring-[var(--c-accent)]"
-                >
-                  <a
-                    href={product.demo_url}
-                    target="_blank"
-                    rel="noopener"
-                    className="flex items-center"
+                <>
+                  <Button
+                    size="sm"
+                    className="flex-1 bg-[var(--c-primary)] text-[var(--c-bg)] hover:shadow-[0_0_24px_var(--c-accent)] focus-visible:ring-2 focus-visible:ring-[var(--c-accent)]"
+                    onClick={handleViewDetails}
                   >
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Ver demo
-                  </a>
-                </Button>
+                    <Eye className="w-4 h-4 mr-2" />
+                    Ver detalles
+                  </Button>
+                  <Button
+                    asChild
+                    size="sm"
+                    className="flex-1 bg-[var(--c-secondary)] text-[var(--c-bg)] hover:bg-[var(--c-primary)] focus-visible:ring-2 focus-visible:ring-[var(--c-accent)]"
+                  >
+                    <a
+                      href={product.demo_url}
+                      target="_blank"
+                      rel="noopener"
+                      className="flex items-center"
+                    >
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      Ver demo
+                    </a>
+                  </Button>
+                </>
               ) : (
                 <Button
                   size="sm"

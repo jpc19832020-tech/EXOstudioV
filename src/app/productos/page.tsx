@@ -152,64 +152,111 @@ export default function ProductosPage() {
               </p>
             </motion.div>
 
-            {/* Filters */}
+            {/* Banner de Proyecto Personalizado */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mb-8"
             >
+              <CustomProjectBanner />
+            </motion.div>
+
+            {/* Filters Mejorados */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mb-8"
+            >
               <div className="bg-card/50 backdrop-blur-sm rounded-lg p-6 border border-border/50">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {/* Search */}
+                <div className="space-y-4">
+                  {/* Búsqueda Mejorada */}
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
                     <Input
-                      placeholder="Buscar productos..."
+                      placeholder="Buscar por nombre, descripción o características... (ej: 'logo', 'web', 'digital')"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10"
+                      className="pl-10 pr-4"
                     />
+                    {searchTerm && (
+                      <button
+                        onClick={() => setSearchTerm("")}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        ×
+                      </button>
+                    )}
                   </div>
 
-                  {/* Category Filter */}
-                  <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Categoría" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">Todas las categorías</SelectItem>
-                      {categories.map((category) => (
-                        <SelectItem key={category} value={category}>
-                          {category}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  {/* Filtros y Controles */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {/* Category Filter */}
+                    <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Filtrar por categoría" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">🏷️ Todas las categorías</SelectItem>
+                        {categories.map((category) => (
+                          <SelectItem key={category} value={category}>
+                            {category}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
 
-                  {/* Sort */}
-                  <Select value={sortBy} onValueChange={setSortBy}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Ordenar por" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="name">Nombre</SelectItem>
-                      <SelectItem value="category">Categoría</SelectItem>
-                    </SelectContent>
-                  </Select>
+                    {/* Sort */}
+                    <Select value={sortBy} onValueChange={setSortBy}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Ordenar resultados" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="name">🔤 Ordenar por nombre</SelectItem>
+                        <SelectItem value="category">📂 Ordenar por categoría</SelectItem>
+                      </SelectContent>
+                    </Select>
 
-                  {/* Results count */}
-                  <div className="flex items-center justify-center">
-                    <Badge variant="secondary">
-                      {filteredProducts.length} producto{filteredProducts.length !== 1 ? 's' : ''}
-                    </Badge>
+                    {/* Results count con acciones */}
+                    <div className="flex items-center justify-between">
+                      <Badge variant="secondary" className="text-sm">
+                        {filteredProducts.length} resultado{filteredProducts.length !== 1 ? 's' : ''}
+                      </Badge>
+                      {(selectedCategory !== "all" || searchTerm || sortBy !== "name") && (
+                        <button
+                          onClick={() => {
+                            setSelectedCategory("all");
+                            setSearchTerm("");
+                            setSortBy("name");
+                          }}
+                          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          🧹 Limpiar filtros
+                        </button>
+                      )}
+                    </div>
                   </div>
+
+                  {/* Indicadores de filtros activos */}
+                  {(selectedCategory !== "all" || searchTerm) && (
+                    <div className="flex flex-wrap gap-2 pt-2 border-t border-border/50">
+                      <span className="text-sm text-muted-foreground">Filtros activos:</span>
+                      {searchTerm && (
+                        <Badge variant="outline" className="text-xs">
+                          🔍 "{searchTerm}"
+                        </Badge>
+                      )}
+                      {selectedCategory !== "all" && (
+                        <Badge variant="outline" className="text-xs">
+                          📂 {selectedCategory}
+                        </Badge>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
-
-            {/* Banner de Proyecto Personalizado */}
-            <CustomProjectBanner />
 
             {/* Products Grid */}
             {filteredProducts.length === 0 ? (
