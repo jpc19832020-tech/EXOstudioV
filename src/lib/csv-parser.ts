@@ -32,7 +32,9 @@ const STATIC_PRODUCTS: Product[] = [
     estado: "visible" as const,
     cta_whatsapp: "Me interesa la Smart Card EXO",
     precio_desde: false,
-    demo_url: null
+    demo_url: null,
+    mostrar_ver_detalles: true,
+    mostrar_ver_demo: true
   }
 ];
 
@@ -187,6 +189,8 @@ export class CSVParser {
     // Parse new fields with backwards compatibility
     const precio_desde = toBool(product['precio_desde']);
     const demo_url = sanitizeUrl(product['demo_url']);
+    const mostrar_ver_detalles = toBool(product['mostrar_ver_detalles']);
+    const mostrar_ver_demo = toBool(product['mostrar_ver_demo']);
     
     // Default CTA WhatsApp if not provided
     const cta_whatsapp = product.cta_whatsapp?.trim() || `Me interesa ${product.nombre}`;
@@ -204,7 +208,9 @@ export class CSVParser {
       cta_whatsapp,
       // Nuevas propiedades:
       precio_desde,
-      demo_url
+      demo_url,
+      mostrar_ver_detalles,
+      mostrar_ver_demo
     };
   }
 
@@ -250,7 +256,9 @@ export class CSVParser {
         cta_whatsapp: product.cta_whatsapp,
         // Nuevas propiedades:
         precio_desde: product.precio_desde,
-        demo_url: product.demo_url
+        demo_url: product.demo_url,
+        mostrar_ver_detalles: product.mostrar_ver_detalles,
+        mostrar_ver_demo: product.mostrar_ver_demo
       };
     });
   }
@@ -289,9 +297,11 @@ export class CSVParser {
       imagenesAdicionales: product.imagenes.slice(1),
       todasLasImagenes: product.imagenes,
       cta_whatsapp: product.cta_whatsapp,
-      // Nuevas propiedades ya incluidas:
+      // Nuevas propiedades:
       precio_desde: product.precio_desde,
-      demo_url: product.demo_url
+      demo_url: product.demo_url,
+      mostrar_ver_detalles: product.mostrar_ver_detalles,
+      mostrar_ver_demo: product.mostrar_ver_demo
     };
   }
 

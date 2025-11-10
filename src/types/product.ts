@@ -12,6 +12,8 @@ export interface Product {
   // Nuevas propiedades:
   precio_desde?: boolean;   // default: false
   demo_url?: string | null; // default: null
+  mostrar_ver_detalles?: boolean; // default: true
+  mostrar_ver_demo?: boolean;     // default: false
 }
 
 export interface ProductCard {
@@ -31,6 +33,8 @@ export interface ProductCard {
   // Nuevas propiedades:
   precio_desde?: boolean;
   demo_url?: string | null;
+  mostrar_ver_detalles?: boolean; // default: true
+  mostrar_ver_demo?: boolean;     // default: false
 }
 
 export interface ProductDetail extends ProductCard {

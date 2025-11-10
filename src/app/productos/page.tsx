@@ -237,7 +237,7 @@ export default function ProductosPage() {
                     >
                       <Sparkles className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary w-5 h-5 z-10" />
                       <Input
-                        placeholder="🚀 Busca productos increíbles... (ej: 'logo', 'web', 'digital')"
+                        placeholder="Busca productos increíbles... (ej: 'logo', 'web', 'digital')"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         onFocus={() => setIsSearchFocused(true)}

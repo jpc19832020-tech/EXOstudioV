@@ -137,47 +137,41 @@ export function ProductCard({ product, onViewDetails }: ProductCardProps) {
               <Button
                 variant="outline"
                 size="sm"
-                className="flex-1 border-[var(--c-border)] text-[var(--c-text)] hover:bg-[var(--c-primary)] hover:text-[var(--c-bg)] focus-visible:ring-2 focus-visible:ring-[var(--c-accent)]"
+                className="border-[var(--c-border)] text-[var(--c-text)] hover:bg-[var(--c-primary)] hover:text-[var(--c-bg)] focus-visible:ring-2 focus-visible:ring-[var(--c-accent)]"
                 onClick={handleWhatsAppClick}
               >
                 <WhatsAppIcon className="w-4 h-4 mr-2" />
                 Cotizar
               </Button>
               
-              {product.demo_url ? (
-                <>
-                  <Button
-                    size="sm"
-                    className="flex-1 bg-[var(--c-primary)] text-[var(--c-bg)] hover:shadow-[0_0_24px_var(--c-accent)] focus-visible:ring-2 focus-visible:ring-[var(--c-accent)]"
-                    onClick={handleViewDetails}
-                  >
-                    <Eye className="w-4 h-4 mr-2" />
-                    Ver detalles
-                  </Button>
-                  <Button
-                    asChild
-                    size="sm"
-                    className="flex-1 bg-[var(--c-secondary)] text-[var(--c-bg)] hover:bg-[var(--c-primary)] focus-visible:ring-2 focus-visible:ring-[var(--c-accent)]"
-                  >
-                    <a
-                      href={product.demo_url}
-                      target="_blank"
-                      rel="noopener"
-                      className="flex items-center"
-                    >
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Ver demo
-                    </a>
-                  </Button>
-                </>
-              ) : (
+              {/* Lógica de botones condicionales */}
+              {product.mostrar_ver_detalles !== false && (
                 <Button
                   size="sm"
-                  className="flex-1 bg-[var(--c-primary)] text-[var(--c-bg)] hover:shadow-[0_0_24px_var(--c-accent)] focus-visible:ring-2 focus-visible:ring-[var(--c-accent)]"
+                  className="bg-[var(--c-primary)] text-[var(--c-bg)] hover:shadow-[0_0_24px_var(--c-accent)] focus-visible:ring-2 focus-visible:ring-[var(--c-accent)]"
                   onClick={handleViewDetails}
                 >
                   <Eye className="w-4 h-4 mr-2" />
                   Ver detalles
+                </Button>
+              )}
+              
+              {/* Mostrar "Ver demo" solo si mostrar_ver_demo es true Y hay demo_url */}
+              {product.mostrar_ver_demo && product.demo_url && (
+                <Button
+                  asChild
+                  size="sm"
+                  className="bg-[var(--c-secondary)] text-[var(--c-bg)] hover:bg-[var(--c-primary)] focus-visible:ring-2 focus-visible:ring-[var(--c-accent)]"
+                >
+                  <a
+                    href={product.demo_url}
+                    target="_blank"
+                    rel="noopener"
+                    className="flex items-center"
+                  >
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    Ver demo
+                  </a>
                 </Button>
               )}
             </div>
