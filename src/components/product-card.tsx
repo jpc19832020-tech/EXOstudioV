@@ -6,7 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ExternalLink, MessageCircle, Eye } from "lucide-react";
 import { ProductCard as ProductCardType } from "@/types/product";
+import { CategorySkin } from "@/components/CategorySkin";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
   product: ProductCardType;
@@ -25,6 +28,22 @@ const WhatsAppIcon = ({ className = "" }: { className?: string }) => (
   </svg>
 );
 
+// Componente para prefetch en hover
+function CardLink({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) {
+  const router = useRouter();
+  
+  return (
+    <Link
+      href={href}
+      prefetch={false}
+      onMouseEnter={() => router.prefetch(href)}
+      className={className}
+    >
+      {children}
+    </Link>
+  );
+}
+
 export function ProductCard({ product, onViewDetails }: ProductCardProps) {
   const handleWhatsAppClick = () => {
     const message = encodeURIComponent(product.cta_whatsapp);
@@ -41,87 +60,138 @@ export function ProductCard({ product, onViewDetails }: ProductCardProps) {
     return text.substring(0, maxLength) + "...";
   };
 
+  // Formatear precio con "Desde" si es necesario
+  const formatPrice = () => {
+    if (!product.precio.amount) return "Cotizar";
+    
+    const prefix = product.precio_desde ? "Desde " : "";
+    return `${prefix}${product.precio.formatted}`;
+  };
+
   return (
-    <motion.div
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.2 }}
-    >
-      <Card className="h-full bg-card/50 backdrop-blur-sm border-border/50 hover:border-cyan/50 transition-all duration-300 hover:shadow-xl">
-        <CardHeader className="space-y-4">
-          {/* Product Image */}
-          <div className="relative w-full rounded-lg overflow-hidden bg-gradient-to-br from-cyan/10 to-magenta/10">
-            <div className="relative w-full pb-[56.25%]">
-              <Image
-                src={product.imagenPrincipal}
-                alt={`${product.nombre} - vista principal`}
-                fill
-                className="object-contain p-4"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
+    <CategorySkin categoria={product.categoria}>
+      <motion.div
+        whileHover={{ y: -4 }}
+        transition={{ duration: 0.2 }}
+        className="h-full"
+      >
+        <Card className="h-full border-[var(--c-border)] bg-[var(--c-bg)] text-[var(--c-text)] hover:shadow-[0_0_24px_var(--c-accent)] transition-all duration-300 group">
+          <CardHeader className="space-y-4">
+            {/* Product Image */}
+            <div className="relative w-full rounded-lg overflow-hidden bg-gradient-to-br from-[var(--c-primary)]/10 to-[var(--c-secondary)]/10">
+              <div className="relative w-full pb-[56.25%]">
+                <Image
+                  src={product.imagenPrincipal}
+                  alt={`${product.nombre} - vista principal`}
+                  fill
+                  className="object-contain p-4"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-          </div>
+            
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-xl text-[var(--c-text)]">{product.nombre}</CardTitle>
+              <Badge 
+                variant="secondary" 
+                className="text-xs border-[var(--c-border)] bg-[color:color-mix(in srgb,var(--c-primary) 20%,transparent)] text-[var(--c-text)]"
+              >
+                {product.categoria}
+              </Badge>
+            </div>
+          </CardHeader>
           
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-xl">{product.nombre}</CardTitle>
-            <Badge variant="secondary" className="text-xs">
-              {product.categoria}
-            </Badge>
-          </div>
-        </CardHeader>
-        
-        <CardContent className="space-y-6">
-          <p className="text-muted-foreground leading-relaxed line-clamp-2">
-            {truncateDescription(product.descripcion_corta)}
-          </p>
-          
-          <div className="space-y-3">
-            <h4 className="font-semibold text-sm">Características:</h4>
-            <ul className="space-y-2">
-              {product.caracteristicas.slice(0, 3).map((feature, index) => (
-                <li
-                  key={index}
-                  className="flex items-center text-sm text-muted-foreground"
+          <CardContent className="space-y-6">
+            <p className="text-[var(--c-text)]/80 leading-relaxed line-clamp-2">
+              {truncateDescription(product.descripcion_corta)}
+            </p>
+            
+            <div className="space-y-3">
+              <h4 className="font-semibold text-sm text-[var(--c-text)]">Características:</h4>
+              <ul className="space-y-2">
+                {product.caracteristicas.slice(0, 3).map((feature, index) => (
+                  <li
+                    key={index}
+                    className="flex items-center text-sm text-[var(--c-text)]/70"
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full mr-3 flex-shrink-0 bg-[var(--c-primary)]" />
+                    {feature}
+                  </li>
+                ))}
+                {product.caracteristicas.length > 3 && (
+                  <li className="text-xs text-[var(--c-text)]/50 italic">
+                    +{product.caracteristicas.length - 3} características más...
+                  </li>
+                )}
+              </ul>
+            </div>
+            
+            <div className="flex items-center justify-between pt-2">
+              <span className="text-lg font-semibold text-[var(--c-text)]">
+                {formatPrice()}
+              </span>
+            </div>
+            
+            <div className="flex gap-3 pt-4">
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex-1 border-[var(--c-border)] text-[var(--c-text)] hover:bg-[var(--c-primary)] hover:text-[var(--c-bg)] focus-visible:ring-2 focus-visible:ring-[var(--c-accent)]"
+                onClick={handleWhatsAppClick}
+              >
+                <WhatsAppIcon className="w-4 h-4 mr-2" />
+                Cotizar
+              </Button>
+              
+              {product.demo_url ? (
+                <Button
+                  asChild
+                  size="sm"
+                  className="flex-1 bg-[var(--c-secondary)] text-[var(--c-bg)] hover:bg-[var(--c-primary)] focus-visible:ring-2 focus-visible:ring-[var(--c-accent)]"
                 >
-                  <div className="w-1.5 h-1.5 bg-cyan rounded-full mr-3 flex-shrink-0" />
-                  {feature}
-                </li>
-              ))}
-              {product.caracteristicas.length > 3 && (
-                <li className="text-xs text-muted-foreground italic">
-                  +{product.caracteristicas.length - 3} características más...
-                </li>
+                  <a
+                    href={product.demo_url}
+                    target="_blank"
+                    rel="noopener"
+                    className="flex items-center"
+                  >
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    Ver demo
+                  </a>
+                </Button>
+              ) : (
+                <Button
+                  size="sm"
+                  className="flex-1 bg-[var(--c-primary)] text-[var(--c-bg)] hover:shadow-[0_0_24px_var(--c-accent)] focus-visible:ring-2 focus-visible:ring-[var(--c-accent)]"
+                  onClick={handleViewDetails}
+                >
+                  <Eye className="w-4 h-4 mr-2" />
+                  Ver detalles
+                </Button>
               )}
-            </ul>
-          </div>
-          
-          <div className="flex items-center justify-between pt-2">
-            <span className="text-lg font-semibold">
-              {product.precio.formatted}
-            </span>
-          </div>
-          
-          <div className="flex gap-3 pt-4">
-            <Button
-              variant="outline"
-              size="sm"
-              className="flex-1"
-              onClick={handleWhatsAppClick}
-            >
-              <WhatsAppIcon className="w-4 h-4 mr-2" />
-              Cotizar
-            </Button>
-            <Button
-              size="sm"
-              className="flex-1"
-              onClick={handleViewDetails}
-            >
-              <Eye className="w-4 h-4 mr-2" />
-              Ver detalles
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </motion.div>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+    </CategorySkin>
   );
+}
+
+// Estilos CSS adicionales para motion reduced
+// (Se aplicarán globalmente en globals.css)
+const styles = `
+@media (prefers-reduced-motion: reduce) {
+  .product-skin * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+`;
+
+// Inject styles if needed (opcional)
+if (typeof document !== 'undefined') {
+  const styleSheet = document.createElement('style');
+  styleSheet.innerText = styles;
+  document.head.appendChild(styleSheet);
 }

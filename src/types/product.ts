@@ -9,6 +9,9 @@ export interface Product {
   imagenes: string[];
   estado: 'visible' | 'oculto';
   cta_whatsapp: string;
+  // Nuevas propiedades:
+  precio_desde?: boolean;   // default: false
+  demo_url?: string | null; // default: null
 }
 
 export interface ProductCard {
@@ -25,11 +28,15 @@ export interface ProductCard {
   imagenPrincipal: string;
   imagenesAdicionales: string[];
   cta_whatsapp: string;
+  // Nuevas propiedades:
+  precio_desde?: boolean;
+  demo_url?: string | null;
 }
 
 export interface ProductDetail extends ProductCard {
   caracteristicas: string[];
   todasLasImagenes: string[];
+  // Nuevas propiedades ya incluidas en ProductCard
 }
 
 export type CurrencySymbol = {

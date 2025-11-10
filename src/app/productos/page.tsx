@@ -6,6 +6,7 @@ import { ExoHeader } from "@/components/exo-header";
 import { ExoFooter } from "@/components/exo-footer";
 import { ThemeProvider } from "next-themes";
 import { ProductCard } from "@/components/product-card";
+import { CustomProjectBanner } from "@/components/CustomProjectBanner";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -206,6 +207,9 @@ export default function ProductosPage() {
                 </div>
               </div>
             </motion.div>
+
+            {/* Banner de Proyecto Personalizado */}
+            <CustomProjectBanner />
 
             {/* Products Grid */}
             {filteredProducts.length === 0 ? (

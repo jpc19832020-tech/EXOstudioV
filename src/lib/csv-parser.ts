@@ -2,6 +2,17 @@ import { Product, ProductCard, ProductDetail, CURRENCY_SYMBOLS } from '@/types/p
 
 const WHATSAPP_NUMBER = "51925475680";
 
+// Función helper para convertir string a boolean
+function toBool(v?: string): boolean {
+  return (v ?? '').trim().toLowerCase() === 'true';
+}
+
+// Función helper para sanitizar URLs
+function sanitizeUrl(v?: string): string | null {
+  const s = (v ?? '').trim();
+  return s.length ? s : null;
+}
+
 // Datos estáticos para el entorno de producción
 const STATIC_PRODUCTS: Product[] = [
   {
@@ -19,7 +30,9 @@ const STATIC_PRODUCTS: Product[] = [
     moneda: "PEN",
     imagenes: ["Imagenes_de_productos/hero.png", "Imagenes_de_productos/mock-1.png"],
     estado: "visible" as const,
-    cta_whatsapp: "Me interesa la Smart Card EXO"
+    cta_whatsapp: "Me interesa la Smart Card EXO",
+    precio_desde: false,
+    demo_url: null
   }
 ];
 
@@ -171,6 +184,10 @@ export class CSVParser {
       moneda = product.moneda;
     }
 
+    // Parse new fields with backwards compatibility
+    const precio_desde = toBool(product['precio_desde']);
+    const demo_url = sanitizeUrl(product['demo_url']);
+    
     // Default CTA WhatsApp if not provided
     const cta_whatsapp = product.cta_whatsapp?.trim() || `Me interesa ${product.nombre}`;
 
@@ -184,7 +201,10 @@ export class CSVParser {
       moneda,
       imagenes,
       estado: product.estado === 'visible' ? 'visible' : 'oculto',
-      cta_whatsapp
+      cta_whatsapp,
+      // Nuevas propiedades:
+      precio_desde,
+      demo_url
     };
   }
 
@@ -227,7 +247,10 @@ export class CSVParser {
         },
         imagenPrincipal: product.imagenes[0],
         imagenesAdicionales: product.imagenes.slice(1),
-        cta_whatsapp: product.cta_whatsapp
+        cta_whatsapp: product.cta_whatsapp,
+        // Nuevas propiedades:
+        precio_desde: product.precio_desde,
+        demo_url: product.demo_url
       };
     });
   }
@@ -265,7 +288,10 @@ export class CSVParser {
       imagenPrincipal: product.imagenes[0],
       imagenesAdicionales: product.imagenes.slice(1),
       todasLasImagenes: product.imagenes,
-      cta_whatsapp: product.cta_whatsapp
+      cta_whatsapp: product.cta_whatsapp,
+      // Nuevas propiedades ya incluidas:
+      precio_desde: product.precio_desde,
+      demo_url: product.demo_url
     };
   }
 

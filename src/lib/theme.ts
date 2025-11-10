@@ -27,6 +27,44 @@ export const theme = {
   }
 } as const;
 
+// Sistema de paletas por categoría
+export const CATEGORY_SKINS = {
+  'Tarjetas Digitales': {
+    primary: '#8B5CF6',  // violeta EXO
+    secondary: '#22D3EE',// cian
+    bg: '#0B0F14',       // fondo oscuro
+    text: '#E6F0FF',     // texto claro
+    accent: '#00F0FF',   // brillo/glow
+    border: '#1F2A37'
+  },
+  'Sitios Web': {
+    primary: '#38BDF8',
+    secondary: '#60A5FA',
+    bg: '#0A0E16',
+    text: '#E5F2FF',
+    accent: '#80E5FF',
+    border: '#1C2430'
+  },
+  'Branding': {
+    primary: '#F59E0B',  // ámbar elegante
+    secondary: '#FDE68A',
+    bg: '#0A0A0A',
+    text: '#FAFAFA',
+    accent: '#FFB74D',
+    border: '#2B2B2B'
+  },
+  'Edición Digital': {
+    primary: '#34D399',  // verde-azulado
+    secondary: '#5EEAD4',
+    bg: '#081314',
+    text: '#E9FFFB',
+    accent: '#90FCEA',
+    border: '#153638'
+  }
+} as const;
+
+export const DEFAULT_SKIN = CATEGORY_SKINS['Tarjetas Digitales'];
+
 // Utilidades para aplicar estilos de tema
 export const getThemeColor = (path: string) => {
   return path.split('.').reduce((obj, key) => obj?.[key], theme.colors);
@@ -34,4 +72,9 @@ export const getThemeColor = (path: string) => {
 
 export const getThemeGradient = (name: keyof typeof theme.gradients) => {
   return theme.gradients[name];
+};
+
+// Utilidad para obtener skin de categoría
+export const getCategorySkin = (categoria: string) => {
+  return CATEGORY_SKINS[categoria as keyof typeof CATEGORY_SKINS] || DEFAULT_SKIN;
 };
