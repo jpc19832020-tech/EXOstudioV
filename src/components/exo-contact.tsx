@@ -380,14 +380,6 @@ export function ExoContact() {
                 <h4 className="font-semibold mb-4">Información adicional</h4>
                 <div className="space-y-3 text-sm text-muted-foreground">
                   <div className="flex items-center gap-3">
-                    <Clock className="w-4 h-4 text-primary" />
-                    <span>Lun - Vie: 9:00 AM - 6:00 PM</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <MapPin className="w-4 h-4 text-primary" />
-                    <span>Lima, Perú</span>
-                  </div>
-                  <div className="flex items-center gap-3">
                     <Phone className="w-4 h-4 text-primary" />
                     <span>+51 925 475 680</span>
                   </div>

@@ -1,11 +1,11 @@
 import { ExoHeader } from "@/components/exo-header";
-import { QuienesSomos } from "@/components/QuienesSomos";
+import { QuienesSomosOptimized } from "@/components/QuienesSomos.optimized";
 
 export default function QuienesSomosPage() {
   return (
     <>
       <ExoHeader />
-      <QuienesSomos />
+      <QuienesSomosOptimized />
     </>
   );
 }
