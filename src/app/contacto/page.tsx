@@ -59,7 +59,7 @@ export default function ContactPage() {
                   {[
                     { icon: Zap, label: "Respuesta", value: "Rápida" },
                     { icon: Target, label: "Enfoque", value: "Resultados" },
-                    { icon: Users, label: "Experiencia", value: "+3 años" },
+                    { icon: Users, label: "Profesional", value: "Calidad" },
                     { icon: Sparkles, label: "Proyectos", value: "100%" }
                   ].map((stat, index) => (
                     <motion.div
